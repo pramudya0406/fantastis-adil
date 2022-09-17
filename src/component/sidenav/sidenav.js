@@ -20,6 +20,7 @@ import {
 import NavItem from '../navitem/navitem'
 import { useSelector, useDispatch } from 'react-redux';
 import { routePageName } from '../../redux/action';
+import { Link } from "react-router-dom";
 
 const SideNav = () => {
     const navSize = "large"
@@ -62,31 +63,31 @@ const SideNav = () => {
                         </Center>
                     </Box>
 
-                    <div onClick={() => {
+                    <Link to={'/unit/dashboard'} onClick={() => {
                         patchRoute('Dashboard')
                     }}>
                         <NavItem navSize={navSize} icon={FiHome} title="Dashboard" active={routeName === 'Dashboard'} />
-                    </div>
-                    <div onClick={() => {
+                    </Link>
+                    <Link to={'/unit/greenhouse'} onClick={() => {
                         patchRoute('Greenhouse')
                     }}>
                         <NavItem navSize={navSize} icon={GiGreenhouse} title="Greenhouse" active={routeName === 'Greenhouse'} />
-                    </div>
-                    <div onClick={() => {
+                    </Link>
+                    <Link to={'/unit/monitoring'} onClick={() => {
                         patchRoute('Monitoring')
                     }}>
                         <NavItem navSize={navSize} icon={FiMonitor} title="Monitoring" active={routeName === 'Monitoring'} />
-                    </div>
-                    <div onClick={() => {
+                    </Link>
+                    <Link to={'/unit/controlling'} onClick={() => {
                         patchRoute('Controlling')
                     }}>
                         <NavItem navSize={navSize} icon={AiOutlineControl} title="Controlling" active={routeName === 'Controlling'} />
-                    </div>
-                    <div onClick={() => {
+                    </Link>
+                    <Link to={'/unit/historynotifikasi'} onClick={() => {
                         patchRoute('History Notification')
                     }}>
                         <NavItem navSize={navSize} icon={AiOutlineHistory} title="History Notification" active={routeName === 'History Notification'} />
-                    </div>
+                    </Link>
 
                 </Flex>
 

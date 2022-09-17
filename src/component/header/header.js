@@ -36,13 +36,16 @@ const Header = () => {
                 }}
                 onClick={onOpen}
             />
+
             <Draw data={{
                 onclose: onClose,
                 isopen: isOpen,
             }} />
+
             <Text color={'black'}>
                 {routeName}
             </Text>
+
             <Flex flexDirection={'row'}>
                 <div>
                     <Icon as={ImExit} color={"#09322D"} fontSize="xl" />

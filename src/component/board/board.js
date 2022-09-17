@@ -12,8 +12,17 @@ import SideNav from '../sidenav/sidenav'
 import { ImExit } from 'react-icons/im'
 import Header from '../header/header'
 import { Route, Routes } from 'react-router-dom'
+import Dashboard from '../../page/dashboard/dashboard'
+import { useSelector, useDispatch } from 'react-redux';
+import Controlling from '../../page/controlling/controlling'
+import GreenHouse from '../../page/greenhouse/greenhouse'
+import Monitoring from '../../page/monitoring/monitoring'
+import Notification from '../../page/notification/notification'
 
 const Baord = () => {
+    const { routeName } = useSelector(
+        state => state.userReducer,
+    );
     return (
         <Flex color='white'>
             <Box bg='tomato' h={'100vh'}>
@@ -28,9 +37,12 @@ const Baord = () => {
                     h={'calc(100vh - 80px)'}
                 >
                     <Routes>
-                        <Route>
-
-                        </Route>
+                        <Route path="/" exact element={<Dashboard />} />
+                        <Route path="/unit/dashboard" element={<Dashboard />} />
+                        <Route path="/unit/greenhouse" element={<GreenHouse />} />
+                        <Route path="/unit/monitoring" element={<Monitoring />} />
+                        <Route path="/unit/controlling" element={<Controlling />} />
+                        <Route path="/unit/historynotifikasi" element={<Notification />} />
                     </Routes>
                 </Flex>
             </Box >

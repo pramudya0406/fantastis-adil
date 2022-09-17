@@ -1,15 +1,14 @@
 import React from "react";
-import './monitoring.css'
-const Monitoring = () => {
+const Notification = () => {
     return (
         <>
 
             <div>
-                Hallo Monitoring
+                Hallo notification
             </div>
 
         </>
     )
 
 }
-export default Monitoring
+export default Notification

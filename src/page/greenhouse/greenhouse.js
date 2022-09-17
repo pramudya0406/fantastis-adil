@@ -5,7 +5,7 @@ const GreenHouse = () => {
         <>
 
             <div>
-                Hallo
+                Hallo GreenHouse
             </div>
 
         </>
