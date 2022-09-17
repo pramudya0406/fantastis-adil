@@ -5,7 +5,7 @@ const Monitoring = () => {
         <>
 
             <div>
-                Hallo
+                Hallo Monitoring
             </div>
 
         </>
