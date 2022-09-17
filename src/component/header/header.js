@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, } from 'react'
 import {
     Flex,
-    Image,
-    Box,
-    Center,
     Text,
     Icon,
+    useDisclosure,
 } from '@chakra-ui/react'
-import SideNav from '../sidenav/sidenav'
 import { ImExit } from 'react-icons/im'
+import { AiOutlineMenu } from 'react-icons/ai'
 import { useSelector, useDispatch } from 'react-redux';
+import Draw from '../draw/draw';
+
 
 const Header = () => {
 
@@ -17,6 +17,9 @@ const Header = () => {
         state => state.userReducer,
     );
     console.log(routeName)
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
 
     return (
         <Flex
@@ -27,6 +30,16 @@ const Header = () => {
             alignItems={'center'}
             flexDirection={'row'}
         >
+            <Icon as={AiOutlineMenu} fontSize="xl" color={"#09322D"}
+                display={{
+                    lg: 'none',
+                }}
+                onClick={onOpen}
+            />
+            <Draw data={{
+                onclose: onClose,
+                isopen: isOpen,
+            }} />
             <Text color={'black'}>
                 {routeName}
             </Text>

@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
-import './navigation.css';
+import React, { useState, } from 'react'
 import {
-    Flex,
-    Image,
-    Box,
-    Center,
+    Drawer,
+    DrawerBody,
+    DrawerHeader,
+    DrawerOverlay,
+    DrawerContent,
 } from '@chakra-ui/react'
+import { useSelector, useDispatch } from 'react-redux';
+import NavItem from '../navitem/navitem'
 import {
     FiHome,
     FiMonitor,
@@ -17,51 +19,30 @@ import {
     AiOutlineControl,
     AiOutlineHistory
 } from 'react-icons/ai'
-import NavItem from '../navitem/navitem'
-import { useSelector, useDispatch } from 'react-redux';
-import { routePageName } from '../../redux/action';
+import { routePageName } from '../../redux/action'
 
-const SideNav = () => {
+const Draw = (props) => {
+
+    const data = props.data
     const navSize = "large"
+
+    const { routeName } = useSelector(
+        state => state.userReducer,
+    );
+    console.log(routeName)
 
     const dispatch = useDispatch()
 
     const patchRoute = (data) => {
         dispatch(routePageName(data))
     }
-    const { routeName } = useSelector(
-        state => state.userReducer,
-    );
 
     return (
-        <>
-            <Flex
-                backgroundColor={'#09322D'}
-                display={{
-                    base: 'none',
-                    lg: 'flex',
-
-                }}
-
-                pos="sticky"
-                h="100vh"
-                boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
-                w={'370px'}
-                flexDir="column"
-                justifyContent="space-between"
-            >
-                <Flex
-                    p="5%"
-                    flexDir="column"
-                    w="100%"
-                    as="nav"
-                >
-                    <Box >
-                        <Center>
-                            <Image src='https://res.cloudinary.com/diyu8lkwy/image/upload/v1663396824/itera%20herro%20icon/Frame_9_1_sznmbk.png' />
-                        </Center>
-                    </Box>
-
+        <Drawer placement={'left'} onClose={data.onclose} isOpen={data.isopen}>
+            <DrawerOverlay />
+            <DrawerContent>
+                <DrawerHeader borderBottomWidth='1px'>Basic Drawer</DrawerHeader>
+                <DrawerBody>
                     <div onClick={() => {
                         patchRoute('Dashboard')
                     }}>
@@ -88,12 +69,9 @@ const SideNav = () => {
                         <NavItem navSize={navSize} icon={AiOutlineHistory} title="History Notification" active={routeName === 'History Notification'} />
                     </div>
 
-                </Flex>
-
-            </Flex>
-
-        </>
+                </DrawerBody>
+            </DrawerContent>
+        </Drawer>
     )
-
 }
-export default SideNav
+export default Draw

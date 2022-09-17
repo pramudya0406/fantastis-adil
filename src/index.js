@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from '@chakra-ui/react'
+import { BrowserRouter } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
 import { Store } from './redux/store';
@@ -13,7 +14,9 @@ root.render(
   <React.StrictMode>
     <ChakraProvider>
       <Provider store={Store}>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </Provider>
     </ChakraProvider>
   </React.StrictMode>
