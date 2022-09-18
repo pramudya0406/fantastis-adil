@@ -6,8 +6,8 @@ import {
     Center,
     Text,
     Icon,
-    calc,
     Button,
+    Wrap,
 } from '@chakra-ui/react'
 const Dashboard = () => {
     return (
@@ -29,7 +29,9 @@ const Dashboard = () => {
                     </Text>
                     <Button bg='#14453E' size='sm' colorScheme={'teal'}>Tambah</Button>
                 </Flex>
-                <Text color={'black'}>hallo</Text>
+                <Wrap>
+
+                </Wrap>
             </Flex>
 
         </>
