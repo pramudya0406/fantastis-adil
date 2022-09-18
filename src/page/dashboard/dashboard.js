@@ -6,9 +6,15 @@ import {
     Center,
     Text,
     Icon,
-    calc,
     Button,
+    Wrap,
+    WrapItem,
 } from '@chakra-ui/react'
+import CardDashboard from '../../component/card_dashboard/card_dashboard'
+import { GiGreenhouse } from 'react-icons/gi';
+import { MdMonitor } from 'react-icons/md';
+import { AiOutlineControl } from 'react-icons/ai';
+
 const Dashboard = () => {
     return (
         <>
@@ -18,18 +24,39 @@ const Dashboard = () => {
                 flexDir={'column'}
             >
                 <Flex
-                    w='100%'
-                    flexDir={'row'}
-                    justifyContent='space-between'
-                    alignItems={'center'}
-                    marginBottom='40px'
+                    justify='center'
                 >
-                    <Text color={'black'}>
-                        List Greenhouse
-                    </Text>
-                    <Button bg='#14453E' size='sm' colorScheme={'teal'}>Tambah</Button>
+                    <Wrap spacing='50px' justify='center'>
+                        <CardDashboard data={{
+                            value: 100,
+                            icon: GiGreenhouse,
+                            name: 'Jumlah GreenHouse'
+                        }} />
+                        <CardDashboard data={{
+                            value: 100,
+                            icon: MdMonitor,
+                            name: 'Jumlah Sensor'
+                        }} />
+                        <CardDashboard data={{
+                            value: 100,
+                            icon: AiOutlineControl,
+                            name: 'Jumlah Actuator'
+                        }} />
+                    </Wrap>
                 </Flex>
-                <Text color={'black'}>hallo</Text>
+
+                <Flex
+                    w='100%'
+                    flexDir={'column'}
+                    justify='center'
+                    align={'center'}
+                    marginTop={'100px'}
+                >
+                    <Text color={'black'} marginBottom={'10px'}>
+                        Kalaborasi oleh :
+                    </Text>
+                    <Image src='https://res.cloudinary.com/diyu8lkwy/image/upload/v1663542541/itera%20herro%20icon/Frame_181_fmtxbh.png' marginBottom={'50px'} />
+                </Flex>
             </Flex>
 
         </>
