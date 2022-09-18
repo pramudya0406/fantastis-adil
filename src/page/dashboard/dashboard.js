@@ -44,6 +44,19 @@ const Dashboard = () => {
                         }} />
                     </Wrap>
                 </Flex>
+
+                <Flex
+                    w='100%'
+                    flexDir={'column'}
+                    justify='center'
+                    align={'center'}
+                    marginTop={'100px'}
+                >
+                    <Text color={'black'} marginBottom={'10px'}>
+                        Kalaborasi oleh :
+                    </Text>
+                    <Image src='https://res.cloudinary.com/diyu8lkwy/image/upload/v1663542541/itera%20herro%20icon/Frame_181_fmtxbh.png' marginBottom={'50px'} />
+                </Flex>
             </Flex>
 
         </>
