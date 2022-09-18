@@ -8,7 +8,13 @@ import {
     Icon,
     Button,
     Wrap,
+    WrapItem,
 } from '@chakra-ui/react'
+import CardDashboard from '../../component/card_dashboard/card_dashboard'
+import { GiGreenhouse } from 'react-icons/gi';
+import { MdMonitor } from 'react-icons/md';
+import { AiOutlineControl } from 'react-icons/ai';
+
 const Dashboard = () => {
     return (
         <>
@@ -18,20 +24,26 @@ const Dashboard = () => {
                 flexDir={'column'}
             >
                 <Flex
-                    w='100%'
-                    flexDir={'row'}
-                    justifyContent='space-between'
-                    alignItems={'center'}
-                    marginBottom='40px'
+                    justify='center'
                 >
-                    <Text color={'black'}>
-                        List Greenhouse
-                    </Text>
-                    <Button bg='#14453E' size='sm' colorScheme={'teal'}>Tambah</Button>
+                    <Wrap spacing='50px' justify='center'>
+                        <CardDashboard data={{
+                            value: 100,
+                            icon: GiGreenhouse,
+                            name: 'Jumlah GreenHouse'
+                        }} />
+                        <CardDashboard data={{
+                            value: 100,
+                            icon: MdMonitor,
+                            name: 'Jumlah Sensor'
+                        }} />
+                        <CardDashboard data={{
+                            value: 100,
+                            icon: AiOutlineControl,
+                            name: 'Jumlah Actuator'
+                        }} />
+                    </Wrap>
                 </Flex>
-                <Wrap>
-
-                </Wrap>
             </Flex>
 
         </>

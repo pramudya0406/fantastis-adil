@@ -3,13 +3,9 @@ import {
     Flex,
     Image,
     Box,
-    Center,
     Text,
     Icon,
-    Button,
-    Wrap,
     WrapItem,
-    Badge,
 } from '@chakra-ui/react'
 import { RiDeleteBinFill, RiPencilFill, RiMapPinFill } from 'react-icons/ri';
 
