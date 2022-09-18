@@ -32,9 +32,11 @@ const Baord = () => {
                 <Header />
                 <Flex
                     padding={'20px'}
-                    bg='tomato'
                     w='100%'
                     h={'calc(100vh - 80px)'}
+
+                    overflowY={'scroll'}
+                    flexDir='column'
                 >
                     <Routes>
                         <Route path="/" exact element={<Dashboard />} />
@@ -44,6 +46,7 @@ const Baord = () => {
                         <Route path="/unit/controlling" element={<Controlling />} />
                         <Route path="/unit/historynotifikasi" element={<Notification />} />
                     </Routes>
+
                 </Flex>
             </Box >
         </Flex >

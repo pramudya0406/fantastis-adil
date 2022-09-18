@@ -29,6 +29,7 @@ const Header = () => {
             justifyContent="space-between"
             alignItems={'center'}
             flexDirection={'row'}
+            shadow='0 0 0 1px rgba(0, 0, 0, 0.1)'
         >
             <Icon as={AiOutlineMenu} fontSize="xl" color={"#09322D"}
                 display={{
