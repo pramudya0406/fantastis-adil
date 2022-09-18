@@ -48,9 +48,9 @@ const Header = () => {
             </Text>
 
             <Flex flexDirection={'row'}>
-                <div>
-                    <Icon as={ImExit} color={"#09322D"} fontSize="xl" />
-                </div>
+                <Flex>
+                    <Icon cursor={'pointer'} onClick={()=> window.open("someLink", "_blank")} as={ImExit} color={"#09322D"} fontSize="xl" />
+                </Flex>
             </Flex>
         </Flex>
     )
