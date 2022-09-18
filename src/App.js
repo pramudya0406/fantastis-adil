@@ -1,15 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import { ChakraProvider } from '@chakra-ui/react'
-import Navigation from './component/navigation/navigation';
-import { Route } from 'react-router-dom';
-import Login from './page/login/login';
+import SideNav from './component/sidenav/sidenav';
+import Baord from './component/board/board';
+
 
 function App() {
   return (
-    <ChakraProvider>
-      <Login />
-    </ChakraProvider>
+    <Baord />
   );
 }
 

@@ -5,7 +5,7 @@ const Controlling = () => {
         <>
 
             <div>
-                Hallo
+                Hallo Controlling
             </div>
 
         </>

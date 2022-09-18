@@ -5,7 +5,7 @@ const Dashboard = () => {
         <>
 
             <div>
-                Hallo
+                Hallo Dashboard
             </div>
 
         </>

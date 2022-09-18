@@ -1,15 +1,14 @@
 import React from "react";
-import './navigation.css';
-const Navigation = () => {
+const Notification = () => {
     return (
         <>
 
             <div>
-                Hallo
+                Hallo notification
             </div>
 
         </>
     )
 
 }
-export default Navigation
+export default Notification
