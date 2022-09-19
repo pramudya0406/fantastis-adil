@@ -52,7 +52,7 @@ const Monitoring = () => {
             <Flex justifyContent={'space-between'} width='100%' >
                 <Link>
                     <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}>
-                        Monitoring
+                    List Sensor pada Greenhouse
                     </Text>
                 </Link>
             </Flex>
@@ -78,10 +78,10 @@ const Monitoring = () => {
                         <Tr textAlign={'center'} alignContent={'center'} alignItems={'center'} justifyContent={'center'}>
                                 <Th textAlign={'center'} >No</Th>
                                 <Th textAlign={'center'} >Nama</Th>
-                                <Th textAlign={'center'}>Icon</Th>
+                                <Th textAlign={'center'} >Icon</Th>
                                 <Th textAlign={'center'} >Satuan Ukur</Th>
                                 <Th textAlign={'center'} >Merek</Th>
-                                <Th textAlign={'center'} >Kode Warna</Th>
+                                <Th textAlign={'center'} >Warna</Th>
                                 <Th textAlign={'center'} >Aksi</Th>
                         </Tr>
                         </Thead>
