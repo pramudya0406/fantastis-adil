@@ -25,10 +25,12 @@
   --color-secondary-variant:#41BF06;
   --color-background : #f6f6f6;
   --color-surface: #FCFFFC;
-  --color-grey: #B00020;
+  --color-grey: #ABABAB;
+  --color-error: #B00020;
   --color-on-primary: #FFFFFF;
   --color-on-background: #000000;
   --color-on-error: #FFFFFF;
+  --color-info: #007BFF;
 }
 
 .App {

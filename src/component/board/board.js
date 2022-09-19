@@ -24,7 +24,7 @@ const Baord = () => {
         state => state.userReducer,
     );
     return (
-        <Flex color='white'>
+        <Flex color='white' width="100%">
             <Box bg='tomato' h={'100vh'}>
                 <SideNav />
             </Box>
@@ -34,7 +34,6 @@ const Baord = () => {
                     padding={'20px'}
                     w='100%'
                     h={'calc(100vh - 80px)'}
-
                     overflowY={'scroll'}
                     flexDir='column'
                 >

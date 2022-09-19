@@ -1,6 +1,7 @@
 import React, { useState, } from 'react'
 import {
     Drawer,
+    Image,
     DrawerBody,
     DrawerHeader,
     DrawerOverlay,
@@ -34,7 +35,7 @@ const Draw = (props) => {
         <Drawer placement={'left'} onClose={data.onclose} isOpen={data.isopen}>
             <DrawerOverlay />
             <DrawerContent>
-                <DrawerHeader borderBottomWidth='1px'>Basic Drawer</DrawerHeader>
+                <DrawerHeader borderBottomWidth='1px'><Image display={{ base: 'flex', lg: 'none'}} position={'Relative'} width={'80%'} maxWidth={'200px'} src="https://res.cloudinary.com/diyu8lkwy/image/upload/v1663418492/itera%20herro%20icon/Frame_3_2_3_1_hfojfh.png"/></DrawerHeader>
                 <DrawerBody>
                     <Link to={'/unit/dashboard'} onClick={() => {
                         patchRoute('Dashboard')
