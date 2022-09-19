@@ -18,6 +18,7 @@ import Controlling from '../../page/controlling/controlling'
 import GreenHouse from '../../page/greenhouse/greenhouse'
 import Monitoring from '../../page/monitoring/monitoring'
 import Notification from '../../page/notification/notification'
+import Monitoring_Add from '../../page/monitoring add/monitoring_add'
 
 const Baord = () => {
     const { routeName } = useSelector(
@@ -44,6 +45,7 @@ const Baord = () => {
                         <Route path="/unit/monitoring" element={<Monitoring />} />
                         <Route path="/unit/controlling" element={<Controlling />} />
                         <Route path="/unit/historynotifikasi" element={<Notification />} />
+                        <Route path="/unit/monitoring/monitoringadd" element={<Monitoring_Add />} />
                     </Routes>
 
                 </Flex>

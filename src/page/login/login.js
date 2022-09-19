@@ -6,7 +6,10 @@ const schema = yup.object({
 	email: yup
 		.string()
 		.required("Email harus diisi"),
-	password: yup.string().required("Password harus diisi"),
+	password: yup
+    .string()  
+    .min(6, "Password harus lebih dari 6 karakter")
+    .required("Password harus diisi"),
 })
 
 const Login = () => {
@@ -23,8 +26,9 @@ const Login = () => {
               <Formik
                 initialValues={{ email: '', password: '' }}
                 validationSchema={schema}
-                onSubmit={(values) => {
-                  alert(JSON.stringify(values, null, 2))
+                onSubmit={(values,actions) => {
+                  console.log(JSON.stringify(values, null, 2))
+                  actions.resetForm()
                 }}
               >
                 {({
