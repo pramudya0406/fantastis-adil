@@ -6,7 +6,10 @@ const schema = yup.object({
 	email: yup
 		.string()
 		.required("Email harus diisi"),
-	password: yup.string().required("Password harus diisi"),
+	password: yup
+    .string()  
+    .min(6, "Password harus lebih dari 6 karakter")
+    .required("Password harus diisi"),
 })
 
 const Login = () => {
@@ -21,10 +24,11 @@ const Login = () => {
               <Image display={{ base: 'flex', lg: 'none'}} position={'Relative'} width={'80%'} maxWidth={'200px'} src="https://res.cloudinary.com/diyu8lkwy/image/upload/v1663418492/itera%20herro%20icon/Frame_3_2_3_1_hfojfh.png"/>
               <Text fontWeight='bold' fontFamily='var(--font-family-secondary)' fontSize='var(--header-2)' color='var(--color-primer)' >Masuk</Text>
               <Formik
-                initialValues={{ username: '', password: '' }}
+                initialValues={{ email: '', password: '' }}
                 validationSchema={schema}
-                onSubmit={(values) => {
-                  alert(JSON.stringify(values, null, 2))
+                onSubmit={(values,actions) => {
+                  console.log(JSON.stringify(values, null, 2))
+                  actions.resetForm()
                 }}
               >
                 {({
@@ -86,8 +90,10 @@ const Login = () => {
                   backgroundColor="var(--color-primer)"
 									type="submit"
 									className="btn-login"
-									// onClick={handleSubmit}
-								>
+									onClick={() => {
+                    handleSubmit();
+                  }}>
+								{">"}
                   <Text fontWeight='bold' fontFamily='var(--font-family-secondary)' fontSize='var(--header-3)' color='var(--color-on-primary)' >
   									Masuk
                   </Text>
