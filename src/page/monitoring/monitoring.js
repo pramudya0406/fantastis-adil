@@ -16,7 +16,7 @@ import {
     Flex,
   } from '@chakra-ui/react'
 import { RiDeleteBinFill,RiPencilFill, RiMapPinFill } from 'react-icons/ri'
-import { Link } from "react-router-dom";
+import { Link, useLinkClickHandler } from "react-router-dom";
 
 const Monitoring = () => {
     const [data, setData] = React.useState([
@@ -50,7 +50,7 @@ const Monitoring = () => {
     return (
         <Flex gap={'30px'} width={'100%'} flexDir={'column'}>
             <Flex justifyContent={'space-between'} width='100%' >
-                <Link>
+                <Link >
                     <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}>
                     List Sensor pada Greenhouse
                     </Text>
@@ -66,9 +66,11 @@ const Monitoring = () => {
                     })}
                 </Select>
                 </Flex>
+                <Link to={'/unit/monitoring/add'}>
                 <Button bg={'var(--color-primer)'}>
                     Tambah
                 </Button>
+                </Link>
             </Flex>
             
             <Box width={'100%'} borderRadius={'md'}  boxShadow={'md'}  bg={'var(--color-on-primary)'} justify='flex-start' mt={30}>
