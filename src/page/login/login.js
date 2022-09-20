@@ -1,8 +1,9 @@
-import { Box, Flex, Button, Image, Text,Input} from "@chakra-ui/react"
+import { Box, Flex, Button, Image, Text, Input } from "@chakra-ui/react"
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import {FormControl,FormLabel,FormErrorMessage} from "@chakra-ui/form-control"
+import { FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/form-control"
 import * as yup from "yup"
 const schema = yup.object({
+
 	email: yup
 		.string()
 		.required("Email harus diisi"),
@@ -14,6 +15,7 @@ const schema = yup.object({
 
 const Login = () => {
   return (
+
     <Flex backgroundColor={"var(--color-on-primary)"} width='100%' height ="100vh" alignItems = 'center' justifyContent = 'center'>
          <Flex flexDir={'column'} backgroundColor={"var(--color-on-primary)"} width='100%' height ="100%" alignItems = 'center' justifyContent = 'center' display={{ base: 'none', md: 'none', lg: 'flex' }}>
             <Image position={'Relative'} width={'80%'} maxWidth={'400px'} src="https://res.cloudinary.com/diyu8lkwy/image/upload/v1663418492/itera%20herro%20icon/Frame_3_2_3_1_hfojfh.png"/>
@@ -88,21 +90,24 @@ const Login = () => {
                   height="50px"
                   borderRadius="10px"
                   backgroundColor="var(--color-primer)"
+
 									type="submit"
 									className="btn-login"
 									onClick={() => {
                     handleSubmit();
                   }}>
 								{">"}
+
                   <Text fontWeight='bold' fontFamily='var(--font-family-secondary)' fontSize='var(--header-3)' color='var(--color-on-primary)' >
-  									Masuk
+                    Masuk
                   </Text>
-								</Button>
-                  </Form>
+                </Button>
+              </Form>
             )}
-              </Formik>
-           </Box>
-         </Flex>
+          </Formik>
+        </Box>
+      </Flex>
     </Flex>
-  )};
+  )
+};
 export default Login

@@ -1,18 +1,12 @@
 import React, { useState } from 'react'
 import {
     Flex,
-    Image,
-    Box,
-    Center,
     Text,
-    Icon,
     Button,
     Wrap,
-    WrapItem,
-    Badge,
 } from '@chakra-ui/react'
-import { RiDeleteBinFill, RiPencilFill, RiMapPinFill } from 'react-icons/ri';
 import CardGreenhouse from '../../component/card_greenhouse/card_green';
+import { Link } from 'react-router-dom';
 
 const GreenHouse = () => {
 
@@ -66,7 +60,11 @@ const GreenHouse = () => {
                     <Text color={'black'}>
                         List Greenhouse
                     </Text>
-                    <Button bg='#14453E' size='sm' colorScheme={'teal'}>Tambah</Button>
+
+                    <Link to={'/unit/greenhouse/add'}>
+                        <Button bg='#14453E' size='sm' colorScheme={'teal'}>Tambah</Button>
+                    </Link>
+
                 </Flex>
                 <Wrap>
                     {
@@ -81,7 +79,6 @@ const GreenHouse = () => {
 
                 </Wrap>
             </Flex>
-
         </>
     )
 
