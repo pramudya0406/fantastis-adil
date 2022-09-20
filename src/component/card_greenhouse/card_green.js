@@ -17,6 +17,7 @@ import {
     Button,
 } from '@chakra-ui/react'
 import { RiDeleteBinFill, RiPencilFill, RiMapPinFill } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 
 const CardGreenhouse = (props) => {
 
@@ -40,9 +41,11 @@ const CardGreenhouse = (props) => {
                             }}>
                                 <Icon as={RiDeleteBinFill} size={'24px'} color={'#B00020'} />
                             </div>
-                            <div>
+                            <Link to={{
+                                pathname: '/unit/greenhouse/' + data.title
+                            }}>
                                 <Icon as={RiPencilFill} size={'24px'} color={'#007BFF'} marginStart={'10px'} />
-                            </div>
+                            </Link >
                         </Flex>
 
                     </Flex>

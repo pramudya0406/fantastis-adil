@@ -3,17 +3,19 @@ import {
     Flex,
     Text,
     Button,
-    Wrap,
     Input,
-    Image
 } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/form-control"
 import * as yup from "yup"
 import FilePicker from 'chakra-ui-file-picker'
+import { useParams } from "react-router";
 
-const GreenhouseAdd = () => {
+const GreenhouseEdit = () => {
+
+    const { slug } = useParams()
+
     let data = {
         name: '',
         location: '',
@@ -58,7 +60,7 @@ const GreenhouseAdd = () => {
                         </Text>
                     </Link>
                     <Text color={'black'} marginRight={'20px'}>{'>'}</Text>
-                    <Text color={'black'} >Tambah</Text>
+                    <Text color={'black'} >{slug}</Text>
                 </Flex>
 
                 <Flex
@@ -188,4 +190,4 @@ const GreenhouseAdd = () => {
     )
 }
 
-export default GreenhouseAdd
+export default GreenhouseEdit

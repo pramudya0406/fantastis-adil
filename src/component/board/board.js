@@ -19,6 +19,7 @@ import GreenHouse from '../../page/greenhouse/greenhouse'
 import Monitoring from '../../page/monitoring/monitoring'
 import Notification from '../../page/notification/notification'
 import GreenhouseAdd from '../../page/greenhouse/greenhouse_add'
+import GreenhouseEdit from '../../page/greenhouse/greenhouse_edit'
 
 const Baord = () => {
     const { routeName } = useSelector(
@@ -47,6 +48,7 @@ const Baord = () => {
                         <Route path="/unit/controlling" element={<Controlling />} />
                         <Route path="/unit/historynotifikasi" element={<Notification />} />
                         <Route path="/unit/greenhouse/add" element={<GreenhouseAdd />} />
+                        <Route path="/unit/greenhouse/:slug" element={<GreenhouseEdit />} />
                     </Routes>
 
                 </Flex>
