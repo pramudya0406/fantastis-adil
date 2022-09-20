@@ -20,13 +20,15 @@ import Monitoring from '../../page/monitoring/monitoring'
 import Notification from '../../page/notification/notification'
 import GreenhouseAdd from '../../page/greenhouse/greenhouse_add'
 import GreenhouseEdit from '../../page/greenhouse/greenhouse_edit'
+import Monitoring_Add from '../../page/monitoring/monitoring_add'
+
 
 const Baord = () => {
     const { routeName } = useSelector(
         state => state.userReducer,
     );
     return (
-        <Flex color='white'>
+        <Flex color='white' width="100%">
             <Box bg='tomato' h={'100vh'}>
                 <SideNav />
             </Box>
@@ -36,7 +38,6 @@ const Baord = () => {
                     padding={'20px'}
                     w='100%'
                     h={'calc(100vh - 80px)'}
-
                     overflowY={'scroll'}
                     flexDir='column'
                 >
@@ -49,6 +50,7 @@ const Baord = () => {
                         <Route path="/unit/historynotifikasi" element={<Notification />} />
                         <Route path="/unit/greenhouse/add" element={<GreenhouseAdd />} />
                         <Route path="/unit/greenhouse/:slug" element={<GreenhouseEdit />} />
+                        <Route path="/unit/monitoring/add" element={<Monitoring_Add />} />
                     </Routes>
 
                 </Flex>
