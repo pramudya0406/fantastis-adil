@@ -33,11 +33,13 @@ export default function NavItem({ icon, title, description, active, navSize }) {
                 >
                     <MenuButton w="100%" >
                         <Flex alignItems={'center'}>
-                            <Icon as={icon} fontSize="xl" color={active ? "#09322D" : '#ABABAB'} />
+                            <Icon fontWeight={'bold'} fontSize={'var(--header-3)'} as={icon} color={active ? 'var(--color-primer)' : 'var(--color-grey)'} />
                             <Text
                                 ml={5}
                                 display={navSize == "small" ? "none" : "flex"}
-                                color={active ? '#09322D' : '#ABABAB'}>
+                                fontWeight={'semibold'}
+                                fontSize={'var(--header-3)'}
+                                color={active ? 'var(--color-primer)' :  'var(--color-grey)'}>
                                 {title}
                             </Text>
                         </Flex>

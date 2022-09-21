@@ -5,7 +5,7 @@ import {
     Icon,
     useDisclosure,
 } from '@chakra-ui/react'
-import { ImExit } from 'react-icons/im'
+import { IoExitOutline } from 'react-icons/io5'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { useSelector, useDispatch } from 'react-redux';
 import Draw from '../draw/draw';
@@ -31,7 +31,8 @@ const Header = () => {
             flexDirection={'row'}
             shadow='0 0 0 1px rgba(0, 0, 0, 0.1)'
         >
-            <Icon as={AiOutlineMenu} fontSize="xl" color={"#09322D"}
+            <Icon as={AiOutlineMenu} fontSize='xl' color={"#09322D"}
+                
                 display={{
                     lg: 'none',
                 }}
@@ -43,14 +44,14 @@ const Header = () => {
                 isopen: isOpen,
             }} />
 
-            <Text color={'black'}>
+            <Text color={'var(--color-primer)'} fontWeight={'bold'} fontSize={'var(--header-2)'}>
                 {routeName}
             </Text>
 
             <Flex flexDirection={'row'}>
-                <Flex>
-                    <Icon cursor={'pointer'} onClick={()=> window.open("someLink", "_blank")} as={ImExit} color={"#09322D"} fontSize="xl" />
-                </Flex>
+                <div>
+                    <Icon cursor='pointer' as={IoExitOutline} color={'var(--color-primer)'} fontSize='lg' />
+                </div>
             </Flex>
         </Flex>
     )
