@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Flex,
     Text,
@@ -7,6 +7,8 @@ import {
 } from '@chakra-ui/react'
 import CardGreenhouse from '../../component/card_greenhouse/card_green';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { routePageName } from '../../redux/action';
 
 const GreenHouse = () => {
 
@@ -42,6 +44,14 @@ const GreenHouse = () => {
             location: 'Lampung Selatan',
         },
     ]
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        return () => {
+            dispatch(routePageName('Greenhouse'))
+        };
+    }, []);
 
     return (
         <>

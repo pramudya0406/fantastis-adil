@@ -1,21 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Flex,
     Image,
-    Box,
-    Center,
     Text,
-    Icon,
-    Button,
     Wrap,
-    WrapItem,
 } from '@chakra-ui/react'
 import CardDashboard from '../../component/card_dashboard/card_dashboard'
 import { GiGreenhouse } from 'react-icons/gi';
 import { MdMonitor } from 'react-icons/md';
 import { AiOutlineControl } from 'react-icons/ai';
+import { useDispatch } from 'react-redux';
+import { routePageName } from '../../redux/action';
 
 const Dashboard = () => {
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        return () => {
+            dispatch(routePageName('Dashboard'))
+        };
+    }, []);
+
     return (
         <>
 
