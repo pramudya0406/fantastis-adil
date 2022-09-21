@@ -45,8 +45,16 @@ const   Monitoring_Add = () => {
                 warna:'red',
                 kategori: 'Persen',
             },
+            {
+                id: 2,
+                nama: 'Ikon 2',
+                ikon:  'https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229870/itera%20herro%20icon/Lovepik_com-400222655-test-tube_1_jhq5uo.png',
+                warna:'red',
+                kategori: 'Persen',
+            },
         ]
     )
+    const [ikon_selected, setIkon_selected] = useState('')
     return (
             <Flex
                 w='100%'
@@ -86,6 +94,7 @@ const   Monitoring_Add = () => {
 						errors,
 						touched,
                         handleChange,
+                        setFieldValue,
                         handleBlur, 
                         handleSubmit, 
                         isSubmitting}) => (
@@ -113,8 +122,11 @@ const   Monitoring_Add = () => {
                             <FormLabel color={'var(--color-primer)'}>
                                 Ikon
                             </FormLabel>
-                                
-                                <Select  color={'var(--color-primer)'} onChange={handleChange}
+                                <Select  color={'var(--color-primer)'}
+                                onChange={(e) => {
+                                    setFieldValue('ikon', e.target.value);
+                                    setIkon_selected(e.target.value)
+                                }}
                                 onBlur={handleBlur}
                                 value={ikon.ikon}
                                 name="ikon"
@@ -130,10 +142,10 @@ const   Monitoring_Add = () => {
                                         )
                                     }
                                 </Select>
-                                <FormLabel color={'var(--color-primer)'} mt='2'>
-                                        Tampilan Ikon
-                                </FormLabel>
-                                
+                                <Image src={ikon_selected}/>
+                        <FormErrorMessage>
+                            {errors.ikon}
+                        </FormErrorMessage>
                     </FormControl>
                         <FormControl  marginTop={'20px'} isInvalid={errors.satuan_ukur && touched.satuan_ukur}>
                             <FormLabel color={'var(--color-primer)'}>
@@ -191,6 +203,9 @@ const   Monitoring_Add = () => {
                                     </option>
                                 ))}
                             </Select>
+                            <FormErrorMessage>
+                                {errors.kategori}
+                            </FormErrorMessage>
                     </FormControl>
                     <Link to={'/unit/monitoring'}>
                     <Button
