@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Flex,
     Text,
@@ -12,6 +12,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/form-control"
 import * as yup from "yup"
 import FilePicker from 'chakra-ui-file-picker'
+import { useDispatch } from 'react-redux';
+import { routePageName } from '../../redux/action';
 
 const GreenhouseAdd = () => {
     let data = {
@@ -39,6 +41,14 @@ const GreenhouseAdd = () => {
             return (alert('mantap'))
         }
     }
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        return () => {
+            dispatch(routePageName('Greenhouse'))
+        };
+    }, []);
 
     return (
         <>

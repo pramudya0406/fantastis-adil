@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Flex,
     Text,
@@ -11,6 +11,8 @@ import { FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/form-contro
 import * as yup from "yup"
 import FilePicker from 'chakra-ui-file-picker'
 import { useParams } from "react-router";
+import { useDispatch } from 'react-redux';
+import { routePageName } from '../../redux/action';
 
 const GreenhouseEdit = () => {
 
@@ -41,6 +43,13 @@ const GreenhouseEdit = () => {
             return (alert('mantap'))
         }
     }
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        return () => {
+            dispatch(routePageName('Greenhouse'))
+        };
+    }, []);
 
     return (
         <>
