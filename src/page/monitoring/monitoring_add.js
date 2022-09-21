@@ -71,31 +71,31 @@ const   Monitoring_Add = () => {
                         handleSubmit, 
                         isSubmitting}) => (
                         <Form onSubmit={handleSubmit}>
-                             <FormControl marginTop={'20px'}isInvalid={errors.nama && touched.nama}>
-                                 <FormLabel >
-                                     Nama
-                                 </FormLabel>
-                             </FormControl>
-                             <FormControl>
-                                 <FormLabel>
-                                     Ikon
-                                 </FormLabel>
-                             </FormControl>
-                             <FormControl>
-                                 <FormLabel>
-                                     Satuan Ukur
-                                 </FormLabel>
-                             </FormControl>
-                             <FormControl>
-                                 <FormLabel>
-                                     Merek
-                                 </FormLabel>
-                             </FormControl>
-                             <FormControl>
-                                 <FormLabel>
-                                     Kategori
-                                 </FormLabel>
-                             </FormControl>
+                            <FormControl marginTop={'20px'}isInvalid={errors.nama && touched.nama}>
+                                <FormLabel >
+                                    Nama
+                                </FormLabel>
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel>
+                                    Ikon
+                                </FormLabel>
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel>
+                                    Satuan Ukur
+                                </FormLabel>
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel>
+                                    Merek
+                                </FormLabel>
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel>
+                                    Kategori
+                                </FormLabel>
+                            </FormControl>
                         </Form>
                     )}
                 </Formik>
