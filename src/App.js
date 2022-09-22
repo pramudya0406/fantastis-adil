@@ -1,11 +1,11 @@
 import './App.css';
-import Baord from './component/board/board';
+import Board from './component/board/board';
 // import Login from './page/login/login';
 
 
 function App() {
   return (
-    <Baord />
+    <Board />
   );
 }
 

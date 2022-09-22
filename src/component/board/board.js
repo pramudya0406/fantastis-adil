@@ -58,4 +58,4 @@ const Baord = () => {
         </Flex >
     )
 }
-export default Baord
+export default Board
