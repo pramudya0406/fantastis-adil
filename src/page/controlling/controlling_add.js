@@ -28,32 +28,22 @@ const schema = yup.object({
     ikon: yup
         .string()
         .required("Ikon harus diisi"),
-    satuan_ukur: yup
+    warna: yup
         .string()
-        .required("Satuan Ukur harus diisi"),
-    merek: yup
+        .required("Warna harus diisi"),
+    greenHouse: yup
         .string()
-        .required("Merek harus diisi"),
-    kategori: yup
-        .string()
-        .required("Kategori harus diisi"),
+        .required("Greenhouse harus diisi"),
 })
-const Monitoring_Add = () => {
+const Controlling_Add = () => {
     const [ikon, setIkon] = useState(
         [
             {
-                id: 1,
-                nama: 'Ikon 1',
-                ikon: 'https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229870/itera%20herro%20icon/Lovepik_com-400222655-test-tube_1_jhq5uo.png',
-                warna: 'red',
-                kategori: 'Persen',
-            },
-            {
-                id: 2,
-                nama: 'Ikon 2',
-                ikon: 'https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229870/itera%20herro%20icon/Lovepik_com-400222655-test-tube_1_jhq5uo.png',
-                warna: 'red',
-                kategori: 'Persen',
+                    id: 1,
+                    greenHouse: 'Greenhouse 1',
+                    ikon: 'https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229870/itera%20herro%20icon/Lovepik_com-400222655-test-tube_1_jhq5uo.png',
+                    nama_alat: 'Pompa Air',
+                    warna: 'red',
             },
         ]
     )
@@ -63,7 +53,7 @@ const Monitoring_Add = () => {
 
     useEffect(() => {
         return () => {
-            dispatch(routePageName('Monitoring'))
+            dispatch(routePageName('Controlling'))
         };
     }, []);
 
@@ -73,10 +63,10 @@ const Monitoring_Add = () => {
             flexDir={'column'}
         >
             <Flex width='100%' >
-                <Link to={'/unit/monitoring'}>
+                <Link to={'/unit/controlling'}>
                     <Flex marginRight={'2'}>
                         <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}>
-                            List Sensor pada Greenhouse
+                            List Controlling pada Greenhouse
                         </Text>
                     </Flex>
                 </Link>
@@ -85,7 +75,12 @@ const Monitoring_Add = () => {
                 </Flex>
                 <Link>
                     <Flex>
-                        <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}> Add </Text>
+                        {ikon.map((item, index) => {
+                            return (
+                                <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}> {item.greenHouse} </Text>
+                            )
+                        }
+                        )}
                     </Flex>
                 </Link>
             </Flex>
@@ -93,9 +88,7 @@ const Monitoring_Add = () => {
                 initialValues={{
                     nama: '',
                     ikon: '',
-                    satuan_ukur: '',
-                    merek: '',
-                    kategori: '',
+                    warna: '',
                 }
                 } validationSchema={schema}
                 onSubmit={(values) => {
@@ -148,7 +141,7 @@ const Monitoring_Add = () => {
                                 </option>
                                 {ikon.map((ikon) => (
                                     <option value={ikon.ikon} color={'var(--color-primer)'}>
-                                        {ikon.nama}
+                                        {ikon.nama_alat}
                                     </option>
                                 )
                                 )
@@ -159,67 +152,26 @@ const Monitoring_Add = () => {
                                 {errors.ikon}
                             </FormErrorMessage>
                         </FormControl>
-                        <FormControl marginTop={'20px'} isInvalid={errors.satuan_ukur && touched.satuan_ukur}>
+                        <FormControl marginTop={'20px'} isInvalid={errors.warna && touched.warna}>
                             <FormLabel color={'var(--color-primer)'}>
-                                Satuan Ukur
+                                Warna
                             </FormLabel>
                             <Input
                                 color={'var(--color-primer)'}
                                 maxWidth={'100%'}
                                 marginTop={'0 auto'}
                                 type="text"
-                                name="satuan_ukur"
-                                value={values.satuan_ukur}
+                                name="warna"
+                                value={values.warna}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 variant='outline'
-                                placeholder="Satuan Ukur..." />
+                                placeholder="Warna..." />
                             <FormErrorMessage>
-                                {errors.satuan_ukur}
+                                {errors.warna}
                             </FormErrorMessage>
                         </FormControl>
-                        <FormControl marginTop={'20px'} isInvalid={errors.merek && touched.merek}>
-                            <FormLabel color={'var(--color-primer)'}>
-                                Merek
-                            </FormLabel>
-                            <Input
-                                color={'var(--color-primer)'}
-                                maxWidth={'100%'}
-                                marginTop={'0 auto'}
-                                type="text"
-                                name="merek"
-                                value={values.merek}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                variant='outline'
-                                placeholder="Merek..." />
-                            <FormErrorMessage>
-                                {errors.merek}
-                            </FormErrorMessage>
-                        </FormControl>
-                        <FormControl marginTop={'20px'} isInvalid={errors.ikon && touched.ikon}>
-                            <FormLabel color={'var(--color-primer)'}>
-                                Kategori
-                            </FormLabel>
-                            <Select value={ikon.kategori} color={'var(--color-primer)'} onChange={handleChange}
-                                onBlur={handleBlur}
-                                name="kategori"
-                                id="kategori"
-                            >
-                                <option value="">
-                                    Pilih Kategori
-                                </option>
-                                {ikon.map((ikon) => (
-                                    <option color={'var(--color-primer)'}>
-                                        {ikon.kategori}
-                                    </option>
-                                ))}
-                            </Select>
-                            <FormErrorMessage>
-                                {errors.kategori}
-                            </FormErrorMessage>
-                        </FormControl>
-                        <Link to={'/unit/monitoring'}>
+                        <Link to={'/unit/controlling'}>
                             <Button
                                 marginTop={'44px'}
                                 width="100%"
@@ -242,4 +194,4 @@ const Monitoring_Add = () => {
         </Flex>
     )
 }
-export default Monitoring_Add
+export default Controlling_Add

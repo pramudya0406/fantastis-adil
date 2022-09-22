@@ -32,7 +32,6 @@ const Controlling = () => {
                     icon: 'https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229870/itera%20herro%20icon/Lovepik_com-400222655-test-tube_1_jhq5uo.png',
                     life_cycle: 'On',
                     nama_alat: 'Pompa Air',
-                    merek: 'adafruit',
                     warna: 'red',
                 },
                 {
@@ -41,7 +40,6 @@ const Controlling = () => {
                     icon: 'https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229870/itera%20herro%20icon/Lovepik_com-400222655-test-tube_1_jhq5uo.png',
                     life_cycle: 'Off',
                     nama_alat: 'Kipas',
-                    merek: 'adafruit',
                     warna: 'red',
                 },
 
@@ -78,9 +76,11 @@ const Controlling = () => {
                         })}
                     </Select>
                 </Flex>
-                <Button bg={'var(--color-primer)'}>
-                    Tambah
-                </Button>
+                <Link to={'/unit/controlling/add'}>
+                    <Button bg={'var(--color-primer)'}>
+                        Tambah
+                    </Button>
+                </Link>
             </Flex>
 
             <Box width={'100%'} borderRadius={'md'} boxShadow={'md'} bg={'var(--color-on-primary)'} justify='flex-start' mt={30}>
@@ -92,7 +92,7 @@ const Controlling = () => {
                                 <Th textAlign={'center'} >Nama Alat</Th>
                                 <Th textAlign={'center'}>Icon</Th>
                                 <Th textAlign={'center'} >Life Cycle</Th>
-                                <Th textAlign={'center'} > Warna</Th>
+                                <Th textAlign={'center'} >Warna</Th>
                                 <Th textAlign={'center'} >Aksi</Th>
                             </Tr>
                         </Thead>

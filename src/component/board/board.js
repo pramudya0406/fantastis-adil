@@ -21,6 +21,7 @@ import Notification from '../../page/notification/notification'
 import GreenhouseAdd from '../../page/greenhouse/greenhouse_add'
 import GreenhouseEdit from '../../page/greenhouse/greenhouse_edit'
 import Monitoring_Add from '../../page/monitoring/monitoring_add'
+import Controlling_Add from '../../page/controlling/controlling_add'
 
 
 const Baord = () => {
@@ -51,6 +52,7 @@ const Baord = () => {
                         <Route path="/unit/greenhouse/add" element={<GreenhouseAdd />} />
                         <Route path="/unit/greenhouse/:slug" element={<GreenhouseEdit />} />
                         <Route path="/unit/monitoring/add" element={<Monitoring_Add />} />
+                        <Route path="/unit/controlling/add" element={<Controlling_Add />} />
                     </Routes>
 
                 </Flex>
