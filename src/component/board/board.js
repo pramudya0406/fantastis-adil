@@ -24,7 +24,7 @@ import Monitoring_Add from '../../page/monitoring/monitoring_add'
 import Controlling_Add from '../../page/controlling/controlling_add'
 
 
-const Baord = () => {
+const Board = () => {
     const { routeName } = useSelector(
         state => state.userReducer,
     );
@@ -60,4 +60,4 @@ const Baord = () => {
         </Flex >
     )
 }
-export default Baord
+export default Board
