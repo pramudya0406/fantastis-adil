@@ -61,17 +61,26 @@ const GreenhouseEdit = () => {
                     w='100%'
                     flexDir={'row'}
                     alignItems={'center'}
-                    marginBottom='70px'
                 >
-                    <Link to={'/unit/greenhouse'}>
-                        <Text color={'black'} marginRight={'20px'}>
-                            List Greenhouse
+                    <Flex width='100%' >
+                <Link to={'/unit/monitoring'}>
+                    <Flex marginRight={'2'}>
+                        <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}>
+                            List GreenHouse
                         </Text>
-                    </Link>
-                    <Text color={'black'} marginRight={'20px'}>{'>'}</Text>
-                    <Text color={'black'} >{slug}</Text>
+                    </Flex>
+                </Link>
+                <Flex marginRight={'2'}>
+                    <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}> {'>'} </Text>
                 </Flex>
-
+                <Link>
+                    <Flex>
+                        <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}> {slug} </Text>
+                    </Flex>
+                </Link>
+            </Flex>
+                </Flex>
+                <Link/>
                 <Flex
                     w='100%'
                     flexDir={'column'}

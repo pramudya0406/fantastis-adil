@@ -67,7 +67,7 @@ const GreenHouse = () => {
                     alignItems={'center'}
                     marginBottom='40px'
                 >
-                    <Text color={'black'}>
+                    <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}>
                         List Greenhouse
                     </Text>
 

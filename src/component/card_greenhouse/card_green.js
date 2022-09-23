@@ -31,8 +31,7 @@ const CardGreenhouse = (props) => {
                     <Image src={data.image} h={'250px'} w={'350px'} />
 
                     <Flex p='2' justifyContent={'space-between'} flexDirection='row' w={'100%'} >
-
-                        <Text color={'black'}>
+                        <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'black'}>
                             {data.title}
                         </Text>
                         <Flex>
@@ -51,7 +50,7 @@ const CardGreenhouse = (props) => {
                     </Flex>
                     <Flex p='2' justifyItems={'center'}>
                         <Icon as={RiMapPinFill} size={'30px'} color={'black'} />
-                        <Text color={'black'} flexDirection='row' w={'100%'} marginStart={'10px'}>
+                        <Text color={'black'} flexDirection='row' w={'100%'} fontSize={'var(--header-5)'} marginStart={'10px'}>
                             {data.location}
                         </Text>
                     </Flex>
