@@ -16,9 +16,8 @@ const CardNotification = (props) => {
 		return result;
 	};
 	// moment.locale("in");
-    var idLocale = require('moment/locale/id'); 
-    moment.locale('id', idLocale);
-    
+	var idLocale = require("moment/locale/id");
+	moment.locale("id", idLocale);
 	return (
 		<Flex
 			w={"100%"}
@@ -58,7 +57,9 @@ const CardNotification = (props) => {
 						fontWeight={"semibold"}
 						fontSize={"var(--header-3)"}
 						color={"var(--color-grey)"}>
-						{moment(sliceDateTime(data.created_at), "YYYYMMDD").fromNow()}
+						{moment(sliceDateTime(data.created_at), "YYYYMMDD")
+							.startOf("seconds")
+							.fromNow()}
 					</Text>
 				</Flex>
 			</Flex>

@@ -13,7 +13,7 @@ const Notification = () => {
 				{
 					id: 6,
 					detail: "Ada buah yang rusak dan butuh pupuk",
-					created_at: "2022-09-13T11:02:28.000Z",
+					created_at: "2022-09-23T11:02:28.000Z",
 					type: "Cek deh",
 					status: "1",
 					id_actuator: 2,
