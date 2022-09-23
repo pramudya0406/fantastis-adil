@@ -51,7 +51,7 @@ const Dashboard = () => {
 					justify="center"
 					align={"center"}
 					marginTop={"100px"}>
-					<Text color={"black"} marginBottom={"10px"}>
+					<Text color={"black"} fontWeight={'semibold'} fontSize={'var( --header-3)'} fontFamily={'var(--font-family-secondary)'} marginBottom={"10px"} >
 						Kolaborasi oleh :
 					</Text>
 					<Image
