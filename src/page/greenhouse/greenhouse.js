@@ -63,25 +63,44 @@ const GreenHouse = () => {
 						List Greenhouse
 					</Text>
 
-					<Link to={"/unit/greenhouse/add"}>
-						<Button bg="#14453E" size="sm" colorScheme={"teal"}>
-							Tambah
-						</Button>
-					</Link>
-				</Flex>
-				<Wrap>
-					{dummieData.map((placement) => (
-						<CardGreenhouse
-							data={{
-								image: placement.image,
-								title: placement.title,
-								location: placement.location,
-							}}
-						/>
-					))}
-				</Wrap>
-			</Flex>
-		</>
-	);
-};
-export default GreenHouse;
+    return (
+        <>
+
+            <Flex
+                w='100%'
+                flexDir={'column'}
+            >
+                <Flex
+                    w='100%'
+                    flexDir={'row'}
+                    justifyContent='space-between'
+                    alignItems={'center'}
+                    marginBottom='40px'
+                >
+                    <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}>
+                        List Greenhouse
+                    </Text>
+
+                    <Link to={'/unit/greenhouse/add'}>
+                        <Button bg='#14453E' size='sm' colorScheme={'teal'}>Tambah</Button>
+                    </Link>
+
+                </Flex>
+                <Wrap>
+                    {
+                        dummieData.map((placement) => (
+                            <CardGreenhouse data={{
+                                image: placement.image,
+                                title: placement.title,
+                                location: placement.location,
+                            }} />
+                        ))
+                    }
+
+                </Wrap>
+            </Flex>
+        </>
+    )
+
+}
+export default GreenHouse

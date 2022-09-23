@@ -9,6 +9,7 @@ import { IoExitOutline } from 'react-icons/io5'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { useSelector, useDispatch } from 'react-redux';
 import Draw from '../draw/draw';
+import { Link } from 'react-router-dom';
 
 
 const Header = () => {
@@ -32,7 +33,7 @@ const Header = () => {
             shadow='0 0 0 1px rgba(0, 0, 0, 0.1)'
         >
             <Icon as={AiOutlineMenu} fontSize='xl' color={"#09322D"}
-                
+
                 display={{
                     lg: 'none',
                 }}
@@ -49,9 +50,11 @@ const Header = () => {
             </Text>
 
             <Flex flexDirection={'row'}>
-                <div>
-                    <Icon cursor='pointer' as={IoExitOutline} color={'var(--color-primer)'} fontSize='lg' />
-                </div>
+                <Link to={'/login'}>
+                    <div>
+                        <Icon cursor='pointer' as={IoExitOutline} color={'var(--color-primer)'} fontSize={'xx-large'} />
+                    </div>
+                </Link>
             </Flex>
         </Flex>
     )

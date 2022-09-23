@@ -9,9 +9,8 @@ import {
     calc,
 } from '@chakra-ui/react'
 import SideNav from '../sidenav/sidenav'
-import { ImExit } from 'react-icons/im'
 import Header from '../header/header'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Outlet } from 'react-router-dom'
 import Dashboard from '../../page/dashboard/dashboard'
 import { useSelector, useDispatch } from 'react-redux';
 import Controlling from '../../page/controlling/controlling'
@@ -41,8 +40,9 @@ const Board = () => {
                     overflowY={'scroll'}
                     flexDir='column'
                 >
-                    <Routes>
-                        <Route path="/" exact element={<Dashboard />} />
+                    <Outlet />
+                    {/* <Routes>
+                        <Route path="/unit" element={<Dashboard />} />
                         <Route path="/unit/dashboard" element={<Dashboard />} />
                         <Route path="/unit/greenhouse" element={<GreenHouse />} />
                         <Route path="/unit/monitoring" element={<Monitoring />} />
@@ -52,7 +52,7 @@ const Board = () => {
                         <Route path="/unit/greenhouse/:slug" element={<GreenhouseEdit />} />
                         <Route path="/unit/monitoring/add" element={<Monitoring_Add />} />
                         <Route path="/unit/controlling/add" element={<Controlling_Add />} />
-                    </Routes>
+                    </Routes> */}
 
                 </Flex>
             </Box >

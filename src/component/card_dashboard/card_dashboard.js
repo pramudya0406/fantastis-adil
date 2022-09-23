@@ -19,19 +19,22 @@ const CardDashboard = (props) => {
     return (
         <WrapItem>
             <Flex
+                mt={50}
                 h={'245px'}
                 w={'sm'}
                 bg={'#ffff'}
                 borderRadius='30'
-                borderWidth='1px'
+                borderWidth='3px'
                 borderColor={'#D9D9D9'}
                 justify={'space-between'}
+                elevation={5}
+                boxShadow={'0px 0.1px 2px rgba(0, 0, 0, 0.25)'}
                 flexDir={'column'}
                 alignItems='center'
                 padding={35}
             >
                 <Flex
-                    w={'65px'}
+                    w={'100px'}
                     h={'56px'}
                     borderRadius={'10px'}
                     bg={'#319795'}
@@ -41,10 +44,10 @@ const CardDashboard = (props) => {
                 >
                     <Icon as={data.icon} w={6} h={6} />
                 </Flex>
-                <Text color={'black'} fontSize={32}>
+                <Text color={"black"} fontWeight={'semibold'} fontSize={'var( --header-1)'} fontFamily={'var(--font-family-secondary)'}>
                     {data.value}
                 </Text>
-                <Text color={'black'} >
+                <Text color={"black"} fontWeight={'semibold'} fontSize={'var( --header-4)'} fontFamily={'var(--font-family-secondary)'}>
                     {data.name}
                 </Text>
             </Flex>
