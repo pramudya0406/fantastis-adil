@@ -60,15 +60,14 @@ const GreenhouseAdd = () => {
                     w='100%'
                     flexDir={'row'}
                     alignItems={'center'}
-                    marginBottom='70px'
                 >
                     <Link to={'/unit/greenhouse'}>
-                        <Text color={'black'} marginRight={'20px'}>
+                        <Text  fontWeight={'semibold'} fontSize={'var(--header-3)'} mr={'20px'} color={'var(--color-primer)'}>
                             List Greenhouse
                         </Text>
                     </Link>
-                    <Text color={'black'} marginRight={'20px'}>{'>'}</Text>
-                    <Text color={'black'} >Tambah</Text>
+                    <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'} mr={'20px'}>{'>'}</Text>
+                    <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}>Add Greenhouse</Text>
                 </Flex>
 
                 <Flex
