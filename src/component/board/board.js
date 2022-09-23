@@ -23,7 +23,6 @@ import GreenhouseEdit from '../../page/greenhouse/greenhouse_edit'
 import Monitoring_Add from '../../page/monitoring/monitoring_add'
 import Controlling_Add from '../../page/controlling/controlling_add'
 
-
 const Board = () => {
     const { routeName } = useSelector(
         state => state.userReducer,
