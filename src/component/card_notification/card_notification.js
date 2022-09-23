@@ -7,14 +7,14 @@ import moment from "moment";
 const CardNotification = (props) => {
 	let data = props.data;
 
-	const sliceDateTime = (date) => {
-		let yearSlice = date.slice(0, 4);
-		let monthSlice = date.slice(5, 7);
-		let daySlice = date.slice(8, 10);
-		let result = [yearSlice, monthSlice, daySlice];
+	// const sliceDateTime = (date) => {
+	// 	let yearSlice = date.slice(0, 4);
+	// 	let monthSlice = date.slice(5, 7);
+	// 	let daySlice = date.slice(8, 10);
+	// 	let result = [yearSlice, monthSlice, daySlice];
 
-		return result;
-	};
+	// 	return result;
+	// };
 	// moment.locale("in");
 	var idLocale = require("moment/locale/id");
 	moment.locale("id", idLocale);
@@ -57,9 +57,7 @@ const CardNotification = (props) => {
 						fontWeight={"semibold"}
 						fontSize={"var(--header-3)"}
 						color={"var(--color-grey)"}>
-						{moment(sliceDateTime(data.created_at), "YYYYMMDD")
-							.startOf("seconds")
-							.fromNow()}
+						{moment(data.created_at).startOf("seconds").fromNow()}
 					</Text>
 				</Flex>
 			</Flex>
