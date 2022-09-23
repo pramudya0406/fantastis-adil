@@ -13,7 +13,7 @@ const Notification = () => {
 				{
 					id: 6,
 					detail: "Ada buah yang rusak dan butuh pupuk",
-					created_at: "2022-09-23T11:02:28.000Z",
+					created_at: "2022-09-23 18:18:28.000 +0700",
 					type: "Cek deh",
 					status: "1",
 					id_actuator: 2,
@@ -23,7 +23,7 @@ const Notification = () => {
 				{
 					id: 7,
 					detail: "Ada buah yang rusak dan butuh pupuk",
-					created_at: "2022-09-13T11:02:54.000Z",
+					created_at: "2022-09-13 18:02:28.000 +0700",
 					type: "Cek deh",
 					status: "0",
 					id_actuator: 2,
@@ -33,7 +33,7 @@ const Notification = () => {
 				{
 					id: 8,
 					detail: "Ada buah yang rusak dan butuh air",
-					created_at: "2022-09-13T11:07:29.000Z",
+					created_at: "2022-09-13 18:02:28.000 +0700",
 					type: "Cek deh",
 					status: "0",
 					id_actuator: 2,
@@ -43,7 +43,7 @@ const Notification = () => {
 				{
 					id: 9,
 					detail: "Ada buah yang rusak dan butuh air",
-					created_at: "2022-09-13T20:04:05.000Z",
+					created_at: "2022-09-13 18:02:28.000 +0700",
 					type: "Cek deh 1",
 					status: "0",
 					id_actuator: 2,
@@ -53,7 +53,7 @@ const Notification = () => {
 				{
 					id: 10,
 					detail: "Ada buah yang rusak dan butuh air",
-					created_at: "2022-09-13T20:07:33.000Z",
+					created_at: "2022-09-13 18:02:28.000 +0700",
 					type: "Cek deh 1",
 					status: "0",
 					id_actuator: 2,
