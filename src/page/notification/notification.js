@@ -5,7 +5,7 @@ import { routePageName } from "../../redux/action";
 import CardNotification from "../../component/card_notification/card_notification";
 
 const Notification = () => {
-	const [data, setData] = useState([
+	const [dataNotification, setDataNotification] = useState([
 		{
 			code: 200,
 			status: "OK",
@@ -132,8 +132,14 @@ const Notification = () => {
 						All Notifications
 					</Text>
 				</Flex>
-				<Flex>
-					<CardNotification />
+				<Flex gap={"20px"} width={"100%"} flexDir={"column"}>
+					{dataNotification.map((item) => {
+						return item.data.map((item2, index) => {
+							return (
+								<CardNotification key={index} data={item2} index={index} />
+							);
+						});
+					})}
 				</Flex>
 			</Flex>
 			{/* <div
