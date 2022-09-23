@@ -2,6 +2,7 @@ import { Box, Flex, Button, Image, Text, Input } from "@chakra-ui/react"
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/form-control"
 import * as yup from "yup"
+import { Link } from "react-router-dom"
 const schema = yup.object({
 
 	email: yup
@@ -84,6 +85,7 @@ const Login = () => {
                         {errors.password}
                       </FormErrorMessage>
                     </FormControl>
+                <Link to={"/unit/dashboard"}>
 								<Button
                   marginTop={'44px'}
                   width="100%"
@@ -102,6 +104,7 @@ const Login = () => {
                     Masuk
                   </Text>
                 </Button>
+                </Link>
               </Form>
             )}
           </Formik>

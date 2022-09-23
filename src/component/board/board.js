@@ -43,7 +43,7 @@ const Board = () => {
                     flexDir='column'
                 >
                     <Routes>
-                        <Route path="/" exact element={<Dashboard />} />
+                        <Route path="/unit" element={<Dashboard />} />
                         <Route path="/unit/dashboard" element={<Dashboard />} />
                         <Route path="/unit/greenhouse" element={<GreenHouse />} />
                         <Route path="/unit/monitoring" element={<Monitoring />} />
