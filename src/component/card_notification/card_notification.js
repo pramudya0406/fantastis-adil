@@ -12,7 +12,11 @@ const CardNotification = (props) => {
 	// 	let monthSlice = date.slice(5, 7);
 	// 	let daySlice = date.slice(8, 10);
 	// 	let result = [yearSlice, monthSlice, daySlice];
-
+	const eleminateZ = (date) => {
+		let result = date.replace("T", " ").replace("Z", " +0700");
+		console.log(result);
+		return result;
+	};
 	// 	return result;
 	// };
 	// moment.locale("in");
@@ -57,7 +61,7 @@ const CardNotification = (props) => {
 						fontWeight={"semibold"}
 						fontSize={"var(--header-3)"}
 						color={"var(--color-grey)"}>
-						{moment(data.created_at).startOf("seconds").fromNow()}
+						{moment(eleminateZ(data.created_at)).startOf("seconds").fromNow()}
 					</Text>
 				</Flex>
 			</Flex>
