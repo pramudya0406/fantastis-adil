@@ -1,34 +1,73 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import {
-    Flex,
-    Image,
-    Box,
-    Text,
-    Icon,
-    WrapItem,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    useDisclosure,
-    Button,
-} from '@chakra-ui/react'
-import { RiDeleteBinFill, RiPencilFill, RiMapPinFill } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+	Flex,
+	Image,
+	Box,
+	Text,
+	Icon,
+	WrapItem,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalFooter,
+	ModalBody,
+	ModalCloseButton,
+	useDisclosure,
+	Button,
+} from "@chakra-ui/react";
+import { RiDeleteBinFill, RiPencilFill, RiMapPinFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const CardGreenhouse = (props) => {
+	const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const { isOpen, onOpen, onClose } = useDisclosure()
+	let data = props.data;
+	return (
+		<>
+			<WrapItem>
+				<Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+					<Image src={data.image} h={"250px"} w={"350px"} />
 
-    let data = props.data
-    return (
-        <>
-            <WrapItem>
-                <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-                    <Image src={data.image} h={'250px'} w={'350px'} />
+					<Flex
+						p="2"
+						justifyContent={"space-between"}
+						flexDirection="row"
+						w={"100%"}>
+						<Text color={"black"}>{data.title}</Text>
+						<Flex>
+							<div
+								onClick={() => {
+									onOpen();
+								}}>
+								<Icon as={RiDeleteBinFill} size={"24px"} color={"#B00020"} />
+							</div>
+							<Link
+								to={{
+									pathname: "/unit/greenhouse/" + data.title,
+								}}>
+								<Icon
+									as={RiPencilFill}
+									size={"24px"}
+									color={"#007BFF"}
+									marginStart={"10px"}
+								/>
+							</Link>
+						</Flex>
+					</Flex>
+					<Flex p="2" justifyItems={"center"}>
+						<Icon as={RiMapPinFill} w={18} h={18} color={"black"} />
+						<Text
+							color={"black"}
+							flexDirection="row"
+							w={"100%"}
+							marginStart={"10px"}>
+							{data.location}
+						</Text>
+					</Flex>
+				</Box>
+			</WrapItem>
+
 
                     <Flex p='2' justifyContent={'space-between'} flexDirection='row' w={'100%'} >
                         <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'black'}>
@@ -84,3 +123,4 @@ const CardGreenhouse = (props) => {
     )
 }
 export default CardGreenhouse
+
