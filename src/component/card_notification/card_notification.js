@@ -2,10 +2,23 @@ import React, { useState } from "react";
 import { Flex, Image, Box, Center, Text, Icon, Button } from "@chakra-ui/react";
 import { RiMapPinFill } from "react-icons/ri";
 import { CloseButton } from "@chakra-ui/react";
+import moment from "moment";
 
 const CardNotification = (props) => {
 	let data = props.data;
 
+	const sliceDateTime = (date) => {
+		let yearSlice = date.slice(0, 4);
+		let monthSlice = date.slice(5, 7);
+		let daySlice = date.slice(8, 10);
+		let result = [yearSlice, monthSlice, daySlice];
+
+		return result;
+	};
+	// moment.locale("in");
+    var idLocale = require('moment/locale/id'); 
+    moment.locale('id', idLocale);
+    
 	return (
 		<Flex
 			w={"100%"}
@@ -33,23 +46,23 @@ const CardNotification = (props) => {
 						fontWeight={"semibold"}
 						fontSize={"var(--header-3)"}
 						color={"var(--color-primer)"}>
-						Title Test
+						{data.detail}
 					</Text>
 					<Flex flexDir={"row"} gap={2} alignItems={"center"}>
 						<Icon as={RiMapPinFill} w={25} h={25} color={"black"} />
 						<Text color={"var(--color-primer)"} fontSize={"var(--header-5)"}>
-							Location
+							{data.greenhouse_loc}
 						</Text>
 					</Flex>
 					<Text
 						fontWeight={"semibold"}
 						fontSize={"var(--header-3)"}
 						color={"var(--color-grey)"}>
-						{data.created_at}
+						{moment(sliceDateTime(data.created_at), "YYYYMMDD").fromNow()}
 					</Text>
 				</Flex>
 			</Flex>
-			<CloseButton w={35} h={35} color={"black"} size={20}/>
+			<CloseButton w={35} h={35} color={"black"} size={20} />
 		</Flex>
 	);
 };
