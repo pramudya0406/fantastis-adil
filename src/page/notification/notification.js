@@ -142,10 +142,6 @@ const Notification = () => {
 					})}
 				</Flex>
 			</Flex>
-			{/* <div
-            >
-                Hallo notification
-            </div> */}
 		</>
 	);
 };
