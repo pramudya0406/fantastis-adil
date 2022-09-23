@@ -33,7 +33,7 @@ const Header = () => {
             shadow='0 0 0 1px rgba(0, 0, 0, 0.1)'
         >
             <Icon as={AiOutlineMenu} fontSize='xl' color={"#09322D"}
-                
+
                 display={{
                     lg: 'none',
                 }}
