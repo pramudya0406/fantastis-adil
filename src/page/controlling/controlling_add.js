@@ -31,9 +31,6 @@ const schema = yup.object({
     warna: yup
         .string()
         .required("Warna harus diisi"),
-    greenHouse: yup
-        .string()
-        .required("Greenhouse harus diisi"),
 })
 const Controlling_Add = () => {
     const [ikon, setIkon] = useState(
