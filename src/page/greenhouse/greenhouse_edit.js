@@ -10,17 +10,17 @@ import {
 import * as yup from "yup";
 import FilePicker from "chakra-ui-file-picker";
 import { useParams } from "react-router";
-import { useDispatch } from "react-redux";
-import { routePageName } from "../../redux/action";
+import { useDispatch } from 'react-redux';
+import { routePageName } from '../../redux/action';
+import { TabTitle } from '../../Utility/utility'
 
 const GreenhouseEdit = () => {
 	const { slug } = useParams();
-
+  TabTitle("Edit Greenhouse - ITERA Hero")
 	let data = {
 		name: "",
 		location: "",
 	};
-
 	const [image, onChangeImage] = useState(null);
 
 	const schema = yup.object({

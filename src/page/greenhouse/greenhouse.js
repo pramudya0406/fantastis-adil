@@ -4,8 +4,10 @@ import CardGreenhouse from "../../component/card_greenhouse/card_green";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { routePageName } from "../../redux/action";
+import { TabTitle } from "../../Utility/utility";
 
 const GreenHouse = () => {
+	TabTitle("Greenhouse - ITERA Hero")
 	const dummieData = [
 		{
 			image: "https://bit.ly/2Z4KKcF",

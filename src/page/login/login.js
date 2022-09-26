@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/form-control"
 import * as yup from "yup"
 import { Link } from "react-router-dom"
+import { TabTitle } from "../../Utility/utility"
 const schema = yup.object({
 
   email: yup
@@ -15,6 +16,7 @@ const schema = yup.object({
 })
 
 const Login = () => {
+  TabTitle("Login - ITERA Hero")
   return (
 
     <Flex backgroundColor={"var(--color-on-primary)"} width='100%' height="100vh" alignItems='center' justifyContent='center'>
@@ -98,8 +100,6 @@ const Login = () => {
                     onClick={() => {
                       handleSubmit();
                     }}>
-                    {">"}
-
                     <Text fontWeight='bold' fontFamily='var(--font-family-secondary)' fontSize='var(--header-3)' color='var(--color-on-primary)' >
                       Masuk
                     </Text>

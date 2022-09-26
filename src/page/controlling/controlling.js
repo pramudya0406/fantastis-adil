@@ -17,10 +17,12 @@ import {
 } from "@chakra-ui/react";
 import { RiDeleteBinFill, RiPencilFill, RiMapPinFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { TabTitle } from '../../Utility/utility';
 import { useDispatch } from "react-redux";
 import { routePageName } from "../../redux/action";
 
 const Controlling = () => {
+ TabTitle("Controlling - ITERA Hero");
 	const [data, setData] = React.useState([
 		{
 			id: 1,
@@ -45,7 +47,6 @@ const Controlling = () => {
 			],
 		},
 	]);
-
 	const columns = Array.from({ length: 100 });
 
 	const dispatch = useDispatch();

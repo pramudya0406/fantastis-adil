@@ -20,8 +20,10 @@ import { Link, useLinkClickHandler } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import { routePageName } from "../../redux/action";
+import { TabTitle } from "../../Utility/utility";
 
 const Monitoring = () => {
+	TabTitle("Monitoring - ITERA Hero");
 	const [data, setData] = React.useState([
 		{
 			id: 1,
@@ -35,6 +37,8 @@ const Monitoring = () => {
 					nama: "Suhu Lingkungan",
 					merek: "adafruit",
 					kode_warna: "red",
+					rangeMin: 0,
+					rangeMax: 100,
 				},
 				{
 					id: 2,
@@ -44,6 +48,8 @@ const Monitoring = () => {
 					nama: "Cahaya",
 					merek: "adafruit",
 					kode_warna: "red",
+					rangeMin: 0,
+					rangeMax: 100,
 				},
 			],
 		},

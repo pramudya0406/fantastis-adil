@@ -6,8 +6,10 @@ import { MdMonitor } from "react-icons/md";
 import { AiOutlineControl } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { routePageName } from "../../redux/action";
+import { TabTitle } from "../../Utility/utility";
 
 const Dashboard = () => {
+	TabTitle("Dashboard - ITERA Hero")
 	const dispatch = useDispatch();
 
 	useEffect(() => {

@@ -20,6 +20,7 @@ import { Link } from "react-router-dom";
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
 import { routePageName } from '../../redux/action';
+import { TabTitle } from '../../Utility/utility'
 
 const schema = yup.object({
     nama: yup
@@ -34,11 +35,18 @@ const schema = yup.object({
     merek: yup
         .string()
         .required("Merek harus diisi"),
+    rangeMax: yup
+    .string()
+    .required("Range Max harus diisi"),
+    rangeMin: yup
+    .string()
+    .required("Range Min harus diisi"),
     kategori: yup
         .string()
         .required("Kategori harus diisi"),
 })
 const Monitoring_Add = () => {
+    TabTitle("Tambah Sensor - ITERA Hero")
     const [ikon, setIkon] = useState(
         [
             {
@@ -47,6 +55,8 @@ const Monitoring_Add = () => {
                 ikon: 'https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229870/itera%20herro%20icon/Lovepik_com-400222655-test-tube_1_jhq5uo.png',
                 warna: 'red',
                 kategori: 'Persen',
+                rangeMin: 0,
+                rangeMax: 100,
             },
             {
                 id: 2,
@@ -54,6 +64,8 @@ const Monitoring_Add = () => {
                 ikon: 'https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229870/itera%20herro%20icon/Lovepik_com-400222655-test-tube_1_jhq5uo.png',
                 warna: 'red',
                 kategori: 'Persen',
+                rangeMin: 0,
+                rangeMax: 100,
             },
         ]
     )
@@ -96,6 +108,8 @@ const Monitoring_Add = () => {
                     satuan_ukur: '',
                     merek: '',
                     kategori: '',
+                    rangeMax: '',
+                    rangeMin: '',
                 }
                 } validationSchema={schema}
                 onSubmit={(values) => {
@@ -195,6 +209,44 @@ const Monitoring_Add = () => {
                                 placeholder="Merek..." />
                             <FormErrorMessage>
                                 {errors.merek}
+                            </FormErrorMessage>
+                        </FormControl>
+                        <FormControl marginTop={'20px'} isInvalid={errors.rangeMin && touched.rangeMin}>
+                            <FormLabel color={'var(--color-primer)'}>
+                                Range Min
+                            </FormLabel>
+                            <Input
+                                color={'var(--color-primer)'}
+                                maxWidth={'100%'}
+                                marginTop={'0 auto'}
+                                type="number"
+                                name="rangeMin"
+                                value={values.rangeMin}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                variant='outline'
+                                placeholder="rangeMin..." />
+                            <FormErrorMessage>
+                                {errors.rangeMin}
+                            </FormErrorMessage>
+                        </FormControl>
+                        <FormControl marginTop={'20px'} isInvalid={errors.rangeMax && touched.rangeMax}>
+                            <FormLabel color={'var(--color-primer)'}>
+                                Range Max
+                            </FormLabel>
+                            <Input
+                                color={'var(--color-primer)'}
+                                maxWidth={'100%'}
+                                marginTop={'0 auto'}
+                                type="number"
+                                name="rangeMax"
+                                value={values.rangeMax}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                variant='outline'
+                                placeholder="rangeMax..." />
+                            <FormErrorMessage>
+                                {errors.rangeMax}
                             </FormErrorMessage>
                         </FormControl>
                         <FormControl marginTop={'20px'} isInvalid={errors.ikon && touched.ikon}>
