@@ -17,6 +17,8 @@ import GreenhouseEdit from "./page/greenhouse/greenhouse_edit";
 import Monitoring_Add from "./page/monitoring/monitoring_add";
 import Controlling_Add from "./page/controlling/controlling_add";
 import Monitoring_Edit from "./page/monitoring/monitoring_edit";
+import Controlling_Edit from "./page/controlling/controlling_edit";
+
 function App() {
 	return (
 		<Routes>
@@ -33,6 +35,7 @@ function App() {
 				<Route path="monitoring/add" element={<Monitoring_Add />} />
 				<Route path="controlling/add" element={<Controlling_Add />} />
 				<Route path="monitoring/edit/:id" element={<Monitoring_Edit />} />
+				<Route path="controlling/edit/:id" element={<Controlling_Edit />} />
 			</Route>
 		</Routes>
 	);

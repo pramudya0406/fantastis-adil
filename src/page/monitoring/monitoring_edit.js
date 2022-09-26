@@ -23,7 +23,7 @@ import { routePageName } from "../../redux/action";
 
 const schema = yup.object({
 	nama: yup.string().required("Nama harus diisi"),
-	ikon: yup.string().required("Ikon harus diisi"),
+	icon: yup.string().required("Ikon harus diisi"),
 	satuan_ukur: yup.string().required("Satuan Ukur harus diisi"),
 	merek: yup.string().required("Merek harus diisi"),
 	kategori: yup.string().required("Kategori harus diisi"),
@@ -136,7 +136,7 @@ const Monitoring_Edit = () => {
 						</FormControl>
 						<FormControl
 							marginTop={"20px"}
-							isInvalid={errors.ikon && touched.ikon}>
+							isInvalid={errors.icon && touched.icon}>
 							<FormLabel color={"var(--color-primer)"}>Ikon</FormLabel>
 							<Select
 								color={"var(--color-primer)"}
@@ -147,11 +147,11 @@ const Monitoring_Edit = () => {
 								// onChange={handleChange}
 								onBlur={handleBlur}
 								value={values.icon}
-								name="ikon"
-								id="ikon">
-								{/* <option value="" selected>
+								name="icon"
+								id="icon">
+								<option value="" selected>
 									Pilih Ikon
-								</option> */}
+								</option>
 								{ikon.map((ikon, key) => (
 									<option
 										value={ikon.ikon_link}
@@ -162,7 +162,7 @@ const Monitoring_Edit = () => {
 								))}
 							</Select>
 							<Image src={ikon_selected} />
-							<FormErrorMessage>{errors.ikon}</FormErrorMessage>
+							<FormErrorMessage>{errors.icon}</FormErrorMessage>
 						</FormControl>
 						<FormControl
 							marginTop={"20px"}
