@@ -39,7 +39,7 @@ const Monitoring = () => {
 				{
 					id: 2,
 					nomor: 2,
-					icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229870/itera%20herro%20icon/Lovepik_com-400222655-test-tube_1_jhq5uo.png",
+					icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229870/itera%20herro%20icon/Lovepik_com-400222655-test-tube_1_jhq5u.png",
 					satuan_ukur: "Lux",
 					nama: "Cahaya",
 					merek: "adafruit",
@@ -149,11 +149,19 @@ const Monitoring = () => {
 											</Td>
 											<Td textAlign={"center"}>
 												<Flex justifyContent={"space-evenly"}>
-													<Button
-														bg={"var(--color-on-primary)"}
-														color={"var(--color-info)"}>
-														<RiPencilFill />
-													</Button>
+													<Link
+														to={{
+															pathname: "/unit/monitoring/edit/" + item2.id,
+														}}
+														state={{
+															data: item2,
+														}}>
+														<Button
+															bg={"var(--color-on-primary)"}
+															color={"var(--color-info)"}>
+															<RiPencilFill />
+														</Button>
+													</Link>
 													<Button
 														bg={"var(--color-on-primary)"}
 														color={"var(--color-error)"}>
