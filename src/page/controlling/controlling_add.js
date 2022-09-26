@@ -20,6 +20,7 @@ import { Link } from "react-router-dom";
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
 import { routePageName } from '../../redux/action';
+import { TabTitle } from '../../Utility/utility';
 
 const schema = yup.object({
     nama: yup
@@ -33,6 +34,7 @@ const schema = yup.object({
         .required("Warna harus diisi"),
 })
 const Controlling_Add = () => {
+    TabTitle("Tambah Aktuator - ITERA Hero")
     const [ikon, setIkon] = useState(
         [
             {

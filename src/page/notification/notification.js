@@ -3,8 +3,9 @@ import { Flex, Text, Button } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { routePageName } from "../../redux/action";
 import CardNotification from "../../component/card_notification/card_notification";
-
+import { TabTitle } from "../../Utility/utility";
 const Notification = () => {
+	TabTitle("Notifikasi - ITERA Hero");
 	const [dataNotification, setDataNotification] = useState([
 		{
 			code: 200,

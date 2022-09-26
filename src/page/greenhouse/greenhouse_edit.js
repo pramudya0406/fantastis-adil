@@ -13,9 +13,10 @@ import FilePicker from 'chakra-ui-file-picker'
 import { useParams } from "react-router";
 import { useDispatch } from 'react-redux';
 import { routePageName } from '../../redux/action';
+import { TabTitle } from '../../Utility/utility'
 
 const GreenhouseEdit = () => {
-
+    TabTitle("Edit Greenhouse - ITERA Hero")
     const { slug } = useParams()
 
     let data = {

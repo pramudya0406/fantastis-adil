@@ -19,8 +19,10 @@ import { RiDeleteBinFill, RiPencilFill, RiMapPinFill } from 'react-icons/ri'
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { routePageName } from '../../redux/action';
+import { TabTitle } from '../../Utility/utility';
 
 const Controlling = () => {
+    TabTitle("Controlling - ITERA Hero");
     const [data, setData] = React.useState([
         {
             id: 1,

@@ -14,8 +14,10 @@ import * as yup from "yup"
 import FilePicker from 'chakra-ui-file-picker'
 import { useDispatch } from 'react-redux';
 import { routePageName } from '../../redux/action';
+import { TabTitle } from '../../Utility/utility'
 
 const GreenhouseAdd = () => {
+    TabTitle("Tambah Greenhouse - ITERA Hero")
     let data = {
         name: '',
         location: '',
