@@ -24,30 +24,21 @@ import { routePageName } from "../../redux/action";
 const schema = yup.object({
 	nama: yup.string().required("Nama harus diisi"),
 	icon: yup.string().required("Ikon harus diisi"),
-	satuan_ukur: yup.string().required("Satuan Ukur harus diisi"),
-	merek: yup.string().required("Merek harus diisi"),
-	kategori: yup.string().required("Kategori harus diisi"),
+	warna: yup.string().required("Warna harus diisi"),
+	greenHouse: yup.string().required("Greenhouse harus diisi"),
 });
-const Monitoring_Edit = () => {
+const Controlling_Edit = () => {
 	const location = useLocation();
 	const data = location.state?.data;
 
 	const [ikon, setIkon] = useState([
 		{
 			id: 1,
-			nama: "Ikon 1",
+			greenHouse: "Greenhouse 1",
 			ikon_link:
 				"https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229870/itera%20herro%20icon/Lovepik_com-400222655-test-tube_1_jhq5uo.png",
+			nama_alat: "Pompa Air",
 			warna: "red",
-			kategori: "Persen",
-		},
-		{
-			id: 2,
-			nama: "Ikon 2",
-			ikon_link:
-				"https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229870/itera%20herro%20icon/Lovepik_com-400222655-test-tube_1_jhq5u.png",
-			warna: "red",
-			kategori: "Persen",
 		},
 	]);
 	const [ikon_selected, setIkon_selected] = useState("");
@@ -56,20 +47,20 @@ const Monitoring_Edit = () => {
 
 	useEffect(() => {
 		return () => {
-			dispatch(routePageName("Monitoring"));
+			dispatch(routePageName("Controlling"));
 		};
 	}, []);
 
 	return (
 		<Flex w="100%" flexDir={"column"}>
 			<Flex width="100%">
-				<Link to={"/unit/monitoring"}>
+				<Link to={"/unit/controlling"}>
 					<Flex marginRight={"2"}>
 						<Text
 							fontWeight={"semibold"}
 							fontSize={"var(--header-3)"}
 							color={"var(--color-primer)"}>
-							List Sensor pada Greenhouse
+							List Controlling pada Greenhouse
 						</Text>
 					</Flex>
 				</Link>
@@ -82,24 +73,27 @@ const Monitoring_Edit = () => {
 						{">"}{" "}
 					</Text>
 				</Flex>
-
-				<Flex>
-					<Text
-						fontWeight={"semibold"}
-						fontSize={"var(--header-3)"}
-						color={"var(--color-primer)"}>
-						{" "}
-						Edit {data.nama} {data.id}{" "}
-					</Text>
-				</Flex>
+				<Link>
+					<Flex>
+						{ikon.map((item, index) => {
+							return (
+								<Text
+									fontWeight={"semibold"}
+									fontSize={"var(--header-3)"}
+									color={"var(--color-primer)"}>
+									{" "}
+									{item.greenHouse}{" "}
+								</Text>
+							);
+						})}
+					</Flex>
+				</Link>
 			</Flex>
 			<Formik
 				initialValues={{
-					nama: data.nama,
+					nama: data.nama_alat,
 					icon: data.icon,
-					satuan_ukur: data.satuan_ukur,
-					merek: data.merek,
-					kategori: data.kategori,
+					warna: data.warna,
 				}}
 				validationSchema={schema}
 				onSubmit={(values) => {
@@ -144,20 +138,17 @@ const Monitoring_Edit = () => {
 									setFieldValue("icon", e.target.value);
 									setIkon_selected(e.target.value);
 								}}
-								// onChange={handleChange}
 								onBlur={handleBlur}
 								value={values.icon}
 								name="icon"
 								id="icon">
-								<option value="" selected>
-									Pilih Ikon
-								</option>
+								<option value="">Pilih Ikon</option>
 								{ikon.map((ikon, key) => (
 									<option
 										value={ikon.ikon_link}
 										key={key}
 										color={"var(--color-primer)"}>
-										{ikon.nama}
+										{ikon.nama_alat}
 									</option>
 								))}
 							</Select>
@@ -166,59 +157,23 @@ const Monitoring_Edit = () => {
 						</FormControl>
 						<FormControl
 							marginTop={"20px"}
-							isInvalid={errors.satuan_ukur && touched.satuan_ukur}>
-							<FormLabel color={"var(--color-primer)"}>Satuan Ukur</FormLabel>
+							isInvalid={errors.warna && touched.warna}>
+							<FormLabel color={"var(--color-primer)"}>Warna</FormLabel>
 							<Input
 								color={"var(--color-primer)"}
 								maxWidth={"100%"}
 								marginTop={"0 auto"}
 								type="text"
-								name="satuan_ukur"
-								value={values.satuan_ukur}
+								name="warna"
+								value={values.warna}
 								onChange={handleChange}
 								onBlur={handleBlur}
 								variant="outline"
-								placeholder="Satuan Ukur..."
+								placeholder="Warna..."
 							/>
-							<FormErrorMessage>{errors.satuan_ukur}</FormErrorMessage>
+							<FormErrorMessage>{errors.warna}</FormErrorMessage>
 						</FormControl>
-						<FormControl
-							marginTop={"20px"}
-							isInvalid={errors.merek && touched.merek}>
-							<FormLabel color={"var(--color-primer)"}>Merek</FormLabel>
-							<Input
-								color={"var(--color-primer)"}
-								maxWidth={"100%"}
-								marginTop={"0 auto"}
-								type="text"
-								name="merek"
-								value={values.merek}
-								onChange={handleChange}
-								onBlur={handleBlur}
-								variant="outline"
-								placeholder="Merek..."
-							/>
-							<FormErrorMessage>{errors.merek}</FormErrorMessage>
-						</FormControl>
-						<FormControl
-							marginTop={"20px"}
-							isInvalid={errors.ikon && touched.ikon}>
-							<FormLabel color={"var(--color-primer)"}>Kategori</FormLabel>
-							<Select
-								value={ikon.kategori}
-								color={"var(--color-primer)"}
-								onChange={handleChange}
-								onBlur={handleBlur}
-								name="kategori"
-								id="kategori">
-								<option value="">Pilih Kategori</option>
-								{ikon.map((ikon) => (
-									<option color={"var(--color-primer)"}>{ikon.kategori}</option>
-								))}
-							</Select>
-							<FormErrorMessage>{errors.kategori}</FormErrorMessage>
-						</FormControl>
-						<Link to={"/unit/monitoring"}>
+						<Link to={"/unit/controlling"}>
 							<Button
 								marginTop={"44px"}
 								width="100%"
@@ -244,4 +199,4 @@ const Monitoring_Edit = () => {
 		</Flex>
 	);
 };
-export default Monitoring_Edit;
+export default Controlling_Edit;
