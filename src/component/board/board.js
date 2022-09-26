@@ -41,18 +41,6 @@ const Board = () => {
                     flexDir='column'
                 >
                     <Outlet />
-                    {/* <Routes>
-                        <Route path="/unit" element={<Dashboard />} />
-                        <Route path="/unit/dashboard" element={<Dashboard />} />
-                        <Route path="/unit/greenhouse" element={<GreenHouse />} />
-                        <Route path="/unit/monitoring" element={<Monitoring />} />
-                        <Route path="/unit/controlling" element={<Controlling />} />
-                        <Route path="/unit/historynotifikasi" element={<Notification />} />
-                        <Route path="/unit/greenhouse/add" element={<GreenhouseAdd />} />
-                        <Route path="/unit/greenhouse/:slug" element={<GreenhouseEdit />} />
-                        <Route path="/unit/monitoring/add" element={<Monitoring_Add />} />
-                        <Route path="/unit/controlling/add" element={<Controlling_Add />} />
-                    </Routes> */}
 
                 </Flex>
             </Box >
