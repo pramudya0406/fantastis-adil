@@ -82,17 +82,16 @@ const Monitoring_Edit = () => {
 						{">"}{" "}
 					</Text>
 				</Flex>
-				<Link>
-					<Flex>
-						<Text
-							fontWeight={"semibold"}
-							fontSize={"var(--header-3)"}
-							color={"var(--color-primer)"}>
-							{" "}
-							Edit {data.nama} {data.id}
-						</Text>
-					</Flex>
-				</Link>
+
+				<Flex>
+					<Text
+						fontWeight={"semibold"}
+						fontSize={"var(--header-3)"}
+						color={"var(--color-primer)"}>
+						{" "}
+						Edit {data.nama} {data.id}{" "}
+					</Text>
+				</Flex>
 			</Flex>
 			<Formik
 				initialValues={{
