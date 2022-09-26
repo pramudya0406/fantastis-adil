@@ -9,6 +9,7 @@ import { routePageName } from "../../redux/action";
 import { TabTitle } from "../../Utility/utility";
 import axios from "axios";
 import Loading from "../../component/loading/loading";
+import { dashboardApi } from "../../Utility/api_link";
 
 const Dashboard = () => {
 	TabTitle("Dashboard - ITERA Hero")
@@ -19,7 +20,7 @@ const Dashboard = () => {
 	const header = localStorage.getItem('token')
 
 	const getApiDashboard = async () => {
-		await axios.get('https://iterahero.herokuapp.com/api/v1/dashboard', {
+		await axios.get(dashboardApi, {
 			headers: {
 				'Authorization': 'Bearer ' + header
 			}
