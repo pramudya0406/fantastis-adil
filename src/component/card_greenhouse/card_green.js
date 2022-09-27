@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
 	Flex,
 	Image,
@@ -17,12 +17,28 @@ import {
 	Button,
 } from "@chakra-ui/react";
 import { RiDeleteBinFill, RiPencilFill, RiMapPinFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, } from "react-router-dom";
+import axios from "axios";
+import { deleteGreenhouse } from "../../Utility/api_link";
 
 const CardGreenhouse = (props) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	let data = props.data;
+
+	const header = localStorage.getItem('token')
+
+	const deleteItem = async () => {
+		axios.delete(
+			deleteGreenhouse + data.id,
+			{
+				headers: {
+					'Authorization': 'Bearer ' + header
+				}
+			}
+		)
+			.then(() => window.location.reload())
+	}
 	return (
 		<>
 			<WrapItem>
@@ -49,7 +65,7 @@ const CardGreenhouse = (props) => {
 							</div>
 							<Link
 								to={{
-									pathname: "/unit/greenhouse/" + data.title,
+									pathname: "/unit/greenhouse/" + data.id,
 								}}>
 								<Icon
 									as={RiPencilFill}
@@ -91,7 +107,7 @@ const CardGreenhouse = (props) => {
 							variant="#09322D"
 							bg={"#09322D"}
 							color={"#ffff"}
-							onClick={onClose}>
+							onClick={deleteItem}>
 							Hapus
 						</Button>
 					</ModalFooter>
