@@ -5,45 +5,39 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { routePageName } from "../../redux/action";
 import { TabTitle } from "../../Utility/utility";
+import axios from "axios";
+import { listGreenhouse } from "../../Utility/api_link";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../component/loading/loading";
 
 const GreenHouse = () => {
 	TabTitle("Greenhouse - ITERA Hero")
-	const dummieData = [
-		{
-			image: "https://bit.ly/2Z4KKcF",
-			title: "GreenHouse 1",
-			location: "Lampung Selatan",
-		},
-		{
-			image: "https://bit.ly/2Z4KKcF",
-			title: "GreenHouse 2",
-			location: "Lampung Selatan",
-		},
-		{
-			image: "https://bit.ly/2Z4KKcF",
-			title: "GreenHouse 3",
-			location: "Lampung Selatan",
-		},
-		{
-			image: "https://bit.ly/2Z4KKcF",
-			title: "GreenHouse 4",
-			location: "Lampung Selatan",
-		},
-		{
-			image: "https://bit.ly/2Z4KKcF",
-			title: "GreenHouse 5",
-			location: "Lampung Selatan",
-		},
-		{
-			image: "https://bit.ly/2Z4KKcF",
-			title: "GreenHouse 6",
-			location: "Lampung Selatan",
-		},
-	];
 
-	const dispatch = useDispatch();
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
+
+	const [dataApi, setDataApi] = useState(null)
+
+	const header = localStorage.getItem('token')
+
+
+	const getListGreenhouse = async () => {
+		await axios.get(listGreenhouse, {
+			headers: {
+				'Authorization': 'Bearer ' + header
+			}
+		}).then(response => {
+			setDataApi(response.data.data)
+			console.log(response.data.data)
+		})
+			.catch((error) => {
+				localStorage.clear()
+				navigate('/login')
+			})
+	}
 
 	useEffect(() => {
+		getListGreenhouse()
 		return () => {
 			dispatch(routePageName("Greenhouse"));
 		};
@@ -51,38 +45,48 @@ const GreenHouse = () => {
 
 	return (
 		<>
-			<Flex w="100%" flexDir={"column"}>
-				<Flex
-					w="100%"
-					flexDir={"row"}
-					justifyContent="space-between"
-					alignItems={"center"}
-					marginBottom="40px">
-					<Text
-						fontWeight={"semibold"}
-						fontSize={"var(--header-3)"}
-						color={"var(--color-primer)"}>
-						List Greenhouse
-					</Text>
+			{dataApi == null ? <Loading />
+				:
 
-					<Link to={"/unit/greenhouse/add"}>
-						<Button bg="#14453E" size="sm" colorScheme={"teal"}>
-							Tambah
-						</Button>
-					</Link>
+
+
+				<Flex w="100%" flexDir={"column"}>
+					<Flex
+						w="100%"
+						flexDir={"row"}
+						justifyContent="space-between"
+						alignItems={"center"}
+						marginBottom="40px">
+						<Text
+							fontWeight={"semibold"}
+							fontSize={"var(--header-3)"}
+							color={"var(--color-primer)"}>
+							List Greenhouse
+						</Text>
+
+						<Link to={"/unit/greenhouse/add"}>
+							<Button bg="#14453E" size="sm" colorScheme={"teal"}>
+								Tambah
+							</Button>
+						</Link>
+					</Flex>
+					<Wrap>
+						{dataApi.map((placement) => (
+							<CardGreenhouse
+								data={{
+									created_at: placement.created_at,
+									id: placement.id,
+									image: placement.image,
+									title: placement.name,
+									location: placement.location,
+									user_id: placement.user_id,
+									user_name: placement.user_name,
+								}}
+							/>
+						))}
+					</Wrap>
 				</Flex>
-				<Wrap>
-					{dummieData.map((placement) => (
-						<CardGreenhouse
-							data={{
-								image: placement.image,
-								title: placement.title,
-								location: placement.location,
-							}}
-						/>
-					))}
-				</Wrap>
-			</Flex>
+			}
 		</>
 	);
 };
