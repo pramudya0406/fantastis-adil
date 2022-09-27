@@ -10,10 +10,12 @@ import { TabTitle } from "../../Utility/utility";
 import axios from "axios";
 import Loading from "../../component/loading/loading";
 import { dashboardApi } from "../../Utility/api_link";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
 	TabTitle("Dashboard - ITERA Hero")
 	const dispatch = useDispatch();
+	const navigate = useNavigate()
 
 	const [dataApi, setDataApi] = useState(null)
 
@@ -26,7 +28,10 @@ const Dashboard = () => {
 			}
 		})
 			.then(response => setDataApi(response.data.data))
-			.catchcatch(error => console.log(error))
+			.catch((error) => {
+				localStorage.clear()
+				navigate('/login')
+			})
 	}
 
 	useEffect(() => {

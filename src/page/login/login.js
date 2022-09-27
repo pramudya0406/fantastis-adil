@@ -28,17 +28,19 @@ const Login = () => {
     })
       .then((response) => {
         if (response.data == '' || response.data == ' ') {
+          console.log(response)
           alert('Login gagal')
         }
         else {
           localStorage.setItem('token', response.data.data.accessToken)
+          navigate('/unit/dashboard')
         }
       })
       .catch((error) => console.log(error))
   }
 
   const checkToken = () => {
-    if (localStorage.getItem('token') != null || localStorage.getItem('token') != '') {
+    if (localStorage.getItem('token') != null) {
       navigate('/unit/dashboard')
     }
   }
