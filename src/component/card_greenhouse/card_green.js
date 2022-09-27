@@ -65,7 +65,7 @@ const CardGreenhouse = (props) => {
 							</div>
 							<Link
 								to={{
-									pathname: "/unit/greenhouse/" + data.title,
+									pathname: "/unit/greenhouse/" + data.id,
 								}}>
 								<Icon
 									as={RiPencilFill}
