@@ -8,7 +8,6 @@ import { TabTitle } from "../../Utility/utility"
 import axios from "axios"
 import { loginApi } from "../../Utility/api_link"
 const schema = yup.object({
-
   email: yup
     .string()
     .required("Email harus diisi"),
