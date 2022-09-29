@@ -189,7 +189,7 @@ const Controlling_Edit = () => {
 									fontFamily="var(--font-family-secondary)"
 									fontSize="var(--header-3)"
 									color="var(--color-on-primary)">
-									Tambah
+									Simpan
 								</Text>
 							</Button>
 						</Link>
