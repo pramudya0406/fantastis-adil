@@ -4,3 +4,6 @@ export const listGreenhouse = 'https://iterahero.herokuapp.com/api/v1/greenhouse
 export const addGreenhouse = 'https://iterahero.herokuapp.com/api/v1/greenhouse'
 export const deleteGreenhouse = 'https://iterahero.herokuapp.com/api/v1/greenhouse/'
 export const updateGreenhouse = 'https://iterahero.herokuapp.com/api/v1/greenhouse/'
+export const greenhouseByUserId = 'https://iterahero.herokuapp.com/api/v1/greenhouse'
+export const controllingApi = 'https://iterahero.herokuapp.com/api/v1/actuator?by_greenhouse_id='
+export const monitoringApi = 'https://iterahero.herokuapp.com/api/v1/sensor?by_id_greenhouse='

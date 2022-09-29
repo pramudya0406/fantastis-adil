@@ -50,7 +50,11 @@ const Header = () => {
             </Text>
 
             <Flex flexDirection={'row'}>
-                <Link to={'/login'}>
+                <Link to={'/login'}
+                onClick={() => {
+                    localStorage.clear()
+                }}
+                >
                     <div>
                         <Icon cursor='pointer' as={IoExitOutline} color={'var(--color-primer)'} fontSize={'xx-large'} />
                     </div>
