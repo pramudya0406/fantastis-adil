@@ -26,14 +26,11 @@ import Loading from "../../component/loading/loading";
 import TableControlling from "../../component/table/controlling_table";
 import { Formik } from "formik";
 
-
 const Controlling = () => {
 TabTitle("Controlling - ITERA Hero");
 const navigate = useNavigate();
 const [dataApi, setDataApi] = useState(null)
 const [data, setData] = useState('')
-
-
 const header = localStorage.getItem('token')
 
 const getApiGreenhouse = async () => {
@@ -55,7 +52,6 @@ const getApiGreenhouse = async () => {
 			dispatch(routePageName("Controlling"));
 		};
 	}, []);
-
 	return (
         <>
         {dataApi == null ? <Loading/>
@@ -130,7 +126,7 @@ const getApiGreenhouse = async () => {
 						)}
 					</Formik>
 				</Flex>
-								<Link to={"/unit/monitoring/add"}>
+								<Link to={"/unit/controlling/add"}>
 									<Button
 										type="submit"
 										bg={"var(--color-primer)"}
@@ -139,26 +135,13 @@ const getApiGreenhouse = async () => {
 									</Button>
 								</Link>
 			</Flex>
-			{data == '' ? <></> : <TableControlling data={setData} />}
+			{data === '' ? <></> : <TableControlling data={{
+				id : data
+			}} />
+		}
 		</Flex>
 				}
 				</>
 	);
 };
-
-// 				</Flex>
-// 				<Link to={"/unit/controlling/add"}>
-// 					<Button bg={"var(--color-primer)"}>Tambah</Button>
-// 				</Link>
-// 			</Flex> 
-// 			{
-// 				dataApi.value !== null ? <TableControlling data={dataApi} /> : <Text>Belum ada data</Text>
-// 			}
-// 		</Flex>	
-// 		}
-// 				</>
-// 	);
-// };
-
-
 export default Controlling;

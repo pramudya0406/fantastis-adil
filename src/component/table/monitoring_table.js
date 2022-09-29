@@ -1,4 +1,4 @@
-import { controllingApi  } from "../..//Utility/api_link";
+import { monitoringApi  } from "../..//Utility/api_link";
 import React, { useState, useEffect } from "react";
 import {
   Table,
@@ -21,23 +21,23 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../component/loading/loading";
 
-const TableControlling = (props) => {
+const TableMonitoring = (props) => {
 	const idApi = props.data.id
   const navigate = useNavigate();
   const [dataTable, setDataTable] = useState(null)
-	const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   
-  const getApiControlling = async () => {
+  const getApiMonitoring = async () => {
   const header = localStorage.getItem('token')
-	await axios.get(controllingApi + idApi, {
+	await axios.get(monitoringApi + idApi, {
 			headers: {
 					'Authorization': 'Bearer ' + header
 			}
 	})
-	.then(response => { 
-		setDataTable(response.data.data)
-		setIsLoading(false)
-	})
+			.then(response => { 
+        setDataTable(response.data.data)
+        setIsLoading(false)
+      })
 			.catch((error) => {
 					localStorage.clear()
 					navigate('/login')
@@ -45,16 +45,17 @@ const TableControlling = (props) => {
 }
 useEffect(() => {
   
-  getApiControlling()
+  getApiMonitoring()
   return () => {
     
     setIsLoading(true)
     
   };
 }, [idApi]);
+  
   return (
     <>
-      {dataTable == null || isLoading ? (
+      {dataTable == null  || isLoading ? (
         <Loading />
       ) : (
 <Box
@@ -79,8 +80,11 @@ useEffect(() => {
 								<Th textAlign={"center"}>No</Th>
 								<Th textAlign={"center"}>Nama Alat</Th>
 								<Th textAlign={"center"}>Icon</Th>
-								<Th textAlign={"center"}>Life Cycle</Th>
-								<Th textAlign={"center"}>Warna</Th>
+								<Th textAlign={"center"}>Satuan Ukur</Th>
+								<Th textAlign={"center"}>Merek</Th>
+                <Th textAlign={"center"}>Warna</Th>
+                <Th textAlign={"center"}>Range Min</Th>
+                <Th textAlign={"center"}>Range Max</Th>
 								<Th textAlign={"center"}>Aksi</Th>
 							</Tr>
 						</Thead>
@@ -101,16 +105,28 @@ useEffect(() => {
 												<Image height={"30px"} src={item.icon} alt="icon" />
 											</Td>
 											<Td textAlign={"center"} color={"var(--color-primer)"}>
-												{item.status_lifecycle}
+												{item.unit_measurement}
 											</Td>
 											<Td textAlign={"center"} color={"var(--color-primer)"}>
-												{item.color}
+												{item.brand}
 											</Td>
+											<Td display={"flex"}
+												justifyContent="center"
+												alignItems={"center"}>
+												<Box width={'20px'} borderRadius={'100px'} height={'20px'} background={item.color}>
+                        </Box>
+											</Td>
+                      <Td textAlign={"center"} color={"var(--color-primer)"}>
+                        {item.range_min}
+                      </Td>
+                      <Td textAlign={"center"} color={"var(--color-primer)"}>
+                        {item.range_max}
+                      </Td>
 											<Td textAlign={"center"}>
 												<Flex justifyContent={"space-evenly"}>
 													<Link
 														to={{
-															pathname: "/unit/controlling/edit/" + item.id,
+															pathname: "/unit/monitoring/edit/" + item.id,
 														}}
 														state={{
 															data: item,
@@ -130,13 +146,13 @@ useEffect(() => {
 											</Td>
 										</Tr>
 									);
-								})};     
+							})}
 						</Tbody>
 					</Table>
 				</TableContainer>
 			</Box>
-      )}
-    </>
-  )
-}
-export default TableControlling;
+          )}
+          </>
+        )
+      }
+      export default TableMonitoring;
