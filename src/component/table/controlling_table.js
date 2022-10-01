@@ -103,8 +103,11 @@ useEffect(() => {
 											<Td textAlign={"center"} color={"var(--color-primer)"}>
 												{item.status_lifecycle}
 											</Td>
-											<Td textAlign={"center"} color={"var(--color-primer)"}>
-												{item.color}
+											<Td display={"flex"}
+												justifyContent="center"
+												alignItems={"center"}>
+												<Box width={'20px'} borderRadius={'100px'} height={'20px'} background={item.color}>
+                        </Box>
 											</Td>
 											<Td textAlign={"center"}>
 												<Flex justifyContent={"space-evenly"}>

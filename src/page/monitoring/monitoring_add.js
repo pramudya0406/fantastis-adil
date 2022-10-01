@@ -13,6 +13,7 @@ import {
     FormErrorMessage,
     FormLabel,
     Select,
+    Circle,
 } from '@chakra-ui/react'
 
 import * as yup from "yup"
@@ -20,56 +21,73 @@ import { Link } from "react-router-dom";
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
 import { routePageName } from '../../redux/action';
+import iconsList from '../../Utility/icon_list_sensor';
+import kategori from '../../Utility/kategori';
 import { TabTitle } from '../../Utility/utility'
 
 const schema = yup.object({
-    nama: yup
+    name: yup
         .string()
         .required("Nama harus diisi"),
-    ikon: yup
+    icon: yup
         .string()
-        .required("Ikon harus diisi"),
-    satuan_ukur: yup
+        .required("icon harus diisi"),
+    color: yup
         .string()
         .required("Satuan Ukur harus diisi"),
-    merek: yup
+    brand: yup
+        .string()
+        .required("Satuan Ukur harus diisi"),
+    unit_measurement: yup
         .string()
         .required("Merek harus diisi"),
-    rangeMax: yup
-    .string()
+    max_range: yup
+    .number()
     .required("Range Max harus diisi"),
-    rangeMin: yup
-    .string()
+    min_range: yup
+    .number()
     .required("Range Min harus diisi"),
-    kategori: yup
-        .string()
-        .required("Kategori harus diisi"),
+    category: yup
+     .string({
+            id: yup.number().required(),
+            nama: yup.string().required(),
+     })
+     .required("Kategori harus diisi"),
 })
 const Monitoring_Add = () => {
     TabTitle("Tambah Sensor - ITERA Hero")
-    const [ikon, setIkon] = useState(
-        [
-            {
-                id: 1,
-                nama: 'Ikon 1',
-                ikon: 'https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229870/itera%20herro%20icon/Lovepik_com-400222655-test-tube_1_jhq5uo.png',
-                warna: 'red',
-                kategori: 'Persen',
-                rangeMin: 0,
-                rangeMax: 100,
-            },
-            {
-                id: 2,
-                nama: 'Ikon 2',
-                ikon: 'https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229870/itera%20herro%20icon/Lovepik_com-400222655-test-tube_1_jhq5uo.png',
-                warna: 'red',
-                kategori: 'Persen',
-                rangeMin: 0,
-                rangeMax: 100,
-            },
-        ]
-    )
-    const [ikon_selected, setIkon_selected] = useState('')
+    const data = [
+        {
+            id: '',
+            name: '',
+            icon: '',
+            color: '',
+            brand: '',
+            unit_measurement: '',
+            max_range: '',
+            min_range: '',
+            // category: {
+            //     id: '',
+            //     name: '',
+            // }
+        }
+    ]
+    
+
+    // let data = {
+    //     name: '',
+    //     icon: '',
+    //     color: '',
+    //     brand: '',
+    //     unit_measurement: '',
+    //     max_range: '',
+    //     min_range: '',
+    //     category: 
+    //     //     id: '',
+    //     //     name: ''
+    //     // }
+    // }
+    const [icon_selected, setIcon_selected] = useState('')
 
     const dispatch = useDispatch()
 
@@ -103,13 +121,17 @@ const Monitoring_Add = () => {
             </Flex>
             <Formik
                 initialValues={{
-                    nama: '',
-                    ikon: '',
-                    satuan_ukur: '',
-                    merek: '',
-                    kategori: '',
-                    rangeMax: '',
-                    rangeMin: '',
+                    name: '',
+                    icon: '',
+                    color: '',
+                    brand: '',
+                    unit_measurement: '',
+                    max_range: '',
+                    min_range: '',
+                    category: {
+                        id: '',
+                        name: ''
+                    }
                 }
                 } validationSchema={schema}
                 onSubmit={(values) => {
@@ -125,7 +147,7 @@ const Monitoring_Add = () => {
                     handleSubmit,
                     isSubmitting }) => (
                     <Form onSubmit={handleSubmit}>
-                        <FormControl marginTop={'20px'} isInvalid={errors.nama && touched.nama}>
+                        <FormControl marginTop={'20px'} isInvalid={errors.name && touched.name}>
                             <FormLabel color={'var(--color-primer)'} >
                                 Nama
                             </FormLabel>
@@ -134,46 +156,83 @@ const Monitoring_Add = () => {
                                 maxWidth={'100%'}
                                 marginTop={'0 auto'}
                                 type="text"
-                                name="nama"
-                                value={values.nama}
+                                name="name"
+                                value={values.name}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 variant='outline'
                                 placeholder="Nama..." />
                             <FormErrorMessage>
-                                {errors.nama}
+                                {errors.name}
                             </FormErrorMessage>
                         </FormControl>
-                        <FormControl marginTop={'20px'} isInvalid={errors.ikon && touched.ikon}>
+                        <FormControl marginTop={'20px'} isInvalid={errors.icon && touched.icon}>
                             <FormLabel color={'var(--color-primer)'}>
-                                Ikon
+                                Icon
                             </FormLabel>
                             <Select color={'var(--color-primer)'}
                                 onChange={(e) => {
-                                    setFieldValue('ikon', e.target.value);
-                                    setIkon_selected(e.target.value)
+                                    setFieldValue('icon', e.target.value);
+                                    setIcon_selected(e.target.value)
                                 }}
                                 onBlur={handleBlur}
-                                value={ikon.ikon}
-                                name="ikon"
-                                id="ikon">
+                                value={values.icon}
+                                name="icon"
+                                id="icon">
                                 <option value="" selected>
-                                    Pilih Ikon
+                                    Pilih Icon
                                 </option>
-                                {ikon.map((ikon) => (
-                                    <option value={ikon.ikon} color={'var(--color-primer)'}>
-                                        {ikon.nama}
+                                {iconsList.map((item) => (
+                                    <option value={item.icon} color={'var(--color-primer)'}>
+                                        {item.nama}
                                     </option>
                                 )
                                 )
                                 }
                             </Select>
-                            <Image src={ikon_selected} />
+                            <Flex m={'15px'}>
+                                <Image src={icon_selected} />
+                            </Flex>
                             <FormErrorMessage>
-                                {errors.ikon}
+                                {errors.icon}
                             </FormErrorMessage>
                         </FormControl>
-                        <FormControl marginTop={'20px'} isInvalid={errors.satuan_ukur && touched.satuan_ukur}>
+                        <FormControl marginTop={'20px'} isInvalid={errors.color && touched.color}>
+                            <FormLabel color={'var(--color-primer)'}>
+                                Warna
+                            </FormLabel>
+                            <Select
+                                color={'var(--color-primer)'}
+                                maxWidth={'100%'}
+                                marginTop={'0 auto'}
+                                type="text"
+                                name="color"
+                                value={values.color}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                variant='outline'
+                                placeholder="Warna..." >
+                                <option value="" >
+                                    Pilih Warna
+                                </option>
+                                {iconsList.map((item) => (
+                                    <option value={item.color} color={'var(--color-primer)'}>
+                                        {item.nama}
+                                    </option>
+                                )
+                                )
+                                }
+                            </Select>
+                            <Flex m={'15px'}>
+                                <Box>
+                                    <Circle bg={values.color} size="30px" />
+                                </Box>
+                            </Flex>
+                            <FormErrorMessage>
+                                {errors.color}
+                            </FormErrorMessage>
+                        </FormControl>
+                        <FormControl marginTop={'20px'} isInvalid={errors.unit_measurement && touched.unit_measurement}>
                             <FormLabel color={'var(--color-primer)'}>
                                 Satuan Ukur
                             </FormLabel>
@@ -182,17 +241,17 @@ const Monitoring_Add = () => {
                                 maxWidth={'100%'}
                                 marginTop={'0 auto'}
                                 type="text"
-                                name="satuan_ukur"
-                                value={values.satuan_ukur}
+                                name="unit_measurement"
+                                value={values.unit_measurement}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 variant='outline'
                                 placeholder="Satuan Ukur..." />
                             <FormErrorMessage>
-                                {errors.satuan_ukur}
+                                {errors.unit_measurement}
                             </FormErrorMessage>
                         </FormControl>
-                        <FormControl marginTop={'20px'} isInvalid={errors.merek && touched.merek}>
+                        <FormControl marginTop={'20px'} isInvalid={errors.brand && touched.brand}>
                             <FormLabel color={'var(--color-primer)'}>
                                 Merek
                             </FormLabel>
@@ -201,17 +260,17 @@ const Monitoring_Add = () => {
                                 maxWidth={'100%'}
                                 marginTop={'0 auto'}
                                 type="text"
-                                name="merek"
-                                value={values.merek}
+                                name="brand"
+                                value={values.brand}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 variant='outline'
-                                placeholder="Merek..." />
+                                placeholder="brand..." />
                             <FormErrorMessage>
-                                {errors.merek}
+                                {errors.brand}
                             </FormErrorMessage>
                         </FormControl>
-                        <FormControl marginTop={'20px'} isInvalid={errors.rangeMin && touched.rangeMin}>
+                        <FormControl marginTop={'20px'} isInvalid={errors.min_range && touched.min_range}>
                             <FormLabel color={'var(--color-primer)'}>
                                 Range Min
                             </FormLabel>
@@ -220,17 +279,17 @@ const Monitoring_Add = () => {
                                 maxWidth={'100%'}
                                 marginTop={'0 auto'}
                                 type="number"
-                                name="rangeMin"
-                                value={values.rangeMin}
+                                name="min_range"
+                                value={values.min_range}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 variant='outline'
-                                placeholder="rangeMin..." />
+                                placeholder="min_range..." />
                             <FormErrorMessage>
-                                {errors.rangeMin}
+                                {errors.min_range}
                             </FormErrorMessage>
                         </FormControl>
-                        <FormControl marginTop={'20px'} isInvalid={errors.rangeMax && touched.rangeMax}>
+                        <FormControl marginTop={'20px'} isInvalid={errors.max_range && touched.max_range}>
                             <FormLabel color={'var(--color-primer)'}>
                                 Range Max
                             </FormLabel>
@@ -239,38 +298,38 @@ const Monitoring_Add = () => {
                                 maxWidth={'100%'}
                                 marginTop={'0 auto'}
                                 type="number"
-                                name="rangeMax"
-                                value={values.rangeMax}
+                                name="max_range"
+                                value={values.max_range}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 variant='outline'
-                                placeholder="rangeMax..." />
+                                placeholder="max_range..." />
                             <FormErrorMessage>
-                                {errors.rangeMax}
+                                {errors.max_range}
                             </FormErrorMessage>
                         </FormControl>
-                        <FormControl marginTop={'20px'} isInvalid={errors.ikon && touched.ikon}>
+                         <FormControl marginTop={'20px'} isInvalid={errors.category && touched.category}>
                             <FormLabel color={'var(--color-primer)'}>
                                 Kategori
                             </FormLabel>
-                            <Select value={ikon.kategori} color={'var(--color-primer)'} onChange={handleChange}
+                            <Select value={values.category.name} color={'var(--color-primer)'} onChange={handleChange}
                                 onBlur={handleBlur}
-                                name="kategori"
-                                id="kategori"
+                                name="category"
+                                id="category"
                             >
                                 <option value="">
                                     Pilih Kategori
                                 </option>
-                                {ikon.map((ikon) => (
+                                {kategori.map((item) => (
                                     <option color={'var(--color-primer)'}>
-                                        {ikon.kategori}
+                                        {item.name}
                                     </option>
                                 ))}
                             </Select>
                             <FormErrorMessage>
-                                {errors.kategori}
+                                {errors.category}
                             </FormErrorMessage>
-                        </FormControl>
+                        </FormControl>  
                         <Link to={'/unit/monitoring'}>
                             <Button
                                 marginTop={'44px'}
@@ -280,8 +339,9 @@ const Monitoring_Add = () => {
                                 backgroundColor="var(--color-primer)"
                                 type="submit"
                                 className="btn-login"
-                                disabled={isSubmitting}
                                 onClick={handleSubmit}
+                                isLoading={isSubmitting}
+                                loadingText="Tunggu Sebentar..."
                             >
                                 <Text fontWeight='bold' fontFamily='var(--font-family-secondary)' fontSize='var(--header-3)' color='var(--color-on-primary)'>
                                     Tambah
