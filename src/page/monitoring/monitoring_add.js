@@ -22,6 +22,9 @@ import { routePageName } from '../../redux/action';
 import iconsList from '../../Utility/icon_list_sensor';
 import kategori from '../../Utility/kategori';
 import { TabTitle } from '../../Utility/utility'
+import { getApiGreenhouse } from '../../Utility/api_link';
+import axios from 'axios';
+import Loading from "../../component/loading/loading";
 
 const schema = yup.object({
     name: yup
@@ -55,6 +58,20 @@ const schema = yup.object({
 const Monitoring_Add = () => {
     TabTitle("Tambah Sensor - ITERA Hero")
     const { id } = useParams();
+    const [dataApi, setDataApi] = useState(null);
+    const getDataApi = async () => {
+        axios.get( getApiGreenhouse + id, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }}
+            )
+            .then(response => {
+                setDataApi(response.data.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
     
     
 
@@ -76,12 +93,16 @@ const Monitoring_Add = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        getDataApi()
         return () => {
             dispatch(routePageName('Monitoring'))
         };
     }, []);
 
     return (
+        <>
+		{dataApi == null ? <Loading/>
+:
         <Flex
             w='100%'
             flexDir={'column'}
@@ -99,7 +120,13 @@ const Monitoring_Add = () => {
                 </Flex>
                 <Link>
                     <Flex>
-                        <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}> Greenhouse {id} </Text>
+                        {
+                            dataApi.id == id ? (
+                                <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}> {dataApi.name} </Text>
+                            ) : (
+                                <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}> {dataApi.name} </Text>
+                            )
+                        }
                     </Flex>
                 </Link>
             </Flex>
@@ -334,6 +361,8 @@ const Monitoring_Add = () => {
                 )}
             </Formik>
         </Flex>
+        			}
+                    </>
     )
 }
 export default Monitoring_Add
