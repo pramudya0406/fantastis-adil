@@ -126,14 +126,18 @@ const getApiGreenhouse = async () => {
 						)}
 					</Formik>
 				</Flex>
-								<Link to={"/unit/monitoring/add"}>
-									<Button
-										type="submit"
-										bg={"var(--color-primer)"}
-										>
-										Tambah
-									</Button>
-								</Link>
+						{
+							data === '' ? <></> : 										
+						<Link to={"/unit/monitoring/add/" + data}>
+							<Button
+								data = {{name:data}}
+								type="submit"
+								bg={"var(--color-primer)"}
+								>
+								Tambah
+							</Button>
+						</Link>
+						}
 			</Flex>
 			{data === '' ? <></> : <TableMonitoring data={{
 				id : data

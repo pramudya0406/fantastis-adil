@@ -3,11 +3,8 @@ import {
     Flex,
     Image,
     Box,
-    Center,
     Text,
     Input,
-    Icon,
-    calc,
     Button,
     FormControl,
     FormErrorMessage,
@@ -16,6 +13,7 @@ import {
     Circle,
 } from '@chakra-ui/react'
 
+import { useParams } from "react-router";
 import * as yup from "yup"
 import { Link } from "react-router-dom";
 import { Formik, Form } from 'formik';
@@ -56,22 +54,8 @@ const schema = yup.object({
 })
 const Monitoring_Add = () => {
     TabTitle("Tambah Sensor - ITERA Hero")
-    const data = [
-        {
-            id: '',
-            name: '',
-            icon: '',
-            color: '',
-            brand: '',
-            unit_measurement: '',
-            max_range: '',
-            min_range: '',
-            // category: {
-            //     id: '',
-            //     name: '',
-            // }
-        }
-    ]
+    const { id } = useParams();
+    
     
 
     // let data = {
@@ -115,7 +99,7 @@ const Monitoring_Add = () => {
                 </Flex>
                 <Link>
                     <Flex>
-                        <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}> Add </Text>
+                        <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}> Greenhouse {id} </Text>
                     </Flex>
                 </Link>
             </Flex>
@@ -211,7 +195,7 @@ const Monitoring_Add = () => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 variant='outline'
-                                placeholder="Warna..." >
+                                >
                                 <option value="" >
                                     Pilih Warna
                                 </option>
@@ -224,9 +208,7 @@ const Monitoring_Add = () => {
                                 }
                             </Select>
                             <Flex m={'15px'}>
-                                <Box>
                                     <Circle bg={values.color} size="30px" />
-                                </Box>
                             </Flex>
                             <FormErrorMessage>
                                 {errors.color}

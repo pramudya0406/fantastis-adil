@@ -6,6 +6,10 @@ const kategori = [
   {
     id: 2,
     name: 'Derajat',
-  }
+  },
+  {
+    id: 3,
+    name: 'etc',
+  },
 ]
 export default kategori;

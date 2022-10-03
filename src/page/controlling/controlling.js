@@ -1,18 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./controlling.css";
 import {
-	Table,
-	Thead,
-	Tbody,
 	Text,
 	Button,
 	Select,
-	Tr,
-	Image,
-	Th,
-	Td,
-	Box,
-	TableContainer,
 	Flex,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
@@ -126,14 +117,18 @@ const getApiGreenhouse = async () => {
 						)}
 					</Formik>
 				</Flex>
-								<Link to={"/unit/controlling/add"}>
-									<Button
-										type="submit"
-										bg={"var(--color-primer)"}
-										>
-										Tambah
-									</Button>
-								</Link>
+				{
+							data === '' ? <></> : 										
+						<Link to={"/unit/monitoring/add"}>
+							<Button
+							id = {data}
+								type="submit"
+								bg={"var(--color-primer)"}
+								>
+								Tambah
+							</Button>
+						</Link>
+						}
 			</Flex>
 			{data === '' ? <></> : <TableControlling data={{
 				id : data
