@@ -22,7 +22,7 @@ import { routePageName } from '../../redux/action';
 import iconsList from '../../Utility/icon_list_sensor';
 import kategori from '../../Utility/kategori';
 import { TabTitle } from '../../Utility/utility'
-import { getApiGreenhouse } from '../../Utility/api_link';
+import { getApiGreenhouse,categoryApi } from '../../Utility/api_link';
 import axios from 'axios';
 import Loading from "../../component/loading/loading";
 
@@ -72,6 +72,20 @@ const Monitoring_Add = () => {
                 console.log(error)
             })
     }
+    const [dataCategory, setDataCategory] = useState(null);
+    const getDataCategory = async () => {
+        axios.get( categoryApi, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }}
+            )
+            .then(response => {
+                setDataCategory(response.data.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        }
     
     
 
@@ -93,6 +107,7 @@ const Monitoring_Add = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        getDataCategory()
         getDataApi()
         return () => {
             dispatch(routePageName('Monitoring'))
@@ -329,7 +344,7 @@ const Monitoring_Add = () => {
                                 <option value="">
                                     Pilih Kategori
                                 </option>
-                                {kategori.map((item) => (
+                                {dataCategory.map((item) => (
                                     <option color={'var(--color-primer)'}>
                                         {item.name}
                                     </option>
