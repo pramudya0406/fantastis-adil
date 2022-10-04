@@ -14,7 +14,7 @@ const CardNotification = (props) => {
 	// 	let result = [yearSlice, monthSlice, daySlice];
 	const eleminateZ = (date) => {
 		let result = date.replace("T", " ").replace("Z", " +0700");
-		console.log(result);
+		// console.log(result);
 		return result;
 	};
 	// 	return result;
