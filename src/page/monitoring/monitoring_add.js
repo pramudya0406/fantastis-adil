@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import {
     Flex,
     Image,
-    Box,
     Text,
     Input,
     Button,
@@ -16,12 +15,15 @@ import {
 import { useParams } from "react-router";
 import * as yup from "yup"
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router';
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
 import { routePageName } from '../../redux/action';
 import iconsList from '../../Utility/icon_list_sensor';
-import kategori from '../../Utility/kategori';
 import { TabTitle } from '../../Utility/utility'
+import { getApiGreenhouse,categoryApi,addSensorApi } from '../../Utility/api_link';
+import axios from 'axios';
+import Loading from "../../component/loading/loading";
 
 const schema = yup.object({
     name: yup
@@ -39,49 +41,66 @@ const schema = yup.object({
     unit_measurement: yup
         .string()
         .required("Merek harus diisi"),
-    max_range: yup
+    range_max: yup
     .number()
     .required("Range Max harus diisi"),
-    min_range: yup
+    range_min: yup
     .number()
     .required("Range Min harus diisi"),
-    category: yup
-     .string({
-            id: yup.number().required(),
-            nama: yup.string().required(),
-     })
-     .required("Kategori harus diisi"),
-})
+    id_category_sensor: yup
+    .number()
+    .required("Kategori harus diisi"),
+    id_greenhouse: yup
+    .number()
+    .required(""),
+});
 const Monitoring_Add = () => {
+    const navigate = useNavigate();
     TabTitle("Tambah Sensor - ITERA Hero")
     const { id } = useParams();
-    
-    
-
-    // let data = {
-    //     name: '',
-    //     icon: '',
-    //     color: '',
-    //     brand: '',
-    //     unit_measurement: '',
-    //     max_range: '',
-    //     min_range: '',
-    //     category: 
-    //     //     id: '',
-    //     //     name: ''
-    //     // }
-    // }
+    const [dataApi, setDataApi] = useState(null);
+    const getDataApi = async () => {
+        axios.get( getApiGreenhouse + id, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }}
+            )
+            .then(response => {
+                setDataApi(response.data.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+    const [dataCategory, setDataCategory] = useState(null);
+    const getDataCategory = async () => {
+        axios.get( categoryApi, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }}
+            )
+            .then(response => {
+                setDataCategory(response.data.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        }
     const [icon_selected, setIcon_selected] = useState('')
-
     const dispatch = useDispatch()
 
     useEffect(() => {
+        getDataCategory()
+        getDataApi()
         return () => {
             dispatch(routePageName('Monitoring'))
         };
     }, []);
 
     return (
+        <>
+		{dataApi == null ? <Loading/>
+:
         <Flex
             w='100%'
             flexDir={'column'}
@@ -99,28 +118,92 @@ const Monitoring_Add = () => {
                 </Flex>
                 <Link>
                     <Flex>
-                        <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}> Greenhouse {id} </Text>
+                        {
+                            dataApi.id == id ? (
+                                <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}> {dataApi.name} </Text>
+                            ) : (
+                                <Text fontWeight={'semibold'} fontSize={'var(--header-3)'} color={'var(--color-primer)'}> {dataApi.name} </Text>
+                            )
+                        }
                     </Flex>
                 </Link>
             </Flex>
             <Formik
+            validationSchema={schema}
+            validateOnChange={false}
+            validateOnBlur={false}
                 initialValues={{
                     name: '',
                     icon: '',
                     color: '',
                     brand: '',
                     unit_measurement: '',
-                    max_range: '',
-                    min_range: '',
-                    category: {
-                        id: '',
-                        name: ''
-                    }
+                    range_max: '',
+                    range_min: '',
+                    id_category_sensor:'',
+                    id_greenhouse: id,
                 }
-                } validationSchema={schema}
-                onSubmit={(values) => {
-                    console.log(JSON.stringify(values, null, 2))
+                }
+                onSubmit={(values, { setSubmitting }) => {
+                        setTimeout(() => {
+                            const submitedData = new FormData()
+                            submitedData.append(
+                                'name',
+                                values.name
+                            )
+                            submitedData.append(
+                                'icon',
+                                values.icon
+                            )
+                            submitedData.append(
+                                'color',
+                                values.color
+                            )
+                            submitedData.append(
+                                'brand',
+                                values.brand
+                            )
+                            submitedData.append(
+                                'unit_measurement',
+                                values.unit_measurement
+                            )
+                            submitedData.append(
+                                'range_max',
+                                values.range_max
+                            )
+                            submitedData.append(
+                                'range_min',
+                                values.range_min
+                            )
+                            submitedData.append(
+                                'id_category_sensor',
+                                values.id_category_sensor
+                            )
+                            submitedData.append(
+                                'id_greenhouse',
+                                values.id_greenhouse
+                            )
+                        axios.post(addSensorApi, values, {
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                                'Accept': 'application/json, text/plain, */*', 
+                                'Content-Type': 'application/json',
+                            },
+                        }
+                            )
+                            .then((response) => {
+								if (response.status === 201) {
+									alert("Data berhasil ditambahkan")
+									navigate(-1)
+								} else {
+									alert("Data gagal ditambahkan")
+								}
+							})
+							.catch((error) => {})
+                            setSubmitting(false);
+                        }, 400);
                 }}
+                
             >
                 {({ values,
                     errors,
@@ -130,8 +213,10 @@ const Monitoring_Add = () => {
                     handleBlur,
                     handleSubmit,
                     isSubmitting }) => (
-                    <Form onSubmit={handleSubmit}>
-                        <FormControl marginTop={'20px'} isInvalid={errors.name && touched.name}>
+                    <Form
+                    method='POST'
+                    onSubmit={handleSubmit}>                        
+                    <FormControl marginTop={'20px'} isInvalid={errors.name && touched.name}>
                             <FormLabel color={'var(--color-primer)'} >
                                 Nama
                             </FormLabel>
@@ -252,7 +337,7 @@ const Monitoring_Add = () => {
                                 {errors.brand}
                             </FormErrorMessage>
                         </FormControl>
-                        <FormControl marginTop={'20px'} isInvalid={errors.min_range && touched.min_range}>
+                        <FormControl marginTop={'20px'} isInvalid={errors.range_min && touched.range_min}>
                             <FormLabel color={'var(--color-primer)'}>
                                 Range Min
                             </FormLabel>
@@ -261,17 +346,17 @@ const Monitoring_Add = () => {
                                 maxWidth={'100%'}
                                 marginTop={'0 auto'}
                                 type="number"
-                                name="min_range"
-                                value={values.min_range}
+                                name="range_min"
+                                value={values.range_min}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 variant='outline'
                                 placeholder="min_range..." />
                             <FormErrorMessage>
-                                {errors.min_range}
+                                {errors.range_min}
                             </FormErrorMessage>
                         </FormControl>
-                        <FormControl marginTop={'20px'} isInvalid={errors.max_range && touched.max_range}>
+                        <FormControl marginTop={'20px'} isInvalid={errors.range_max && touched.range_max}>
                             <FormLabel color={'var(--color-primer)'}>
                                 Range Max
                             </FormLabel>
@@ -280,38 +365,46 @@ const Monitoring_Add = () => {
                                 maxWidth={'100%'}
                                 marginTop={'0 auto'}
                                 type="number"
-                                name="max_range"
-                                value={values.max_range}
+                                name="range_max"
+                                value={values.range_max}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 variant='outline'
                                 placeholder="max_range..." />
                             <FormErrorMessage>
-                                {errors.max_range}
+                                {errors.range_max}
                             </FormErrorMessage>
                         </FormControl>
-                         <FormControl marginTop={'20px'} isInvalid={errors.category && touched.category}>
+                         <FormControl marginTop={'20px'} isInvalid={errors.id_category_sensor && touched.id_category_sensor}>
                             <FormLabel color={'var(--color-primer)'}>
                                 Kategori
                             </FormLabel>
-                            <Select value={values.category.name} color={'var(--color-primer)'} onChange={handleChange}
+                            <Select value={values.id_category_sensor} color={'var(--color-primer)'} onChange={handleChange}
                                 onBlur={handleBlur}
-                                name="category"
-                                id="category"
-                            >
+                                name="id_category_sensor">
                                 <option value="">
                                     Pilih Kategori
                                 </option>
-                                {kategori.map((item) => (
-                                    <option color={'var(--color-primer)'}>
-                                        {item.name}
+                                {dataCategory.map((item) => (
+                                    <option value={item.id} color={'var(--color-primer)'}>
+                                        {item.name} 
                                     </option>
                                 ))}
                             </Select>
                             <FormErrorMessage>
-                                {errors.category}
+                                {errors.id_category_sensor}
                             </FormErrorMessage>
                         </FormControl>  
+                        <FormControl>
+                            <Input
+                                type="hidden"
+                                value={id}
+                                name="id_greenhouse"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                variant='outline'
+                                placeholder="id..." />
+                        </FormControl>
                         <Link to={'/unit/monitoring'}>
                             <Button
                                 marginTop={'44px'}
@@ -321,8 +414,9 @@ const Monitoring_Add = () => {
                                 backgroundColor="var(--color-primer)"
                                 type="submit"
                                 className="btn-login"
-                                onClick={handleSubmit}
                                 isLoading={isSubmitting}
+                                disabled={isSubmitting}
+								onClick={handleSubmit}
                                 loadingText="Tunggu Sebentar..."
                             >
                                 <Text fontWeight='bold' fontFamily='var(--font-family-secondary)' fontSize='var(--header-3)' color='var(--color-on-primary)'>
@@ -334,6 +428,8 @@ const Monitoring_Add = () => {
                 )}
             </Formik>
         </Flex>
+        			}
+                    </>
     )
 }
 export default Monitoring_Add

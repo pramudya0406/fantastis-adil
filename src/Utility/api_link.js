@@ -7,4 +7,6 @@ export const listGreenhouse = 'https://iterahero.herokuapp.com/api/v1/greenhouse
 export const addGreenhouse = 'https://iterahero.herokuapp.com/api/v1/greenhouse'
 export const deleteGreenhouse = 'https://iterahero.herokuapp.com/api/v1/greenhouse/'
 export const updateGreenhouse = 'https://iterahero.herokuapp.com/api/v1/greenhouse/'
-
+export const getApiGreenhouse = 'https://iterahero.herokuapp.com/api/v1/greenhouse/'
+export const categoryApi = 'https://iterahero.herokuapp.com/api/v1/category/sensor'
+export const addSensorApi = 'https://iterahero.herokuapp.com/api/v1/sensor'
