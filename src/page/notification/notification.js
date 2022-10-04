@@ -143,7 +143,7 @@ const Notification = () => {
 	};
 
 	useEffect(() => {
-		getNotificationData()
+		getNotificationData();
 		return () => {
 			dispatch(routePageName("History Notification"));
 		};
@@ -151,29 +151,26 @@ const Notification = () => {
 
 	return (
 		<>
-		{dataNotification == null ? <Loading />
-				:
-			<Flex gap={"30px"} width={"100%"} flexDir={"column"}>
-				<Flex w="100%" justifyContent="space-between">
-					<Text
-						fontWeight={"semibold"}
-						fontSize={"var(--header-3)"}
-						color={"var(--color-primer)"}>
-						All Notifications
-					</Text>
+			{dataNotification == null ? (
+				<Loading />
+			) : (
+				<Flex gap={"30px"} width={"100%"} flexDir={"column"}>
+					<Flex w="100%" justifyContent="space-between">
+						<Text
+							fontWeight={"semibold"}
+							fontSize={"var(--header-3)"}
+							color={"var(--color-primer)"}>
+							All Notifications
+						</Text>
+					</Flex>
+					<Flex gap={"20px"} width={"100%"} flexDir={"column"}>
+						{dataNotification.map((item, index) => {
+							return <CardNotification key={index} data={item} index={index} />;
+						})}
+					</Flex>
 				</Flex>
-				<Flex gap={"20px"} width={"100%"} flexDir={"column"}>
-					{dataNotification.map((item) => {
-						return item.data.map((item2, index) => {
-							return (
-								<CardNotification key={index} data={item2} index={index} />
-							);
-						});
-					})}
-				</Flex>
-			</Flex>
-			}
-		</>	
+			)}
+		</>
 	);
 };
 export default Notification;
