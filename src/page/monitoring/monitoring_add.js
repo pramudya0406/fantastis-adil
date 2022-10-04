@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import {
     Flex,
     Image,
-    Box,
     Text,
     Input,
     Button,
@@ -20,9 +19,8 @@ import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
 import { routePageName } from '../../redux/action';
 import iconsList from '../../Utility/icon_list_sensor';
-import kategori from '../../Utility/kategori';
 import { TabTitle } from '../../Utility/utility'
-import { getApiGreenhouse,categoryApi } from '../../Utility/api_link';
+import { getApiGreenhouse,categoryApi,postSensor } from '../../Utility/api_link';
 import axios from 'axios';
 import Loading from "../../component/loading/loading";
 
@@ -49,9 +47,8 @@ const schema = yup.object({
     .number()
     .required("Range Min harus diisi"),
     category: yup
-     .string({
-            id: yup.number().required(),
-            nama: yup.string().required(),
+     .object().shape({
+            id: yup.string().required().nullable(),
      })
      .required("Kategori harus diisi"),
 })
@@ -86,6 +83,33 @@ const Monitoring_Add = () => {
                 console.log(error)
             })
         }
+    // const postSensor = async (name, icon, color, brand, unit_measurement, max_range, min_range, category) => {
+    //     const data = {
+    //         name: name,
+    //         icon: icon,
+    //         color: color,
+    //         brand: brand,
+    //         unit_measurement: unit_measurement,
+    //         max_range: max_range,
+    //         min_range: min_range,
+    //         category: category,
+    //         greenhouse: id
+    //     }
+    //     await axios.post(postSensor, data, {
+    //         headers: {
+    //             'Authorization': 'Bearer ' + localStorage.getItem('token')
+    //         }
+    //     })
+    //         .then(response => {
+    //             console.log(response)
+    //         })
+    //         .catch((error) => {
+    //             console.log(error)
+    //         })
+    // }
+
+    
+    
     
     
 
@@ -156,8 +180,8 @@ const Monitoring_Add = () => {
                     min_range: '',
                     category: {
                         id: '',
-                        name: ''
-                    }
+                    },
+                    id_greenhouse: id
                 }
                 } validationSchema={schema}
                 onSubmit={(values) => {
@@ -332,28 +356,37 @@ const Monitoring_Add = () => {
                                 {errors.max_range}
                             </FormErrorMessage>
                         </FormControl>
-                         <FormControl marginTop={'20px'} isInvalid={errors.category && touched.category}>
+                         <FormControl marginTop={'20px'} isInvalid={errors?.category?.id && touched?.category?.id}>
                             <FormLabel color={'var(--color-primer)'}>
                                 Kategori
                             </FormLabel>
-                            <Select value={values.category.name} color={'var(--color-primer)'} onChange={handleChange}
+                            <Select value={values?.category?.id} color={'var(--color-primer)'} onChange={handleChange}
                                 onBlur={handleBlur}
-                                name="category"
-                                id="category"
+                                name="category.id"
                             >
                                 <option value="">
                                     Pilih Kategori
                                 </option>
                                 {dataCategory.map((item) => (
-                                    <option color={'var(--color-primer)'}>
-                                        {item.name}
+                                    <option value={item.id} color={'var(--color-primer)'}>
+                                        {item.name} 
                                     </option>
                                 ))}
                             </Select>
                             <FormErrorMessage>
-                                {errors.category}
+                                {errors?.category?.id}
                             </FormErrorMessage>
                         </FormControl>  
+                        <FormControl>
+                            <Input
+                                type="hidden"
+                                value={id}
+                                name="id_greenhouse"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                variant='outline'
+                                placeholder="id..." />
+                        </FormControl>
                         <Link to={'/unit/monitoring'}>
                             <Button
                                 marginTop={'44px'}
