@@ -14,3 +14,4 @@ let iconsList = [
     //     color: '#A6CE39'
     // },
 ]
+export default iconsList;

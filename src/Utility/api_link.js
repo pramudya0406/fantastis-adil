@@ -10,3 +10,4 @@ export const updateGreenhouse = 'https://iterahero.herokuapp.com/api/v1/greenhou
 export const getApiGreenhouse = 'https://iterahero.herokuapp.com/api/v1/greenhouse/'
 export const categoryApi = 'https://iterahero.herokuapp.com/api/v1/category/sensor'
 export const addSensorApi = 'https://iterahero.herokuapp.com/api/v1/sensor'
+export const addActuatorApi = 'https://iterahero.herokuapp.com/api/v1/actuator'

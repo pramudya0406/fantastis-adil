@@ -33,7 +33,7 @@ function App() {
 				<Route path="greenhouse/add" element={<GreenhouseAdd />} />
 				<Route path="greenhouse/:slug" element={<GreenhouseEdit />} />
 				<Route path="monitoring/add/:id" element={<Monitoring_Add />} />
-				<Route path="controlling/add" element={<Controlling_Add />} />
+				<Route path="controlling/add/:id" element={<Controlling_Add />} />
 				<Route path="monitoring/edit/:id" element={<Monitoring_Edit />} />
 				<Route path="controlling/edit/:id" element={<Controlling_Edit />} />
 			</Route>

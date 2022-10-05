@@ -5,6 +5,7 @@ import {
 	Button,
 	Select,
 	Flex,
+	Form,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { TabTitle } from '../../Utility/utility';
@@ -119,9 +120,9 @@ const getApiGreenhouse = async () => {
 				</Flex>
 				{
 							data === '' ? <></> : 										
-						<Link to={"/unit/monitoring/add"}>
+						<Link to={"/unit/controlling/add/" + data}>
 							<Button
-							id = {data}
+							  data = {{name:data}}
 								type="submit"
 								bg={"var(--color-primer)"}
 								>
