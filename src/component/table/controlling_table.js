@@ -1,4 +1,4 @@
-import { controllingApi  } from "../..//Utility/api_link";
+import { controllingApi,deleteAktuatorApi  } from "../..//Utility/api_link";
 import React, { useState, useEffect } from "react";
 import {
   Table,
@@ -10,7 +10,15 @@ import {
 	Th,
 	Td,
 	Box,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalCloseButton,
+	ModalHeader,
+	ModalFooter,
+	ModalBody,
 	TableContainer,
+	useDisclosure,
 	Flex,
 } from "@chakra-ui/react";
 import { RiDeleteBinFill, RiPencilFill } from "react-icons/ri";
@@ -19,12 +27,29 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../component/loading/loading";
 
+
 const TableControlling = (props) => {
+	const [id,setId] = useState('')
 	const idApi = props.data.id
+	function deleteItem (id) {
+		axios.delete(deleteAktuatorApi+id, {
+			headers: {
+				'Authorization': 'Bearer ' + localStorage.getItem('token')
+			}
+		})
+			.then(response => {
+				window.location.reload()
+			}
+			)
+			.catch((error) => {
+				console.log(error)
+			}
+			)
+	}
   const navigate = useNavigate();
   const [dataTable, setDataTable] = useState(null)
 	const [isLoading, setIsLoading] = useState(false)
-  
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const getApiControlling = async () => {
   const header = localStorage.getItem('token')
 	await axios.get(controllingApi + idApi, {
@@ -122,7 +147,38 @@ useEffect(() => {
 															<RiPencilFill />
 														</Button>
 													</Link>
+													<Modal  isOpen={isOpen} onClose={onClose}>
+														<ModalOverlay />
+														<ModalContent>
+															<ModalHeader>Apakah anda yakin?</ModalHeader>
+															<ModalCloseButton />
+															<ModalBody>
+																Apakah anda yakin ingin menghapus data ini?
+															</ModalBody>
+															<ModalFooter>
+																<Button
+																	colorScheme="blue"
+																	onClick={() => {
+																		deleteItem(item.id);
+																	}}
+																	mr={3}>
+																	Hapus
+																</Button>
+																<Button 
+																onClick={() =>{
+																	onClose()
+																}}
+																variant="ghost"
+																>
+																	Batal
+																</Button>
+															</ModalFooter>
+														</ModalContent>
+													</Modal>
 													<Button
+														onClick={() => {
+															onOpen();
+														}}
 														bg={"var(--color-on-primary)"}
 														color={"var(--color-error)"}>
 														<RiDeleteBinFill />
