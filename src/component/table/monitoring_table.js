@@ -106,6 +106,7 @@ useEffect(() => {
                 <Th textAlign={"center"}>Warna</Th>
                 <Th textAlign={"center"}>Range Min</Th>
                 <Th textAlign={"center"}>Range Max</Th>
+								<Th textAlign={"center"}>Topik</Th>
 								<Th textAlign={"center"}>Aksi</Th>
 							</Tr>
 						</Thead>
@@ -143,6 +144,9 @@ useEffect(() => {
                       <Td textAlign={"center"} color={"var(--color-primer)"}>
                         {item.range_max}
                       </Td>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{item.topic_broker}
+											</Td>
 											<Td textAlign={"center"}>
 												<Flex justifyContent={"space-evenly"}>
 													<Link

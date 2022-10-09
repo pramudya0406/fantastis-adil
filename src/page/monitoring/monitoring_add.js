@@ -34,7 +34,7 @@ const schema = yup.object({
         .required("icon harus diisi"),
     color: yup
         .string()
-        .required("Satuan Ukur harus diisi"),
+        .required("Warna harus diisi"),
     brand: yup
         .string()
         .required("Satuan Ukur harus diisi"),
@@ -53,6 +53,8 @@ const schema = yup.object({
     id_greenhouse: yup
     .number()
     .required(""),
+    topic_broker: yup
+    .string()
 });
 const Monitoring_Add = () => {
     const navigate = useNavigate();
@@ -141,6 +143,7 @@ const Monitoring_Add = () => {
                     range_max: '',
                     range_min: '',
                     id_category_sensor:'',
+                    topic_broker:'',
                     id_greenhouse: id,
                 }
                 }
@@ -299,6 +302,25 @@ const Monitoring_Add = () => {
                                 {errors.color}
                             </FormErrorMessage>
                         </FormControl>
+                        <FormControl marginTop={'20px'} isInvalid={errors.brand && touched.brand}>
+                            <FormLabel color={'var(--color-primer)'}>
+                                Merek
+                            </FormLabel>
+                            <Input
+                                color={'var(--color-primer)'}
+                                maxWidth={'100%'}
+                                marginTop={'0 auto'}
+                                type="text"
+                                name="brand"
+                                value={values.brand}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                variant='outline'
+                                placeholder="Merek..." />
+                            <FormErrorMessage>
+                                {errors.brand}
+                            </FormErrorMessage>
+                        </FormControl>
                         <FormControl marginTop={'20px'} isInvalid={errors.unit_measurement && touched.unit_measurement}>
                             <FormLabel color={'var(--color-primer)'}>
                                 Satuan Ukur
@@ -318,23 +340,23 @@ const Monitoring_Add = () => {
                                 {errors.unit_measurement}
                             </FormErrorMessage>
                         </FormControl>
-                        <FormControl marginTop={'20px'} isInvalid={errors.brand && touched.brand}>
+                        <FormControl marginTop={'20px'} isInvalid={errors.topic_broker && touched.topic_broker}>
                             <FormLabel color={'var(--color-primer)'}>
-                                Merek
+                                Topik
                             </FormLabel>
                             <Input
                                 color={'var(--color-primer)'}
                                 maxWidth={'100%'}
                                 marginTop={'0 auto'}
                                 type="text"
-                                name="brand"
-                                value={values.brand}
+                                name="topic_broker"
+                                value={values.topic_broker}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 variant='outline'
-                                placeholder="brand..." />
+                                placeholder="Topik..." />
                             <FormErrorMessage>
-                                {errors.brand}
+                                {errors.topic_broker}
                             </FormErrorMessage>
                         </FormControl>
                         <FormControl marginTop={'20px'} isInvalid={errors.range_min && touched.range_min}>
