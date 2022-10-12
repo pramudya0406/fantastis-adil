@@ -30,9 +30,11 @@ import Loading from "../../component/loading/loading";
 
 const TableControlling = (props) => {
 	const [id,setId] = useState('')
+	const [name,setName] = useState('')
 	const idApi = props.data.id
-	function deleteItem (id) {
-		axios.delete(deleteAktuatorApi+id, {
+	const deleteItem = (e,id) => {
+		e.preventDefault()
+		axios.delete(`${deleteAktuatorApi}${id}`, {
 			headers: {
 				'Authorization': 'Bearer ' + localStorage.getItem('token')
 			}
@@ -147,42 +149,44 @@ useEffect(() => {
 															<RiPencilFill />
 														</Button>
 													</Link>
+													<Button
+													onClick={() => {
+														setId(item.id);
+														setName (item.name);
+														onOpen();
+													}
+														}
+														bg={"var(--color-on-primary)"}
+														color={"var(--color-error)"}>
+														<RiDeleteBinFill />
+													</Button>
 													<Modal  isOpen={isOpen} onClose={onClose}>
 														<ModalOverlay />
 														<ModalContent>
-															<ModalHeader>Apakah anda yakin?</ModalHeader>
+															<ModalHeader>Peringatan !</ModalHeader>
 															<ModalCloseButton />
 															<ModalBody>
-																Apakah anda yakin ingin menghapus data ini?
+																Apakah anda yakin ingin menghapus {name} ini?
 															</ModalBody>
 															<ModalFooter>
 																<Button
 																	colorScheme="blue"
-																	onClick={() => {
-																		deleteItem(item.id);
+																	onClick={(e) => {
+																		deleteItem(e,id);
+																		onClose();
 																	}}
-																	mr={3}>
+																		mr={3}
+																	>
 																	Hapus
 																</Button>
 																<Button 
 																onClick={() =>{
 																	onClose()
 																}}
-																variant="ghost"
-																>
-																	Batal
-																</Button>
+																variant="ghost">Batal</Button>
 															</ModalFooter>
 														</ModalContent>
-													</Modal>
-													<Button
-														onClick={() => {
-															onOpen();
-														}}
-														bg={"var(--color-on-primary)"}
-														color={"var(--color-error)"}>
-														<RiDeleteBinFill />
-													</Button>
+													</Modal> 
 												</Flex>
 											</Td>
 										</Tr>
