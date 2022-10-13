@@ -409,7 +409,7 @@ const Monitoring_Add = () => {
                             <Button
                                 marginTop={'44px'}
                                 width="100%"
-                                height="50px"
+                                height="10%"
                                 borderRadius="10px"
                                 backgroundColor="var(--color-primer)"
                                 type="submit"
@@ -419,7 +419,7 @@ const Monitoring_Add = () => {
 								onClick={handleSubmit}
                                 loadingText="Tunggu Sebentar..."
                             >
-                                <Text fontWeight='bold' fontFamily='var(--font-family-secondary)' fontSize='var(--header-3)' color='var(--color-on-primary)'>
+                                <Text fontWeight='bold'  fontFamily='var(--font-family-secondary)' fontSize='var(--header-3)' color='var(--color-on-primary)'>
                                     Tambah
                                 </Text>
                             </Button>

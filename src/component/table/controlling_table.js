@@ -124,7 +124,7 @@ useEffect(() => {
 					bg={"white"}
 					width="100%"
 					overflowX="auto">
-					<Table variant="simple">
+					<Table variant="simple" size={['lg','md','sm']}>
 						<Thead>
 							<Tr
 								textAlign={"center"}
