@@ -53,8 +53,6 @@ const schema = yup.object({
     id_greenhouse: yup
     .number()
     .required(""),
-    topic_broker: yup
-    .string()
 });
 const Monitoring_Add = () => {
     const navigate = useNavigate();
@@ -143,7 +141,6 @@ const Monitoring_Add = () => {
                     range_max: '',
                     range_min: '',
                     id_category_sensor:'',
-                    topic_broker:'',
                     id_greenhouse: id,
                 }
                 }
@@ -338,25 +335,6 @@ const Monitoring_Add = () => {
                                 placeholder="Satuan Ukur..." />
                             <FormErrorMessage>
                                 {errors.unit_measurement}
-                            </FormErrorMessage>
-                        </FormControl>
-                        <FormControl marginTop={'20px'} isInvalid={errors.topic_broker && touched.topic_broker}>
-                            <FormLabel color={'var(--color-primer)'}>
-                                Topik
-                            </FormLabel>
-                            <Input
-                                color={'var(--color-primer)'}
-                                maxWidth={'100%'}
-                                marginTop={'0 auto'}
-                                type="text"
-                                name="topic_broker"
-                                value={values.topic_broker}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                variant='outline'
-                                placeholder="Topik..." />
-                            <FormErrorMessage>
-                                {errors.topic_broker}
                             </FormErrorMessage>
                         </FormControl>
                         <FormControl marginTop={'20px'} isInvalid={errors.range_min && touched.range_min}>

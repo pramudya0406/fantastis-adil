@@ -1,4 +1,4 @@
-import { monitoringApi,deleteSensorApi  } from "../..//Utility/api_link";
+import { paginationMonitoring,deleteSensorApi  } from "../..//Utility/api_link";
 import React, { useState, useEffect } from "react";
 import {
   Table,
@@ -26,7 +26,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../component/loading/loading";
-
+import { GrFormPrevious,GrFormNext } from "react-icons/gr"
+import "./monitoring_table.css"
 const TableMonitoring = (props) => {
 	const idApi = props.data.id
 	const deleteItem = (e,id) => {
@@ -41,25 +42,31 @@ const TableMonitoring = (props) => {
 			}
 			)
 			.catch((error) => {
-				console.log(error)
 			}
 			)
 	}
   const navigate = useNavigate();
 	const [id,setId] = useState('')
 	const [name,setName] = useState('')
-  const [dataTable, setDataTable] = useState(null)
+  const [dataTable, setDataTable] = useState([])
+	const [totalPage, setTotalPage] = useState(1)
+	const [totalData, setTotalData] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const getApiMonitoring = async () => {
+	const [page, setPage] = useState(1)
+
+	const getApiMonitoring = async () => {
+		setIsLoading(true)
+
   const header = localStorage.getItem('token')
-	await axios.get(monitoringApi + idApi, {
+	await axios.get(`${paginationMonitoring}${idApi}&&page=${page}`, {
 			headers: {
 					'Authorization': 'Bearer ' + header
-			}
-	})
+				}
+			})
 			.then(response => { 
-        setDataTable(response.data.data)
+				setDataTable(response.data.data)
+				setTotalPage(response.data.totalpage)
         setIsLoading(false)
       })
 			.catch((error) => {
@@ -67,15 +74,33 @@ const TableMonitoring = (props) => {
 					navigate('/login')
 			})
 }
+const getPagination = async () => {
+	setIsLoading(true)
+
+const header = localStorage.getItem('token')
+await axios.get(`${paginationMonitoring}${idApi}&&size=100`, {
+		headers: {
+				'Authorization': 'Bearer ' + header
+			}
+		})
+		.then(response => { 
+			setTotalData(response.data.data)
+			setIsLoading(false)
+		})
+		.catch((error) => {
+				localStorage.clear()
+				navigate('/login')
+		})
+}
 useEffect(() => {
-  
+	getPagination()
   getApiMonitoring()
   return () => {
     
     setIsLoading(true)
     
   };
-}, [idApi]);
+},[idApi, page]);
   
   return (
     <>
@@ -109,7 +134,6 @@ useEffect(() => {
                 <Th textAlign={"center"}>Warna</Th>
                 <Th textAlign={"center"}>Range Min</Th>
                 <Th textAlign={"center"}>Range Max</Th>
-								<Th textAlign={"center"}>Topik</Th>
 								<Th textAlign={"center"}>Aksi</Th>
 							</Tr>
 						</Thead>
@@ -147,9 +171,6 @@ useEffect(() => {
                       <Td textAlign={"center"} color={"var(--color-primer)"}>
                         {item.range_max}
                       </Td>
-											<Td textAlign={"center"} color={"var(--color-primer)"}>
-												{item.topic_broker}
-											</Td>
 											<Td textAlign={"center"}>
 												<Flex justifyContent={"space-evenly"}>
 													<Link
@@ -211,6 +232,35 @@ useEffect(() => {
 						</Tbody>
 					</Table>
 				</TableContainer>
+				{dataTable.length > 0 ? (
+				<Flex justify={'space-between'}>
+					<p>
+						Showing {dataTable.length} of {totalData.length}  entries
+					</p>
+				<nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="previous"><a class="page-link" onClick={() => {
+                                            setPage(1)
+                                        }}><GrFormPrevious/></a></li>
+                                        {
+                                            (page - 1) != 0 ? <li class="page-item"><a class="page-link" onClick={(
+																						) => {
+                                                setPage(page - 1)
+                                            }}>{page - 1}</a></li> : null
+                                        }
+                                        <li class="page-item-active"><a class="page-link" > {page}</a></li>
+                                        {
+                                            (page + 1) <= totalPage? <li class="page-item"><a class="page-link" onClick={() => {
+                                                setPage(page + 1)
+                                            }}> {page + 1}</a></li> : null
+                                        }
+                                        <li class="next"><a class="page-link" onClick={() => {
+                                            setPage(totalPage)
+                                        }}><GrFormNext/></a></li>
+                                    </ul>
+                                </nav>
+						</Flex>) : null
+				}
 			</Box>
           )}
           </>
