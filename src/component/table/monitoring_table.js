@@ -234,31 +234,33 @@ useEffect(() => {
 				</TableContainer>
 				{dataTable.length > 0 ? (
 				<Flex justify={'space-between'}>
-				<p>
-					Showing {dataTable.length} of {totalData.length}  entries
-				</p>
-			<nav aria-label="Page navigation example">
-																	<ul class="pagination">
-																			<li class="previous"><a class="page-link" onClick={() => {
-																					setPage(1)
-																			}}><GrFormPrevious/></a></li>
-																			{
-																					(page - 1) != 0 ? <li class="page-item"><a class="page-link" onClick={(
-																					) => {
-																							setPage(page - 1)
-																					}}>{page - 1}</a></li> : null
-																			}
-																			<li class="page-item-active"><a class="page-link" > {page}</a></li>
-																			{
-																					(page + 1) <= totalPage ? <li class="page-item"><a class="page-link" onClick={() => {
-																							setPage(page + 1)
-																					}}> {page + 1}</a></li> : null
-																			}
-																			<li class="next"><a class="page-link" onClick={() => {
-																					setPage(totalPage)
-																			}}><GrFormNext/></a></li>
-																	</ul>
-															</nav>
+				<Flex >
+					<p>
+						Showing {dataTable.length} of {totalData.length}  entries
+					</p>
+				</Flex>
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+									<li class="previous"><a class="page-link" onClick={() => {
+											setPage(1)
+									}}><GrFormPrevious/></a></li>
+									{
+											(page - 1) != 0 ? <li class="page-item"><a class="page-link" onClick={(
+											) => {
+													setPage(page - 1)
+											}}>{page - 1}</a></li> : null
+									}
+									<li class="page-item-active"><a class="page-link" > {page}</a></li>
+									{
+											(page + 1) <= totalPage ? <li class="page-item"><a class="page-link" onClick={() => {
+													setPage(page + 1)
+											}}> {page + 1}</a></li> : null
+									}
+									<li class="next"><a class="page-link" onClick={() => {
+											setPage(totalPage)
+									}}><GrFormNext/></a></li>
+							</ul>
+						</nav>
 					</Flex>) : null
 			}
 			</Box>
