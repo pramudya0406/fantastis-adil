@@ -26,11 +26,11 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../component/loading/loading";
+import { GrFormPrevious,GrFormNext } from "react-icons/gr"
+import "./monitoring_table.css"
 
 
 const TableControlling = (props) => {
-	const [id,setId] = useState('')
-	const [name,setName] = useState('')
 	const idApi = props.data.id
 	const deleteItem = (e,id) => {
 		e.preventDefault()
@@ -49,18 +49,29 @@ const TableControlling = (props) => {
 			)
 	}
   const navigate = useNavigate();
-  const [dataTable, setDataTable] = useState(null)
-	const [isLoading, setIsLoading] = useState(false)
+	const [id,setId] = useState('')
+	const [name,setName] = useState('')
+  const [dataTable, setDataTable] = useState([])
+	const [totalPage, setTotalPage] = useState(1)
+	const [totalData, setTotalData] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure();
+	const [page, setPage] = useState(1)
+
   const getApiControlling = async () => {
+		setIsLoading(true)
+
   const header = localStorage.getItem('token')
-	await axios.get(controllingApi + idApi, {
+	await axios.get(`${controllingApi}${idApi}&&page=${page}`, {
 			headers: {
 					'Authorization': 'Bearer ' + header
 			}
 	})
 	.then(response => { 
 		setDataTable(response.data.data)
+		setTotalPage(response.data.totalPage)
+		console.log('halloooooo...')
+		console.log(response.data)
 		setIsLoading(false)
 	})
 			.catch((error) => {
@@ -68,15 +79,34 @@ const TableControlling = (props) => {
 					navigate('/login')
 			})
 }
+const getPagination = async () => {
+	setIsLoading(true)
+
+const header = localStorage.getItem('token')
+await axios.get(`${controllingApi}${idApi}&&size=100`, {
+		headers: {
+				'Authorization': 'Bearer ' + header
+			}
+		})
+		.then(response => { 
+			setTotalData(response.data.data)
+			setIsLoading(false)
+		})
+		.catch((error) => {
+				localStorage.clear()
+				navigate('/login')
+		})
+}
+
 useEffect(() => {
-  
+  getPagination()
   getApiControlling()
   return () => {
     
     setIsLoading(true)
     
   };
-}, [idApi]);
+}, [idApi,page]);
   return (
     <>
       {dataTable == null || isLoading ? (
@@ -195,6 +225,35 @@ useEffect(() => {
 						</Tbody>
 					</Table>
 				</TableContainer>
+				{dataTable.length > 0 ? (
+				<Flex justify={'space-between'}>
+					<p>
+						Showing {dataTable.length} of {totalData.length}  entries
+					</p>
+				<nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="previous"><a class="page-link" onClick={() => {
+                                            setPage(1)
+                                        }}><GrFormPrevious/></a></li>
+                                        {
+                                            (page - 1) != 0 ? <li class="page-item"><a class="page-link" onClick={(
+																						) => {
+                                                setPage(page - 1)
+                                            }}>{page - 1}</a></li> : null
+                                        }
+                                        <li class="page-item-active"><a class="page-link" > {page}</a></li>
+                                        {
+                                            (page + 1) <= totalPage ? <li class="page-item"><a class="page-link" onClick={() => {
+                                                setPage(page + 1)
+                                            }}> {page + 1}</a></li> : null
+                                        }
+                                        <li class="next"><a class="page-link" onClick={() => {
+                                            setPage(totalPage)
+                                        }}><GrFormNext/></a></li>
+                                    </ul>
+                                </nav>
+						</Flex>) : null
+				}
 			</Box>
       )}
     </>
