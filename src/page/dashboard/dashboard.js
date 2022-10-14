@@ -107,9 +107,6 @@ const Dashboard = () => {
 							<Button onClick={()=> setSelected(item.id)} w="100%" height={'100%'} borderRadius={'16'} border={selected == item.id ? null : '1px solid var(--color-primer)'} bg={ selected == item.id ? 'var(--color-primer)': 'var(--color-on-primary)' } flexDir={"row"} alignContent={"center"} justifyContent={"center"} alignItems={"center"}>
 								<Text fontWeight={'semibold'} color={selected==item.id?  'var(--color-surface)': 'var(--color-on-background'} size={'var(--header-3)'}>{item.name}</Text>
 							</Button>
-							{
-							console.log(selected)
-							}
 						</Flex>
 						
 					)
@@ -179,7 +176,7 @@ const Dashboard = () => {
 				</Flex>
 			</Flex>
 				{
-					selected === 1  ? <CardSensor data={{id : dataGreenhouse}}  /> :  <></>
+					selected === 1 && data !== ''  ? <CardSensor data={{id : data}}  /> :  <></>
 					// selected === 2 && dataGreenhouse === '' ? <></> : <Se data={{id : dataGreenhouse}}  />
 				}
 					
