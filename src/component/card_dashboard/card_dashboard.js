@@ -11,6 +11,7 @@ import {
     WrapItem,
 } from '@chakra-ui/react'
 import { GiGreenhouse } from 'react-icons/gi';
+import "./card_dashboard.css"
 
 const CardDashboard = (props) => {
 

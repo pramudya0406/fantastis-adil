@@ -78,7 +78,7 @@ const getPagination = async () => {
 	setIsLoading(true)
 
 const header = localStorage.getItem('token')
-await axios.get(`${paginationMonitoring}${idApi}&&size=100`, {
+await axios.get(`${paginationMonitoring}${idApi}&&size=1000`, {
 		headers: {
 				'Authorization': 'Bearer ' + header
 			}
