@@ -18,7 +18,7 @@ const CardDashboard = (props) => {
     let data = props.data
 
     return (
-        <WrapItem>
+        <WrapItem className='dont-touch'>
             <Flex
                 mt={50}
                 h={'245px'}
