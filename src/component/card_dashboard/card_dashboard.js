@@ -11,6 +11,7 @@ import {
     WrapItem,
 } from '@chakra-ui/react'
 import { GiGreenhouse } from 'react-icons/gi';
+import "./card_dashboard.css"
 
 const CardDashboard = (props) => {
 
@@ -40,9 +41,8 @@ const CardDashboard = (props) => {
                     bg={'#319795'}
                     justify='center'
                     align={'center'}
-
                 >
-                    <Icon as={data.icon} w={6} h={6} />
+                    <Icon as={data.icon} color={'white'} w={6} h={6} />
                 </Flex>
                 <Text color={"black"} fontWeight={'semibold'} fontSize={'var( --header-1)'} fontFamily={'var(--font-family-secondary)'}>
                     {data.value}

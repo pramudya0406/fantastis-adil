@@ -15,56 +15,47 @@ import {
 	TableContainer,
 	Flex,
 } from "@chakra-ui/react";
-import { RiDeleteBinFill, RiPencilFill, RiMapPinFill } from "react-icons/ri";
 import { Link, useLinkClickHandler } from "react-router-dom";
-
+import { Formik } from "formik";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { routePageName } from "../../redux/action";
 import { TabTitle } from "../../Utility/utility";
+import TableMonitoring from "../../component/table/monitoring_table";
+import { greenhouseByUserId } from "../../Utility/api_link";
+import axios from "axios";
+import Loading from "../../component/loading/loading";
 
 const Monitoring = () => {
 	TabTitle("Monitoring - ITERA Hero");
-	const [data, setData] = React.useState([
-		{
-			id: 1,
-			name: "Greenhouse 1",
-			info: [
-				{
-					id: 1,
-					nomor: 1,
-					icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229870/itera%20herro%20icon/Lovepik_com-400222655-test-tube_1_jhq5uo.png",
-					satuan_ukur: "Lux",
-					nama: "Suhu Lingkungan",
-					merek: "adafruit",
-					kode_warna: "red",
-					rangeMin: 0,
-					rangeMax: 100,
-				},
-				{
-					id: 2,
-					nomor: 2,
-					icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229870/itera%20herro%20icon/Lovepik_com-400222655-test-tube_1_jhq5u.png",
-					satuan_ukur: "Lux",
-					nama: "Cahaya",
-					merek: "adafruit",
-					kode_warna: "red",
-					rangeMin: 0,
-					rangeMax: 100,
-				},
-			],
-		},
-	]);
+	const navigate = useNavigate();
+	const [data, setData] = useState('')
+	const [dataApi, setDataApi] = useState(null);
+	const header = localStorage.getItem('token')
 
-	const columns = Array.from({ length: 100 });
+const getApiGreenhouse = async () => {
+    await axios.get(greenhouseByUserId, {
+        headers: {
+            'Authorization': 'Bearer ' + header
+        }
+    })
+        .then(response => setDataApi(response.data.data))
+        .catch((error) => {
+            localStorage.clear()
+            navigate('/login')
+        })
+}
 	const dispatch = useDispatch();
-
 	useEffect(() => {
+				getApiGreenhouse()
 		return () => {
 			dispatch(routePageName("Monitoring"));
 		};
 	}, []);
 	return (
-		<Flex gap={"30px"} width={"100%"} flexDir={"column"}>
+		<>
+		{dataApi == null ? <Loading/>
+:<Flex gap={"30px"} width={"100%"} flexDir={"column"}>
 			<Flex justifyContent={"space-between"} width="100%">
 				<Link>
 					<Text
@@ -78,112 +69,83 @@ const Monitoring = () => {
 			<Flex
 				alignContent={"center"}
 				alignItems={"center"}
-				justify={"space-between"}>
+				justifyContent={"space-between"}>
 				<Flex width={"30%"}>
-					<Select
-						size="xs"
-						borderRadius={"10"}
-						color={"var(--color-primer)"}
-						placeholder="Pilih Greenhouse">
-						{data.map((item, index) => {
-							return (
-								<option key={index} value={item.id}>
-									{item.name}
-								</option>
-							);
-						})}
-					</Select>
+					<Formik
+						initialValues={{
+							greenhouse: "",
+						}}
+						onSubmit={(values) => {
+							setData(values.greenhouse)
+						}}>
+						{({
+							values,
+							handleChange,
+							handleSubmit,
+							isSubmitting,
+							setFieldValue,
+						}) => (
+							<form onSubmit={handleSubmit}>
+								<Flex alignContent={"center"}
+											alignItems={"center"}
+											justify={"space-between"}> 
+								<Flex width={"100%"}>
+									<Select
+										onChange={(e) => {
+											setFieldValue('id', e.target.value);
+											setData(e.target.value)
+										}}
+										size="xs"
+										borderRadius={"10"}
+										name="greenhouse"
+										value={values.id}
+										placeholder="Pilih Greenhouse"
+										width={"100%"}
+										bg={"white"}
+										_active={{ bg: "white" }}
+										borderColor={"var(--color-border)"}
+										fontSize={"var(--header-5)"}
+										fontWeight={"normal"}
+										color={"var(--color-primer)"}
+										_hover={{ borderColor: "var(--color-border)" }}
+										_focusWithin={{ borderColor: "var(--color-border)" }}>
+										{dataApi.map((item, index) => {
+											return (
+												<option
+													color={"var(--color-border)"}
+													key={index}
+													value={item.id}>
+													{item.name}
+												</option>
+											);
+										})}
+									</Select>
+								</Flex>
+								</Flex>
+							</form>
+						)}
+					</Formik>
 				</Flex>
-				<Link to={"/unit/monitoring/add"}>
-					<Button bg={"var(--color-primer)"}>Tambah</Button>
-				</Link>
+						{
+							data === '' ? <></> : 										
+						<Link to={"/unit/monitoring/add/" + data}>
+							<Button
+								data = {{name:data}}
+								type="submit"
+								bg={"var(--color-primer)"}
+								>
+								Tambah
+							</Button>
+						</Link>
+						}
 			</Flex>
-
-			<Box
-				width={"100%"}
-				borderRadius={"md"}
-				boxShadow={"md"}
-				bg={"var(--color-on-primary)"}
-				justify="flex-start"
-				mt={30}>
-				<TableContainer
-					borderRadius={"md"}
-					bg={"white"}
-					width="100%"
-					overflowX="auto">
-					<Table variant="simple">
-						<Thead>
-							<Tr
-								textAlign={"center"}
-								alignContent={"center"}
-								alignItems={"center"}
-								justifyContent={"center"}>
-								<Th textAlign={"center"}>No</Th>
-								<Th textAlign={"center"}>Nama</Th>
-								<Th textAlign={"center"}>Icon</Th>
-								<Th textAlign={"center"}>Satuan Ukur</Th>
-								<Th textAlign={"center"}>Merek</Th>
-								<Th textAlign={"center"}>Warna</Th>
-								<Th textAlign={"center"}>Aksi</Th>
-							</Tr>
-						</Thead>
-						<Tbody>
-							{data.map((item) => {
-								return item.info.map((item2, index2) => {
-									return (
-										<Tr key={index2}>
-											<Td textAlign={"center"} color={"var(--color-primer)"}>
-												{item2.nomor}
-											</Td>
-											<Td textAlign={"center"} color={"var(--color-primer)"}>
-												{item2.nama}
-											</Td>
-											<Td
-												display={"flex"}
-												justifyContent="center"
-												alignItems={"center"}>
-												<Image height={"30px"} src={item2.icon} alt="icon" />
-											</Td>
-											<Td textAlign={"center"} color={"var(--color-primer)"}>
-												{item2.satuan_ukur}
-											</Td>
-											<Td textAlign={"center"} color={"var(--color-primer)"}>
-												{item2.merek}
-											</Td>
-											<Td textAlign={"center"} color={"var(--color-primer)"}>
-												{item2.kode_warna}{" "}
-											</Td>
-											<Td textAlign={"center"}>
-												<Flex justifyContent={"space-evenly"}>
-													<Link
-														to={{
-															pathname: "/unit/monitoring/edit/" + item2.id,
-														}}
-														state={{
-															data: item2,
-														}}>
-														<Button
-															bg={"var(--color-on-primary)"}
-															color={"var(--color-info)"}>
-															<RiPencilFill />
-														</Button>
-													</Link>
-													<Button
-														bg={"var(--color-on-primary)"}
-														color={"var(--color-error)"}>
-														<RiDeleteBinFill />
-													</Button>
-												</Flex>
-											</Td>
-										</Tr>
-									);
-								});
-							})}
-						</Tbody>
-					</Table>
-				</TableContainer>
-			</Box>
+			{data === '' ? <></> : <TableMonitoring data={{
+				id : data
+			}} />
+		}
 		</Flex>
+				}
+				</>
 	);
 };
 export default Monitoring;
