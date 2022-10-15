@@ -1,3 +1,4 @@
+
 export const loginApi = 'https://iterahero.herokuapp.com/api/v1/login'
 export const dashboardApi = 'https://iterahero.herokuapp.com/api/v1/dashboard'
 export const greenhouseByUserId = 'https://iterahero.herokuapp.com/api/v1/greenhouse'
@@ -15,3 +16,5 @@ export const deleteAktuatorApi = 'https://iterahero.herokuapp.com/api/v1/actuato
 export const deleteSensorApi = 'https://iterahero.herokuapp.com/api/v1/sensor/'
 export const paginationMonitoring ='https://iterahero.herokuapp.com/api/v1/sensor?by_id_greenhouse='
 export const paginationAktuator ='https://iterahero.herokuapp.com/api/v1/actuator?by_greenhouse_id='
+export const getNotificationByUserId =
+	"https://iterahero.herokuapp.com/api/v1/notification?by_user_id=1";

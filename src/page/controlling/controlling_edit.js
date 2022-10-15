@@ -161,7 +161,6 @@ const Controlling_Edit = () => {
 							<FormLabel color={"var(--color-primer)"}>Warna</FormLabel>
 							<Input
 								color={"var(--color-primer)"}
-								maxWidth={"100%"}
 								marginTop={"0 auto"}
 								type="text"
 								name="warna"
