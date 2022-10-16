@@ -18,6 +18,7 @@ import Monitoring_Add from "./page/monitoring/monitoring_add";
 import Controlling_Add from "./page/controlling/controlling_add";
 import Monitoring_Edit from "./page/monitoring/monitoring_edit";
 import Controlling_Edit from "./page/controlling/controlling_edit";
+import MoreNotification from "./page/notification/more_notification";
 
 function App() {
 	return (
@@ -30,6 +31,10 @@ function App() {
 				<Route path="monitoring" element={<Monitoring />} />
 				<Route path="controlling" element={<Controlling />} />
 				<Route path="historynotifikasi" element={<Notification />} />
+				<Route
+					path="historynotifikasi/more-notifcation"
+					element={<MoreNotification />}
+				/>
 				<Route path="greenhouse/add" element={<GreenhouseAdd />} />
 				<Route path="greenhouse/:slug" element={<GreenhouseEdit />} />
 				<Route path="monitoring/add/:id" element={<Monitoring_Add />} />

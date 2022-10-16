@@ -14,7 +14,7 @@ import {
 	FormLabel,
 	Select,
 } from "@chakra-ui/react";
-
+import "./monitoring.css"
 import * as yup from "yup";
 import { Link, useLocation } from "react-router-dom";
 import { Formik, Form } from "formik";
@@ -28,6 +28,7 @@ const schema = yup.object({
 	merek: yup.string().required("Merek harus diisi"),
 	kategori: yup.string().required("Kategori harus diisi"),
 });
+
 const Monitoring_Edit = () => {
 	const location = useLocation();
 	const data = location.state?.data;
@@ -222,11 +223,11 @@ const Monitoring_Edit = () => {
 							<Button
 								marginTop={"44px"}
 								width="100%"
-								height="50px"
+								height="50px important!"
 								borderRadius="10px"
 								backgroundColor="var(--color-primer)"
 								type="submit"
-								className="btn-login"
+								className="btn-login monitoring-edit-btn"
 								disabled={isSubmitting}
 								onClick={handleSubmit}>
 								<Text
