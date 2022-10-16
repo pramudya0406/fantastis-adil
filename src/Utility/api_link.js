@@ -15,3 +15,4 @@ export const deleteAktuatorApi = 'https://iterahero.herokuapp.com/api/v1/actuato
 export const deleteSensorApi = 'https://iterahero.herokuapp.com/api/v1/sensor/'
 export const paginationMonitoring ='https://iterahero.herokuapp.com/api/v1/sensor?by_id_greenhouse='
 export const paginationAktuator ='https://iterahero.herokuapp.com/api/v1/actuator?by_greenhouse_id='
+export const brokerSensor = 'https://iterahero.herokuapp.com/api/v1/sensor_broker?id_sensor='

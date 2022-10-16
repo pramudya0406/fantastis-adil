@@ -99,7 +99,7 @@ const Monitoring_Add = () => {
 
     return (
         <>
-		{dataApi == null ? <Loading/>
+		{dataApi == null || dataCategory == null ? <Loading/>
 :
         <Flex
             w='100%'
