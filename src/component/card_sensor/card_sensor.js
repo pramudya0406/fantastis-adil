@@ -20,7 +20,6 @@ import {
 import axios from 'axios';
 import { paginationMonitoring } from "../..//Utility/api_link";
 import Loading from "../../component/loading/loading";
-import moment, { now } from 'moment/moment';
 import { useNavigate } from "react-router-dom";
 import ValueSensor from '../value_sensor/value_sensor';
 
@@ -72,23 +71,25 @@ const CardSensor = (props) => {
                   <WrapItem key={index} 
                   w={['sm']}
                   bg={'#ffff'}
+                  borderRadius={'10px'}
+                  border={'1px solid #E2E8F0'}
+                  paddingTop={'30px'}
+                  paddingBottom={'30px'}
                   >
                     <Center justifyContent={'center'} flexDir={'column'} >
-                      <Flex flexDir={'row'} justify={'center'}>
+                      <Flex flexDir={'row'} justify={'space-between'}>
                         <Image src={`${item.icon}`} color={item.color} />
                         <Text color={`${item.color}`}>{item.name}</Text>
                       </Flex>
                       {
                         item.id === '' ? <></> : <ValueSensor data={{
                           id : item.id,
+                          color : item.color,
+                          category : item.category.name,
+                          unit: item.unit_measurement,
                         }} />
                       }
-                      <Flex flexDir={'row'} justifyContent={'space-between'}>
-                        <Text  fontSize={'var(--caption)'}>Diperbarui : </Text>
-                        <Text fontSize={'var(--caption)'}>
-                          {moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a')}
-                        </Text>
-                    </Flex>
+                     
                     </Center>
                   </WrapItem>
                     ))}
