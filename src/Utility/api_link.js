@@ -36,14 +36,15 @@ export const getNotificationByUserId =
 export const deleteNotification =
 	"https://iterahero.herokuapp.com/api/v1/notification/";
 
-// export const updateActuatorDetail =
-// 	"https://iterahero.herokuapp.com/api/v1/actuator/";
+export const updateActuatorDetail =
+	"https://iterahero.herokuapp.com/api/v1/actuator/";
 
-// ini local
-export const updateActuatorDetail = "http://localhost:3001/api/v1/actuator/";
+// // ini local
+// export const updateActuatorDetail = "http://localhost:3001/api/v1/actuator/";
 
-// export const updateSensorDetail =
-// 	"https://iterahero.herokuapp.com/api/v1/sensor/";
+export const updateSensorDetail =
+	"https://iterahero.herokuapp.com/api/v1/sensor/";
 
-// ini local
-export const updateSensorDetail = "http://localhost:3001/api/v1/sensor/";
+// // ini local
+// export const updateSensorDetail = "http://localhost:3001/api/v1/sensor/";
+// kalo 
