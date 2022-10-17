@@ -18,3 +18,4 @@ export const paginationMonitoring ='https://iterahero.herokuapp.com/api/v1/senso
 export const paginationAktuator ='https://iterahero.herokuapp.com/api/v1/actuator?by_greenhouse_id='
 export const getNotificationByUserId =
 	"https://iterahero.herokuapp.com/api/v1/notification?by_user_id=1";
+export const brokerSensor = 'https://iterahero.herokuapp.com/api/v1/sensor_broker?id_sensor='

@@ -1,0 +1,4 @@
+.card-sensor {
+  cursor: none !important;
+  pointer-events: none !important;
+}

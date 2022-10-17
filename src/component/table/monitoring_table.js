@@ -104,7 +104,7 @@ useEffect(() => {
   
   return (
     <>
-      {dataTable == null  || isLoading ? (
+      {dataTable == null || totalData == null || totalPage == null  || isLoading ? (
         <Loading />
       ) : (
 <Box

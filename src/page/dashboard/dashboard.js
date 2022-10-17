@@ -63,17 +63,17 @@ const Dashboard = () => {
 
 	return (
 		<>
-			{dataApi == null ? <Loading />
-				: <Flex w="100%" flexDir={"column"}>
-					<Flex w="100%" flexDir={"row"} alignContent={"center"} justifyContent={"center"} alignItems={"center"}>
+			{dataApi == null || dataGreenhouse == null ? <Loading />
+				: <Flex w="100%"  flexDir={"column"} >
+					<Flex w="100%"  flexDir={"row"} alignContent={"center"} justifyContent={"center"} alignItems={"center"}>
 					<Image
 						  width={"20%"}
 							height={"auto"}
 							src="https://res.cloudinary.com/diyu8lkwy/image/upload/v1663542541/itera%20herro%20icon/Frame_181_fmtxbh.png"
 						/>
 						</Flex>
-					<Flex justify="center" mt={'-30px'}>
-						<Wrap spacing="50px" justify="center">
+					<Flex  justify="center" mt={'-30px'}>
+						<Wrap  spacing="50px" justify="center">
 							<CardDashboard
 								data={{
 									value: dataApi.greenhouse,
@@ -99,7 +99,7 @@ const Dashboard = () => {
 					</Flex>
 					<Flex justifyContent={'flex-start'} width="100%">
 			</Flex>
-			<Flex  mt={'30px'}  flexDir={'row'} >
+			<Wrap   mt={'30px'}  flexDir={'row'} >
 			{
 				dashboardMenu.map((item, index) => {
 					return (
@@ -112,7 +112,7 @@ const Dashboard = () => {
 					)
 				})
 			}
-			</Flex>
+			</Wrap>
 			<Flex
 			  mt={'30px'}
 				alignContent={"center"}
@@ -137,7 +137,7 @@ const Dashboard = () => {
 								<Flex alignContent={"center"}
 											alignItems={"center"}
 											justify={"space-between"}> 
-								<Flex width={"100%"}>
+								<Flex height={'auto'} width={"100%"}>
 									<Select
 										onChange={(e) => {
 											setFieldValue('id', e.target.value);
@@ -175,11 +175,12 @@ const Dashboard = () => {
 					</Formik>
 				</Flex>
 			</Flex>
+			<Wrap justify={'center'}>
 				{
 					selected === 1 && data !== ''  ? <CardSensor data={{id : data}}  /> :  <></>
 					// selected === 2 && dataGreenhouse === '' ? <></> : <Se data={{id : dataGreenhouse}}  />
 				}
-					
+			</Wrap>
 			</Flex>
 			}
 		</>
