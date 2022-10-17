@@ -2,48 +2,89 @@ import React, { useState, useEffect } from "react";
 import {
 	Flex,
 	Image,
-	Box,
-	Center,
 	Text,
 	Input,
-	Icon,
-	calc,
+	Circle,
 	Button,
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
 	Select,
 } from "@chakra-ui/react";
-
+import Loading from "../../component/loading/loading";
 import * as yup from "yup";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { useDispatch } from "react-redux";
 import { routePageName } from "../../redux/action";
+import iconsList from "../../Utility/icon_list_aktuator";
+import { TabTitle } from "../../Utility/utility";
+import { updateActuatorDetail } from "../../Utility/api_link";
+import axios from "axios";
 
-const schema = yup.object({
-	nama: yup.string().required("Nama harus diisi"),
-	icon: yup.string().required("Ikon harus diisi"),
-	warna: yup.string().required("Warna harus diisi"),
-	greenHouse: yup.string().required("Greenhouse harus diisi"),
-});
 const Controlling_Edit = () => {
+	TabTitle("Edit Aktuator - ITERA Hero");
 	const location = useLocation();
+	const navigate = useNavigate();
 	const data = location.state?.data;
+	const header = localStorage.getItem("token");
+	const [iconSelected, setIconSelected] = useState("");
 
-	const [ikon, setIkon] = useState([
-		{
-			id: 1,
-			greenHouse: "Greenhouse 1",
-			ikon_link:
-				"https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229870/itera%20herro%20icon/Lovepik_com-400222655-test-tube_1_jhq5uo.png",
-			nama_alat: "Pompa Air",
-			warna: "red",
-		},
-	]);
-	const [ikon_selected, setIkon_selected] = useState("");
+	const [isloading, checkLoading] = useState(false);
+
+	const schema = yup.object({
+		name: yup.string().required("Nama harus diisi"),
+		icon: yup.string().required("Ikon harus diisi"),
+		color: yup.string().required("Warna harus diisi"),
+	});
 
 	const dispatch = useDispatch();
+
+	const putActuator = async (valueName, valueIcon, valueColor) => {
+		await axios
+			.put(
+				updateActuatorDetail + data.id,
+				{
+					name: valueName,
+					icon: valueIcon,
+					color: valueColor,
+				},
+				{
+					headers: {
+						"content-type": "multipart/form-data",
+						Authorization: "Bearer " + header,
+					},
+				}
+			)
+			.then((response) => {
+				console.log(response);
+				checkLoading(false);
+				navigate("/unit/controlling");
+				alert("Data Aktuator Berhasil Diperbaharui");
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
+	let dataSend = {
+		name: "",
+		icon: "",
+		color: "",
+	};
+
+	const submit = async (name, color, icon) => {
+		dataSend.name = name;
+		dataSend.color = color;
+		dataSend.icon = icon;
+
+		if (dataSend.name == "" || dataSend.icon == "" || dataSend.color == "") {
+			return alert("Masih ada yang belum di isi");
+		} else {
+			checkLoading(true);
+			putActuator(name, icon, color);
+		}
+	};
 
 	useEffect(() => {
 		return () => {
@@ -52,150 +93,163 @@ const Controlling_Edit = () => {
 	}, []);
 
 	return (
-		<Flex w="100%" flexDir={"column"}>
-			<Flex width="100%">
-				<Link to={"/unit/controlling"}>
-					<Flex marginRight={"2"}>
-						<Text
-							fontWeight={"semibold"}
-							fontSize={"var(--header-3)"}
-							color={"var(--color-primer)"}>
-							List Controlling pada Greenhouse
-						</Text>
-					</Flex>
-				</Link>
-				<Flex marginRight={"2"}>
-					<Text
-						fontWeight={"semibold"}
-						fontSize={"var(--header-3)"}
-						color={"var(--color-primer)"}>
-						{" "}
-						{">"}{" "}
-					</Text>
-				</Flex>
-				<Link>
-					<Flex>
-						{ikon.map((item, index) => {
-							return (
+		<>
+			{isloading ? (
+				<Loading />
+			) : (
+				<Flex w="100%" flexDir={"column"}>
+					<Flex width="100%">
+						<Link to={"/unit/controlling"}>
+							<Flex marginRight={"2"}>
 								<Text
 									fontWeight={"semibold"}
 									fontSize={"var(--header-3)"}
 									color={"var(--color-primer)"}>
-									{" "}
-									{item.greenHouse}{" "}
+									List Controlling pada Greenhouse
 								</Text>
-							);
-						})}
-					</Flex>
-				</Link>
-			</Flex>
-			<Formik
-				initialValues={{
-					nama: data.nama_alat,
-					icon: data.icon,
-					warna: data.warna,
-				}}
-				validationSchema={schema}
-				onSubmit={(values) => {
-					console.log(JSON.stringify(values, null, 2));
-				}}>
-				{({
-					values,
-					errors,
-					touched,
-					handleChange,
-					setFieldValue,
-					handleBlur,
-					handleSubmit,
-					isSubmitting,
-				}) => (
-					<Form onSubmit={handleSubmit}>
-						<FormControl
-							marginTop={"20px"}
-							isInvalid={errors.nama && touched.nama}>
-							<FormLabel color={"var(--color-primer)"}>Nama</FormLabel>
-							<Input
-								color={"var(--color-primer)"}
-								maxWidth={"100%"}
-								marginTop={"0 auto"}
-								type="text"
-								name="nama"
-								value={values.nama}
-								onChange={handleChange}
-								onBlur={handleBlur}
-								variant="outline"
-								placeholder="Nama..."
-							/>
-							<FormErrorMessage>{errors.nama}</FormErrorMessage>
-						</FormControl>
-						<FormControl
-							marginTop={"20px"}
-							isInvalid={errors.icon && touched.icon}>
-							<FormLabel color={"var(--color-primer)"}>Ikon</FormLabel>
-							<Select
-								color={"var(--color-primer)"}
-								onChange={(e) => {
-									setFieldValue("icon", e.target.value);
-									setIkon_selected(e.target.value);
-								}}
-								onBlur={handleBlur}
-								value={values.icon}
-								name="icon"
-								id="icon">
-								<option value="">Pilih Ikon</option>
-								{ikon.map((ikon, key) => (
-									<option
-										value={ikon.ikon_link}
-										key={key}
-										color={"var(--color-primer)"}>
-										{ikon.nama_alat}
-									</option>
-								))}
-							</Select>
-							<Image src={ikon_selected} />
-							<FormErrorMessage>{errors.icon}</FormErrorMessage>
-						</FormControl>
-						<FormControl
-							marginTop={"20px"}
-							isInvalid={errors.warna && touched.warna}>
-							<FormLabel color={"var(--color-primer)"}>Warna</FormLabel>
-							<Input
-								color={"var(--color-primer)"}
-								marginTop={"0 auto"}
-								type="text"
-								name="warna"
-								value={values.warna}
-								onChange={handleChange}
-								onBlur={handleBlur}
-								variant="outline"
-								placeholder="Warna..."
-							/>
-							<FormErrorMessage>{errors.warna}</FormErrorMessage>
-						</FormControl>
-						<Link to={"/unit/controlling"}>
-							<Button
-								marginTop={"44px"}
-								width="100%"
-								height="50px"
-								borderRadius="10px"
-								backgroundColor="var(--color-primer)"
-								type="submit"
-								className="btn-login"
-								disabled={isSubmitting}
-								onClick={handleSubmit}>
-								<Text
-									fontWeight="bold"
-									fontFamily="var(--font-family-secondary)"
-									fontSize="var(--header-3)"
-									color="var(--color-on-primary)">
-									Simpan
-								</Text>
-							</Button>
+							</Flex>
 						</Link>
-					</Form>
-				)}
-			</Formik>
-		</Flex>
+
+						<Flex marginRight={"2"}>
+							<Text
+								fontWeight={"semibold"}
+								fontSize={"var(--header-3)"}
+								color={"var(--color-primer)"}>
+								{" "}
+								{">"}{" "}
+							</Text>
+						</Flex>
+
+						<Flex>
+							<Text
+								fontWeight={"semibold"}
+								fontSize={"var(--header-3)"}
+								color={"var(--color-primer)"}>
+								{" "}
+								Edit {data.name}{" "}
+							</Text>
+						</Flex>
+					</Flex>
+					<Formik
+						initialValues={{
+							name: data.name,
+							icon: data.icon,
+							color: data.color,
+						}}
+						validationSchema={schema}>
+						{({
+							values,
+							errors,
+							touched,
+							handleChange,
+							setFieldValue,
+							handleBlur,
+							handleSubmit,
+							isSubmitting,
+						}) => (
+							<Form>
+								<FormControl
+									marginTop={"20px"}
+									isInvalid={errors.name && touched.name}>
+									<FormLabel color={"var(--color-primer)"}>Nama</FormLabel>
+									<Input
+										color={"var(--color-primer)"}
+										maxWidth={"100%"}
+										marginTop={"0 auto"}
+										type="text"
+										name="name"
+										value={values.name}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										variant="outline"
+										placeholder="Nama..."
+									/>
+									<FormErrorMessage>{errors.name}</FormErrorMessage>
+								</FormControl>
+								<FormControl
+									marginTop={"20px"}
+									isInvalid={errors.icon && touched.icon}>
+									<FormLabel color={"var(--color-primer)"}>Ikon</FormLabel>
+									<Select
+										color={"var(--color-primer)"}
+										onChange={(e) => {
+											setFieldValue("icon", e.target.value);
+											setIconSelected(e.target.value);
+										}}
+										onBlur={handleBlur}
+										value={values.icon}
+										name="icon"
+										id="icon">
+										<option value="">Pilih Ikon</option>
+										{iconsList.map((item, key) => (
+											<option value={item.icon} color={"var(--color-primer)"}>
+												{item.nama}
+											</option>
+										))}
+									</Select>
+									<Flex m={"15px"}>
+										{iconSelected == "" ? (
+											<Image src={data.icon} />
+										) : (
+											<Image src={iconSelected} />
+										)}
+									</Flex>
+									<FormErrorMessage>{errors.icon}</FormErrorMessage>
+								</FormControl>
+								<FormControl
+									marginTop={"20px"}
+									isInvalid={errors.color && touched.color}>
+									<FormLabel color={"var(--color-primer)"}>Warna</FormLabel>
+									<Select
+										color={"var(--color-primer)"}
+										maxWidth={"100%"}
+										marginTop={"0 auto"}
+										type="text"
+										name="color"
+										value={values.color}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										variant="outline">
+										<option value="">Pilih Warna</option>
+										{iconsList.map((item) => (
+											<option value={item.color} color={"var(--color-primer)"}>
+												{item.nama}
+											</option>
+										))}
+									</Select>
+									<Flex m={"15px"}>
+										<Circle bg={values.color} size="30px" />
+									</Flex>
+									<FormErrorMessage>{errors.color}</FormErrorMessage>
+								</FormControl>
+								<Link>
+									<Button
+										marginTop={"44px"}
+										width="100%"
+										height="50px"
+										borderRadius="10px"
+										backgroundColor="var(--color-primer)"
+										type="submit"
+										className="btn-login"
+										// disabled={isSubmitting}
+										onClick={() =>
+											submit(values.name, values.color, values.icon)
+										}>
+										<Text
+											fontWeight="bold"
+											fontFamily="var(--font-family-secondary)"
+											fontSize="var(--header-3)"
+											color="var(--color-on-primary)">
+											Simpan
+										</Text>
+									</Button>
+								</Link>
+							</Form>
+						)}
+					</Formik>
+				</Flex>
+			)}
+		</>
 	);
 };
 export default Controlling_Edit;
