@@ -41,3 +41,9 @@ export const deleteNotification =
 
 // ini local
 export const updateActuatorDetail = "http://localhost:3001/api/v1/actuator/";
+
+// export const updateSensorDetail =
+// 	"https://iterahero.herokuapp.com/api/v1/sensor/";
+
+// ini local
+export const updateSensorDetail = "http://localhost:3001/api/v1/sensor/";
