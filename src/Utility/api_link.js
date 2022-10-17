@@ -27,11 +27,17 @@ export const paginationMonitoring =
 	"https://iterahero.herokuapp.com/api/v1/sensor?by_id_greenhouse=";
 export const paginationAktuator =
 	"https://iterahero.herokuapp.com/api/v1/actuator?by_greenhouse_id=";
-// export const getNotificationByUserId =
-// 	"https://iterahero.herokuapp.com/api/v1/notification?by_user_id=1";
-// ini local host
 export const getNotificationByUserId =
-	"http://localhost:3001/api/v1/notification?by_user_id=1";
+	"https://iterahero.herokuapp.com/api/v1/notification?by_user_id=1";
+// ini local host
+// export const getNotificationByUserId =
+// 	"http://localhost:3001/api/v1/notification?by_user_id=1";
 
 export const deleteNotification =
 	"https://iterahero.herokuapp.com/api/v1/notification/";
+
+// export const updateActuatorDetail =
+// 	"https://iterahero.herokuapp.com/api/v1/actuator/";
+
+// ini local
+export const updateActuatorDetail = "http://localhost:3001/api/v1/actuator/";

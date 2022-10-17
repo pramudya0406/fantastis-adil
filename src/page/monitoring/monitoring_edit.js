@@ -14,12 +14,13 @@ import {
 	FormLabel,
 	Select,
 } from "@chakra-ui/react";
-import "./monitoring.css"
+import "./monitoring.css";
 import * as yup from "yup";
 import { Link, useLocation } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { useDispatch } from "react-redux";
 import { routePageName } from "../../redux/action";
+import { TabTitle } from "../../Utility/utility";
 
 const schema = yup.object({
 	nama: yup.string().required("Nama harus diisi"),
@@ -30,6 +31,8 @@ const schema = yup.object({
 });
 
 const Monitoring_Edit = () => {
+	TabTitle("Edit Sensor - ITERA Hero");
+
 	const location = useLocation();
 	const data = location.state?.data;
 
@@ -74,6 +77,7 @@ const Monitoring_Edit = () => {
 						</Text>
 					</Flex>
 				</Link>
+
 				<Flex marginRight={"2"}>
 					<Text
 						fontWeight={"semibold"}
@@ -90,13 +94,13 @@ const Monitoring_Edit = () => {
 						fontSize={"var(--header-3)"}
 						color={"var(--color-primer)"}>
 						{" "}
-						Edit {data.nama} {data.id}{" "}
+						Edit {data.name}{" "}
 					</Text>
 				</Flex>
 			</Flex>
 			<Formik
 				initialValues={{
-					nama: data.nama,
+					nama: data.name,
 					icon: data.icon,
 					satuan_ukur: data.satuan_ukur,
 					merek: data.merek,
