@@ -144,8 +144,6 @@ const Controlling_Edit = () => {
 							handleChange,
 							setFieldValue,
 							handleBlur,
-							handleSubmit,
-							isSubmitting,
 						}) => (
 							<Form>
 								<FormControl
