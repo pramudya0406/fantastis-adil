@@ -1,4 +1,7 @@
-import { controllingApi, deleteAktuatorApi } from "../..//Utility/api_link";
+import {
+	getNotificationByUserId,
+	deleteNotification,
+} from "../..//Utility/api_link";
 import React, { useState, useEffect } from "react";
 import {
 	Table,
@@ -22,19 +25,27 @@ import {
 	Flex,
 } from "@chakra-ui/react";
 import { RiDeleteBinFill, RiPencilFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import Loading from "../../component/loading/loading";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 import "./monitoring_table.css";
+import moment from "moment";
 
-const TableControlling = (props) => {
-	const idApi = props.data.id;
+const TableNotification = () => {
+	const eleminateZ = (date) => {
+		let result = date.replace("T", " ").replace("Z", " +0700");
+		// console.log(result);
+		return result;
+	};
+
+	var idLocale = require("moment/locale/id");
+	moment.locale("id", idLocale);
+
 	const deleteItem = (e, id) => {
 		e.preventDefault();
 		axios
-			.delete(`${deleteAktuatorApi}${id}`, {
+			.delete(`${deleteNotification}${id}`, {
 				headers: {
 					Authorization: "Bearer " + localStorage.getItem("token"),
 				},
@@ -42,13 +53,11 @@ const TableControlling = (props) => {
 			.then((response) => {
 				window.location.reload();
 			})
-			.catch((error) => {
-				console.log(error);
-			});
+			.catch((error) => {});
 	};
+
 	const navigate = useNavigate();
 	const [id, setId] = useState("");
-	const [name, setName] = useState("");
 	const [dataTable, setDataTable] = useState([]);
 	const [totalPage, setTotalPage] = useState(1);
 	const [totalData, setTotalData] = useState("");
@@ -56,12 +65,12 @@ const TableControlling = (props) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [page, setPage] = useState(1);
 
-	const getApiControlling = async () => {
+	const getNotification = async () => {
 		setIsLoading(true);
 
 		const header = localStorage.getItem("token");
 		await axios
-			.get(`${controllingApi}${idApi}&&page=${page}`, {
+			.get(`${getNotificationByUserId}&&page=${page}`, {
 				headers: {
 					Authorization: "Bearer " + header,
 				},
@@ -69,8 +78,6 @@ const TableControlling = (props) => {
 			.then((response) => {
 				setDataTable(response.data.data);
 				setTotalPage(response.data.totalPage);
-				console.log("halloooooo...");
-				console.log(response.data);
 				setIsLoading(false);
 			})
 			.catch((error) => {
@@ -83,7 +90,7 @@ const TableControlling = (props) => {
 
 		const header = localStorage.getItem("token");
 		await axios
-			.get(`${controllingApi}${idApi}&&size=100`, {
+			.get(`${getNotificationByUserId}&&size=1000`, {
 				headers: {
 					Authorization: "Bearer " + header,
 				},
@@ -97,16 +104,25 @@ const TableControlling = (props) => {
 				navigate("/login");
 			});
 	};
-
 	useEffect(() => {
 		getPagination();
-		getApiControlling();
+		getNotification();
 		return () => {
 			setIsLoading(true);
 		};
-	}, [idApi, page]);
+	}, [page]);
+
 	return (
 		<>
+			{/* {dataTable.map((item, index) => {
+				return (
+					<div>
+						<p>{item.id}</p>
+						<p>{item.detail}</p>
+					</div>
+				);
+			})}
+		</> */}
 			{dataTable == null || isLoading ? (
 				<Loading />
 			) : (
@@ -122,7 +138,10 @@ const TableControlling = (props) => {
 						bg={"white"}
 						width="100%"
 						overflowX="auto">
-						<Table variant="simple" size={["lg", "md", "sm"]}>
+						<Table
+							variant="simple"
+							size={["lg", "md", "sm"]}
+							overflowX={"hidden"}>
 							<Thead>
 								<Tr
 									textAlign={"center"}
@@ -130,11 +149,11 @@ const TableControlling = (props) => {
 									alignItems={"center"}
 									justifyContent={"center"}>
 									<Th textAlign={"center"}>No</Th>
-									<Th textAlign={"center"}>Nama Alat</Th>
-									<Th textAlign={"center"}>Icon</Th>
-									<Th textAlign={"center"}>Life Cycle</Th>
-									<Th textAlign={"center"}>Warna</Th>
-									<Th textAlign={"center"}>Aksi</Th>
+									<Th textAlign={"center"}>Detail Notifikasi</Th>
+									<Th textAlign={"center"}>Tipe</Th>
+									<Th textAlign={"center"}>Waktu</Th>
+									<Th textAlign={"center"}>Lokasi</Th>
+									<Th textAlign={"center"}>Id Actuator</Th>
 								</Tr>
 							</Thead>
 							<Tbody>
@@ -145,46 +164,27 @@ const TableControlling = (props) => {
 												{index + 1}
 											</Td>
 											<Td textAlign={"center"} color={"var(--color-primer)"}>
-												{item.name}
-											</Td>
-											<Td
-												display={"flex"}
-												justifyContent="center"
-												alignItems={"center"}>
-												<Image height={"30px"} src={item.icon} alt="icon" />
+												{item.detail}
 											</Td>
 											<Td textAlign={"center"} color={"var(--color-primer)"}>
-												{item.status_lifecycle}
+												{item.type}
 											</Td>
-											<Td
-												display={"flex"}
-												justifyContent="center"
-												alignItems={"center"}>
-												<Box
-													width={"20px"}
-													borderRadius={"100px"}
-													height={"20px"}
-													background={item.color}></Box>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{moment(eleminateZ(item.created_at)).format(
+													"DD MMMM YYYY, h:mm:ss a"
+												)}
+											</Td>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{item.greenhouse_loc}
+											</Td>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{item.id_actuator}
 											</Td>
 											<Td textAlign={"center"}>
 												<Flex justifyContent={"space-evenly"}>
-													<Link
-														to={{
-															pathname: "/unit/controlling/edit/" + item.id,
-														}}
-														state={{
-															data: item,
-														}}>
-														<Button
-															bg={"var(--color-on-primary)"}
-															color={"var(--color-info)"}>
-															<RiPencilFill />
-														</Button>
-													</Link>
 													<Button
 														onClick={() => {
 															setId(item.id);
-															setName(item.name);
 															onOpen();
 														}}
 														bg={"var(--color-on-primary)"}
@@ -197,7 +197,8 @@ const TableControlling = (props) => {
 															<ModalHeader>Peringatan !</ModalHeader>
 															<ModalCloseButton />
 															<ModalBody>
-																Apakah anda yakin ingin menghapus {name} ini?
+																Apakah anda yakin ingin menghapus notifikasi
+																ini?
 															</ModalBody>
 															<ModalFooter>
 																<Button
@@ -224,15 +225,16 @@ const TableControlling = (props) => {
 										</Tr>
 									);
 								})}
-								;
 							</Tbody>
 						</Table>
 					</TableContainer>
 					{dataTable.length > 0 ? (
 						<Flex justify={"space-between"}>
-							<p>
-								Showing {dataTable.length} of {totalData.length} entries
-							</p>
+							<Flex>
+								<p>
+									Showing {dataTable.length} of {totalData.length} entries
+								</p>
+							</Flex>
 							<nav aria-label="Page navigation example">
 								<ul class="pagination">
 									<li class="previous">
@@ -288,4 +290,5 @@ const TableControlling = (props) => {
 		</>
 	);
 };
-export default TableControlling;
+
+export default TableNotification;

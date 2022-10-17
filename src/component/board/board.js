@@ -36,7 +36,7 @@ const Board = () => {
                 <Flex
                     padding={'20px'}
                     w='100%'
-                    h={'calc(100vh - 80px)'}
+                    h={'calc(100vh - 100px)'}
                     overflowY={'scroll'}
                     flexDir='column'
                 >
