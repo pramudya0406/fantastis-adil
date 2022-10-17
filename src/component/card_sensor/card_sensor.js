@@ -21,6 +21,7 @@ import axios from 'axios';
 import { paginationMonitoring } from "../..//Utility/api_link";
 import Loading from "../../component/loading/loading";
 import { useNavigate } from "react-router-dom";
+import './card_sensor.css'
 import ValueSensor from '../value_sensor/value_sensor';
 
 
@@ -70,6 +71,7 @@ const CardSensor = (props) => {
                   {dataTable.map((item,index) => (
                   <WrapItem key={index} 
                   w={['sm']}
+                  className='card-sensor'
                   bg={'#ffff'}
                   borderRadius={'10px'}
                   border={'1px solid #E2E8F0'}
@@ -87,9 +89,10 @@ const CardSensor = (props) => {
                           color : item.color,
                           category : item.category.name,
                           unit: item.unit_measurement,
+                          max: item.max_range,
+                          min: item.min_range,
                         }} />
                       }
-                     
                     </Center>
                   </WrapItem>
                     ))}

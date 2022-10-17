@@ -30,6 +30,8 @@ const ValueSensor = (props) => {
   const color = props.data.color
   const kategori = props.data.category
   const satuan =props.data.unit
+  const max = props.data.max
+  const min = props.data.min
   const navigate = useNavigate();
   const [valueSensor,setValueSensor] = useState(0)
   const [time,setTime] = useState('')
@@ -122,29 +124,38 @@ const ValueSensor = (props) => {
           textAlignment: 'center',
           backgroundColor: '#10B8DD',
         })}
-        >
-          <Text dy={needDominantBaselineFix ? -15 : 0} color={`${color}`} fontSize={'20px'}>{valueSensor}%</Text>  
+        >{
+          <>
+            <Text dy={needDominantBaselineFix ? -15 : 0} color={valueSensor > max || valueSensor < min ? 'var(--color-error)' :  `${color}`} fontSize={'20px'}>{valueSensor}%</Text>  
+          </>
+        }
         </CircularProgressbarWithChildren> 
       </Flex>:
         null
       }
       {
-        kategori == 'Derajat' ? 
+        kategori == 'Derajat' ?
         <Flex justify={'center'}  mb={'10px'} mt={'10px'} flexDir={'column'} alignItems={'center'} textAlign='center' style={{ width: "50px" }}>
-          <Text fontSize={'20px'} color={`${color}`}>{valueSensor}°</Text> 
-          <Text fontSize={'20px'}  color={`${color}`}>{satuan}</Text> 
+          {
+            <><Text fontSize={'20px'} color={
+              valueSensor > max || valueSensor < min ? 'var(--color-error)' :  `${color}`
+            }>{valueSensor}°</Text><Text fontSize={'20px'} color={valueSensor > max || valueSensor < min ? 'var(--color-error)' :  `${color}`}>{satuan}</Text></>
+          }
+           
         </Flex>:
-           null
+         null
       }
       {
-        kategori == 'Lainnya' ?
+        kategori == 'Lainnya'  ?
         <Flex justify={'center'}  mb={'10px'} mt={'10px'} flexDir={'column'} alignItems={'center'} textAlign='center' style={{ width: "50px" }}>
-          <Text fontSize={'20px'} color={`${color}`}>{valueSensor}</Text>
-          <Text fontSize={'20px'}  color={`${color}`}>{satuan}</Text>
-        </Flex>:
-        null
+          {
+            <><Text fontSize={'20px'} color={
+              valueSensor > max || valueSensor < min ? 'var(--color-error)' :  `${color}`
+            }>{valueSensor}°</Text><Text fontSize={'20px'} color={valueSensor > max || valueSensor < min ? 'var(--color-error)' :  `${color}`}>{satuan}</Text></>
+          }
+        </Flex>
+        : null
       }
-
     {
           <Flex flexDir={'row'} justifyContent={'space-between'}>
             <Text  fontSize={'var(--caption)'}>Diperbarui : </Text>
