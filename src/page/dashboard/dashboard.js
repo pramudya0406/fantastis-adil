@@ -178,8 +178,11 @@ const Dashboard = () => {
 			<Wrap justify={'center'}>
 				{
 					selected === 1 && data !== ''  ? <CardSensor data={{id : data}}  /> :  <></>
-					// selected === 2 && dataGreenhouse === '' ? <></> : <Se data={{id : dataGreenhouse}}  />
 				}
+				{
+					
+				}
+		
 			</Wrap>
 			</Flex>
 			}

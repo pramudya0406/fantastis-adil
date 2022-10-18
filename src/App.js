@@ -19,6 +19,7 @@ import Controlling_Add from "./page/controlling/controlling_add";
 import Monitoring_Edit from "./page/monitoring/monitoring_edit";
 import Controlling_Edit from "./page/controlling/controlling_edit";
 import MoreNotification from "./page/notification/more_notification";
+import Grafik from "./page/grafik/grafik";
 
 function App() {
 	return (
@@ -35,6 +36,7 @@ function App() {
 					path="historynotifikasi/more-notifcation"
 					element={<MoreNotification />}
 				/>
+				<Route path='dashboard/sensor/:id' element={<Grafik />} />
 				<Route path="greenhouse/add" element={<GreenhouseAdd />} />
 				<Route path="greenhouse/:slug" element={<GreenhouseEdit />} />
 				<Route path="monitoring/add/:id" element={<Monitoring_Add />} />

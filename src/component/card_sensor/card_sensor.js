@@ -17,7 +17,9 @@ import {
   WrapItem,
   Center,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom"
 import axios from 'axios';
+import { Switch } from '@chakra-ui/react'
 import { paginationMonitoring } from "../..//Utility/api_link";
 import Loading from "../../component/loading/loading";
 import { useNavigate } from "react-router-dom";
@@ -67,8 +69,13 @@ const CardSensor = (props) => {
           <Loading/> 
           ):(
             <Flex align={'center'} justify={'center'} mt={'30px'}>
-              <Wrap className='center-ul' align={'center'} spacing={'30px'} mt={'30px'} >
+              <Wrap className='center-ul' align={'center'} spacing={'30px'} mt={'30px'}  >
                   {dataTable.map((item,index) => (
+                  <Link to={`/unit/dashboard/sensor/${item.id}`} state={
+                    {
+                      id: item.id,
+                    }
+                  } >
                   <WrapItem key={index} 
                   w={['sm']}
                   className='card-sensor'
@@ -78,9 +85,9 @@ const CardSensor = (props) => {
                   paddingTop={'30px'}
                   paddingBottom={'30px'}
                   >
-                    <Center justifyContent={'center'} flexDir={'column'} >
+                    <Center justifyContent={'center'} flexDir={'column'} data={{data : idApi}} >
                       <Flex flexDir={'row'} justify={'space-between'}>
-                        <Image src={`${item.icon}`} color={item.color} />
+                        <Image size={5} src={`${item.icon}`} color={item.color} />
                         <Text color={`${item.color}`}>{item.name}</Text>
                       </Flex>
                       {
@@ -89,12 +96,13 @@ const CardSensor = (props) => {
                           color : item.color,
                           category : item.category.name,
                           unit: item.unit_measurement,
-                          max: item.max_range,
-                          min: item.min_range,
+                          max: item.range_max,
+                          min: item.range_min,
                         }} />
                       }
                     </Center>
                   </WrapItem>
+                  </Link>
                     ))}
               </Wrap>
               </Flex>

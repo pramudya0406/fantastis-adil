@@ -21,6 +21,7 @@ import GreenhouseAdd from '../../page/greenhouse/greenhouse_add'
 import GreenhouseEdit from '../../page/greenhouse/greenhouse_edit'
 import Monitoring_Add from '../../page/monitoring/monitoring_add'
 import Controlling_Add from '../../page/controlling/controlling_add'
+import grafik from '../../page/grafik/grafik'
 
 const Board = () => {
     const { routeName } = useSelector(

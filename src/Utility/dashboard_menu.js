@@ -5,7 +5,7 @@ let dashboardMenu = [
   },
   {
     id: 2,
-    name: 'Grafik',
+    name: 'Aktuator',
   },
 ]
 export default dashboardMenu;

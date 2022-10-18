@@ -30,6 +30,7 @@ export const paginationAktuator =
 export const getNotificationByUserId =
 	"https://iterahero.herokuapp.com/api/v1/notification?by_user_id=1";
 export const brokerSensor = 'https://iterahero.herokuapp.com/api/v1/sensor_broker?id_sensor='
+export const idSensor =  'https://iterahero.herokuapp.com/api/v1/sensor/'
 // ini local host
 // export const getNotificationByUserId =
 // 	"http://localhost:3001/api/v1/notification?by_user_id=1";
