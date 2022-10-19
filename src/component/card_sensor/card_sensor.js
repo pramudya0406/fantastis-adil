@@ -71,11 +71,7 @@ const CardSensor = (props) => {
             <Flex align={'center'} justify={'center'} mt={'30px'}>
               <Wrap className='center-ul' align={'center'} spacing={'30px'} mt={'30px'}  >
                   {dataTable.map((item,index) => (
-                  <Link to={`/unit/dashboard/sensor/${item.id}`} state={
-                    {
-                      id: item.id,
-                    }
-                  } >
+                  <Link to={`/unit/dashboard/sensor/${item.id}`} >
                   <WrapItem key={index} 
                   w={['sm']}
                   className='card-sensor'

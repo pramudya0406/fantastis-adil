@@ -14,7 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import dashboardMenu from "../../Utility/dashboard_menu";
 import CardSensor from "../../component/card_sensor/card_sensor";
-
+import CardAktuator from "../../component/card_aktuator/card_aktuator";
 const Dashboard = () => {
 	TabTitle("Dashboard - ITERA Hero")
 	const dispatch = useDispatch();
@@ -180,7 +180,7 @@ const Dashboard = () => {
 					selected === 1 && data !== ''  ? <CardSensor data={{id : data}}  /> :  <></>
 				}
 				{
-					
+					selected === 2 && data !== '' ? <CardAktuator data = {{id: data}} /> : <></>
 				}
 		
 			</Wrap>

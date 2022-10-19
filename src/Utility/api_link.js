@@ -47,6 +47,8 @@ export const updateActuatorDetail =
 export const updateSensorDetail =
 	"https://iterahero.herokuapp.com/api/v1/sensor/";
 
+export const getLogAktuator = "https://iterahero.herokuapp.com/api/v1/actuator-log?by_actuator_id="
+export const postLogAktuator = 'https://iterahero.herokuapp.com/api/v1/actuator-log'
 // // ini local
 // export const updateSensorDetail = "http://localhost:3001/api/v1/sensor/";
 // kalo 
