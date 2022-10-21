@@ -83,7 +83,7 @@ const CardSensor = (props) => {
                   >
                     <Center justifyContent={'center'} flexDir={'column'} data={{data : idApi}} >
                       <Flex flexDir={'row'} justify={'space-between'}>
-                        <Image size={5} src={`${item.icon}`} color={item.color} />
+                        <Image size={'1px'} src={`${item.icon}`} color={item.color} />
                         <Text color={`${item.color}`}>{item.name}</Text>
                       </Flex>
                       {

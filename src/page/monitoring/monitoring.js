@@ -41,6 +41,7 @@ const Monitoring = () => {
 				},
 			})
 			.then((response) => setDataApi(response.data.data))
+			console.log(dataApi)
 			.catch((error) => {
 				localStorage.clear();
 				navigate("/login");

@@ -1,22 +1,9 @@
 import React,{useState,useEffect} from 'react';
 import {
-	Table,
-	Thead,
-	Tbody,
 	Text,
-	Button,
   FormControl,
-	Select,
-	Tr,
 	Image,
-	Th,
-	Td,
-	Box,
-	TableContainer,
 	Flex,
-  Wrap,
-  CircularProgress,
-  CircularProgressLabel,
   Stack
 } from "@chakra-ui/react";
 import axios from 'axios';
@@ -78,13 +65,6 @@ const ValueAktuator = (props) => {
      }, 200); 
     }
   }
-  const handleChange = (event) => {
-    setStatus(event.target.value);
-    setIsLoading(true)
-    toogleSwitch()
-  };
- 
-
     useEffect(() => {
       return () => {
         setIsLoading(true)
@@ -118,13 +98,17 @@ const ValueAktuator = (props) => {
           </Flex><FormControl mt={'10px'} alignContent={'center'} justify={'center'} columns={{ base: 2, lg: 4 }}>
             <Stack align='center' onClick={play} className='touchable'>
               {
-                status == 1 ? (
-                  <Switch colorScheme="green" size="lg"  onChange={e => handleChange(e)} value={status} isChecked />
-                ) : (
-                  <Switch colorScheme='green' size="lg" onChange={e => handleChange(e)} value={status} />
-                )
+                isLoading ?
+                <Switch colorScheme="green" size="lg"  onChange={()=>{
+                  setIsLoading(true)
+                  toogleSwitch()
+                } } value={status} isChecked={status}  
+                />:<Switch size="lg" onChange={()=>{
+                  setIsLoading(true)
+                  toogleSwitch()
+                }
+                } value={status}  isInvalid={status} isChecked={status} />
               }
-              {/* <Switch colorScheme='green' value={status} {...props} isChecked={status} onChange={e => handleChange(e)} /> */}
             </Stack>
           </FormControl></>
   )

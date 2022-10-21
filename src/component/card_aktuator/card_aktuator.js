@@ -67,11 +67,7 @@ const CardAktuator = (props) => {
           {dataTable == null || isLoading ? (
           <Loading/> 
           ):(
-            <><Flex justify={'flex-start'}>
-              <Text>
-                *Note : Click 1 kali untuk mematikan, 2 kali untuk menyalakan
-              </Text>
-            </Flex><Flex>
+           <Flex>
                 <Flex align={'center'} justify={'center'} mt={'30px'}>
                   <Wrap className='center-ul' align={'center'} spacing={'30px'} mt={'30px'}>
                     {dataTable.map((item, index) => (
@@ -100,7 +96,7 @@ const CardAktuator = (props) => {
                     ))}
                   </Wrap>
                 </Flex>
-              </Flex></>
+              </Flex>
             )
           }
         </>
