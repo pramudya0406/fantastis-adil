@@ -4,6 +4,7 @@ import { getGrafikSensor } from '../../Utility/api_link';
 import axios from 'axios';
 import GrafikValue from './grafik_value';
 import Loading from '../../component/loading/loading';
+import './grafik_component';
 import { useNavigate } from 'react-router';
 import {
   Chart as ChartJS,
@@ -48,15 +49,11 @@ const GrafikComponent= (props) => {
       setDataSensor(response.data.data)
       console.log(response.data.data)
     })
-    .catch((error) => {
-      localStorage.clear()
-      navigate('/login')
-    })
   }
   useEffect(() => {
     getGrafik()
   }, [id,value]);
-    return <GrafikValue data={{
+    return <GrafikValue className='grafik' data={{
       value: value,
       label: dataSensor.map((item) => item.label),
       data: dataSensor.map((item) => item.data),

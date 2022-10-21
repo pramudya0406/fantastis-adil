@@ -14,6 +14,7 @@ import axios from 'axios';
 import Loading from '../../component/loading/loading';
 import { TabTitle } from '../../Utility/utility';
 import { useNavigate } from 'react-router';
+import './grafik.css';
 import { idSensor,getGrafikSensor } from '../../Utility/api_link';
 import infoGrafik from '../../Utility/grafikDropDown';
 import GrafikComponent from '../../component/grafik_component/grafik_component';
@@ -133,7 +134,8 @@ const getSensor = async () => {
 					) : (
             console.log(data),
             console.log(id),
-						<GrafikComponent 
+						<GrafikComponent size="lg"
+            className="grafik"
 							data={{
 								value: data,
                 id: id

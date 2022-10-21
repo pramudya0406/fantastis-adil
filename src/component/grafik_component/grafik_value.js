@@ -51,6 +51,6 @@ const GrafikValue =(props) => {
   };
   useEffect(() => {
   }, [value]);
-    return <Line options={options} data={data} />;
+    return <Line size={'md'} options={options} data={data} />;
   }
   export default GrafikValue

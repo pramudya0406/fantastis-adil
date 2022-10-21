@@ -52,7 +52,7 @@ const ValueSensor = (props) => {
       axios.get(`${brokerSensor}${idSensor}`)
       .then(response => { 
         setValueSensor(response.data.data[0].value)
-        setTime(response.data.data[0].created_at)
+        setTime(response.data.data[0].createdAt)
         setOnRefresh(true)
       })
     }
@@ -103,7 +103,7 @@ const ValueSensor = (props) => {
       kategori == 'Persen' ? 
       <Flex justify={'center'} alignItems={'center'} textAlign='center' mb={'5px'} mt={'10px'} style={{ width: "100px" }}>
         <CircularProgress value={valueSensor} color={valueSensor > max || valueSensor < min ? 'var(--color-error)' : `${color}`} size='70px'>
-          <CircularProgressLabel>40%</CircularProgressLabel>
+          <CircularProgressLabel>{valueSensor}%</CircularProgressLabel>
         </CircularProgress>
       </Flex>:
         null
