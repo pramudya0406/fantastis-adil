@@ -19,10 +19,10 @@ import { useNavigate } from "react-router";
 import { Formik, Form } from "formik";
 import { useDispatch } from "react-redux";
 import { routePageName } from "../../redux/action";
-import iconsList from "../../Utility/icon_list_sensor";
 import { TabTitle } from "../../Utility/utility";
 import {
 	getApiGreenhouse,
+	icons,
 	categoryApi,
 	addSensorApi,
 } from "../../Utility/api_link";
@@ -59,12 +59,23 @@ const Monitoring_Add = () => {
 				console.log(error);
 			});
 	};
+	const [iconsList, setIconsList] = useState('');
+	const getIcon = async () => {
+		axios.get(icons)
+		.then((response) => {
+			setIconsList(response.data.data);
+		})
+		.catch((error) => {	
+			console.log(error);
+		});
+	};
 	const [dataCategory, setDataCategory] = useState(null);
+	const header = localStorage.getItem("token");
 	const getDataCategory = async () => {
 		axios
 			.get(categoryApi, {
 				headers: {
-					Authorization: "Bearer " + localStorage.getItem("token"),
+					Authorization: "Bearer " + header,
 				},
 			})
 			.then((response) => {
@@ -80,6 +91,7 @@ const Monitoring_Add = () => {
 	useEffect(() => {
 		getDataCategory();
 		getDataApi();
+		getIcon();
 		return () => {
 			dispatch(routePageName("Monitoring"));
 		};
@@ -87,7 +99,7 @@ const Monitoring_Add = () => {
 
 	return (
 		<>
-			{dataApi == null ? (
+			{dataApi == null || dataCategory == null || icons == null ? (
 				<Loading />
 			) : (
 				<Flex w="100%" flexDir={"column"}>
@@ -233,9 +245,11 @@ const Monitoring_Add = () => {
 											Pilih Icon
 										</option>
 										{iconsList.map((item) => (
-											<option value={item.icon} color={"var(--color-primer)"}>
-												{item.nama}
-											</option>
+											item.type =='sensor'? (
+												<option value={item.icon} color={"var(--color-primer)"}>
+													{item.name}
+												</option>
+											) : null
 										))}
 									</Select>
 									<Flex m={"15px"}>
@@ -251,7 +265,7 @@ const Monitoring_Add = () => {
 										color={"var(--color-primer)"}
 										maxWidth={"100%"}
 										marginTop={"0 auto"}
-										type="text"
+										type="hidden"
 										name="color"
 										value={values.color}
 										onChange={handleChange}
@@ -259,9 +273,11 @@ const Monitoring_Add = () => {
 										variant="outline">
 										<option value="">Pilih Warna</option>
 										{iconsList.map((item) => (
-											<option value={item.color} color={"var(--color-primer)"}>
-												{item.nama}
-											</option>
+											item.type =='sensor' && item.icon == icon_selected? (
+												<option value={item.color} color={"var(--color-primer)"} selected>
+													{item.name}
+												</option>
+											) : null
 										))}
 									</Select>
 									<Flex m={"15px"}>
@@ -409,4 +425,5 @@ const Monitoring_Add = () => {
 		</>
 	);
 };
+
 export default Monitoring_Add;

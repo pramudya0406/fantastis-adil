@@ -124,7 +124,7 @@ const ValueSensor = (props) => {
           {
             <><Text fontSize={'20px'} color={
               valueSensor > max || valueSensor < min ? 'var(--color-error)' :  `${color}`
-            }>{valueSensor}°</Text><Text fontSize={'20px'} color={valueSensor > max || valueSensor < min ? 'var(--color-error)' :  `${color}`}>{satuan}</Text></>
+            }>{valueSensor}</Text><Text fontSize={'20px'} color={valueSensor > max || valueSensor < min ? 'var(--color-error)' :  `${color}`}>{satuan}</Text></>
           }
         </Flex>
         : null

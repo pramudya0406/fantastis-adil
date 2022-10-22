@@ -20,6 +20,7 @@ import { RiDeleteBinFill, RiPencilFill, RiMapPinFill } from "react-icons/ri";
 import { Link, } from "react-router-dom";
 import axios from "axios";
 import { deleteGreenhouse } from "../../Utility/api_link";
+import './card_green.css'
 
 const CardGreenhouse = (props) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -41,7 +42,7 @@ const CardGreenhouse = (props) => {
 	}
 	return (
 		<>
-			<WrapItem>
+			<WrapItem className="dont-touch">
 				<Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
 					<Image src={data.image} h={"250px"} w={"350px"} />
 
@@ -58,12 +59,14 @@ const CardGreenhouse = (props) => {
 						</Text>
 						<Flex>
 							<div
+							className="touch"
 								onClick={() => {
 									onOpen();
 								}}>
 								<Icon as={RiDeleteBinFill} size={"24px"} color={"#B00020"} />
 							</div>
 							<Link
+							className="touch"
 								to={{
 									pathname: "/unit/greenhouse/" + data.id,
 								}}>
@@ -76,16 +79,18 @@ const CardGreenhouse = (props) => {
 							</Link>
 						</Flex>
 					</Flex>
-					<Flex p="2" justifyItems={"center"}>
+					<Flex p="2" justify={"flex-start"}>
+						<Flex>
 						<Icon as={RiMapPinFill} size={"30px"} color={"black"} />
+						</Flex>
+						<Flex textAlign={'center'} alignContent={'center'}>
 						<Text
 							color={"black"}
 							flexDirection="row"
-							w={"100%"}
-							fontSize={"var(--header-5)"}
-							marginStart={"10px"}>
+							fontSize={"var(--header-5)"}>
 							{data.location}
 						</Text>
+						</Flex>
 					</Flex>
 				</Box>
 			</WrapItem>

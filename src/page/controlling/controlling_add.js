@@ -20,10 +20,9 @@ import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
 import { routePageName } from '../../redux/action';
 import { TabTitle } from '../../Utility/utility';
-import { getApiGreenhouse,addActuatorApi } from '../../Utility/api_link';
+import { getApiGreenhouse,addActuatorApi,icons } from '../../Utility/api_link';
 import axios from 'axios';
 import Loading from "../../component/loading/loading";
-import iconsList from '../../Utility/icon_list_aktuator';
 
 const schema = yup.object({
     name: yup
@@ -41,7 +40,17 @@ const Controlling_Add = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [dataApi, setDataApi] = useState(null);
-    const [iconSelected, setIconSelected] = useState('');
+    const [icon_selected, setIcon_selected] = useState("");
+    const [iconsList, setIconsList] = useState('');
+	const getIcon = async () => {
+		axios.get(icons)
+		.then((response) => {
+			setIconsList(response.data.data);
+		})
+		.catch((error) => {	
+			console.log(error);
+		});
+	};
     const getDataApi = async () => {
         axios.get( getApiGreenhouse + id, {
             headers: {
@@ -59,6 +68,7 @@ const Controlling_Add = () => {
 
     useEffect(() => {
         getDataApi()
+        getIcon()
         return () => {
             dispatch(routePageName('Controlling'))
         };
@@ -163,28 +173,29 @@ const Controlling_Add = () => {
                             <FormLabel color={'var(--color-primer)'}>
                                 Icon
                             </FormLabel>
-                            <Select color={'var(--color-primer)'}
-                                onChange={(e) => {
-                                    setFieldValue('icon', e.target.value);
-                                    setIconSelected(e.target.value)
-                                }}
-                                onBlur={handleBlur}
-                                value={values.icon}
-                                name="icon"
-                                id="icon">
-                                <option value="" selected>
-                                    Pilih Icon
-                                </option>
-                                {iconsList.map((item) => (
-                                    <option value={item.icon} color={'var(--color-primer)'}>
-                                        {item.nama}
-                                    </option>
-                                )
-                                )
-                                }
-                            </Select>
+                            <Select
+										color={"var(--color-primer)"}
+										onChange={(e) => {
+											setFieldValue("icon", e.target.value);
+											setIcon_selected(e.target.value);
+										}}
+										onBlur={handleBlur}
+										value={values.icon}
+										name="icon"
+										id="icon">
+										<option value="" selected>
+											Pilih Icon
+										</option>
+										{iconsList.map((item) => (
+											item.type =='actuator'? (
+												<option value={item.icon} color={"var(--color-primer)"}>
+													{item.name}
+												</option>
+											) : null
+										))}
+									</Select>
                             <Flex m={'15px'}>
-                                <Image src={iconSelected} />
+                                <Image src={icon_selected} />
                             </Flex>
                             <FormErrorMessage>
                                 {errors.icon}
@@ -195,27 +206,24 @@ const Controlling_Add = () => {
                                 Warna
                             </FormLabel>
                             <Select
-                                color={'var(--color-primer)'}
-                                maxWidth={'100%'}
-                                marginTop={'0 auto'}
-                                type="text"
-                                name="color"
-                                value={values.color}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                variant='outline'
-                                >
-                                <option value="" >
-                                    Pilih Warna
-                                </option>
-                                {iconsList.map((item) => (
-                                    <option value={item.color} color={'var(--color-primer)'}>
-                                        {item.nama}
-                                    </option>
-                                )
-                                )
-                                }
-                            </Select>
+										color={"var(--color-primer)"}
+										maxWidth={"100%"}
+										marginTop={"0 auto"}
+										type="hidden"
+										name="color"
+										value={values.color}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										variant="outline">
+										<option value="">Pilih Warna</option>
+										{iconsList.map((item) => (
+											item.type =='actuator' && item.icon == icon_selected? (
+												<option value={item.color} color={"var(--color-primer)"} selected>
+													{item.name}
+												</option>
+											) : null
+										))}
+									</Select>
                             <Flex m={'15px'}>
                                     <Circle bg={values.color} size="30px" />
                             </Flex>

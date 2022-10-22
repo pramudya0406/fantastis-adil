@@ -17,9 +17,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { useDispatch } from "react-redux";
 import { routePageName } from "../../redux/action";
-import iconsList from "../../Utility/icon_list_aktuator";
 import { TabTitle } from "../../Utility/utility";
-import { updateSensorDetail, categoryApi } from "../../Utility/api_link";
+import { updateSensorDetail,icons, categoryApi } from "../../Utility/api_link";
 import axios from "axios";
 import "./monitoring.css";
 
@@ -103,6 +102,17 @@ const Monitoring_Edit = () => {
 				console.log(error);
 			});
 	};
+	const [iconsList, setIconsList] = useState('');
+	const [icon_selected, setIcon_selected] = useState("");
+	const getIcon = async () => {
+		axios.get(icons)
+		.then((response) => {
+			setIconsList(response.data.data);
+		})
+		.catch((error) => {	
+			console.log(error);
+		});
+	};
 
 	let dataSend = {
 		name: "",
@@ -162,6 +172,7 @@ const Monitoring_Edit = () => {
 
 	useEffect(() => {
 		getDataCategory();
+		getIcon();
 		return () => {
 			dispatch(routePageName("Monitoring"));
 		};
@@ -247,22 +258,26 @@ const Monitoring_Edit = () => {
 								<FormControl
 									marginTop={"20px"}
 									isInvalid={errors.icon && touched.icon}>
-									<FormLabel color={"var(--color-primer)"}>Ikon</FormLabel>
+									<FormLabel color={"var(--color-primer)"}>Icon</FormLabel>
 									<Select
 										color={"var(--color-primer)"}
 										onChange={(e) => {
 											setFieldValue("icon", e.target.value);
-											setIconSelected(e.target.value);
+											setIcon_selected(e.target.value);
 										}}
 										onBlur={handleBlur}
 										value={values.icon}
 										name="icon"
 										id="icon">
-										<option value="">Pilih Ikon</option>
-										{iconsList.map((item, key) => (
-											<option value={item.icon} color={"var(--color-primer)"}>
-												{item.nama}
-											</option>
+										<option value="" selected>
+											Pilih Icon
+										</option>
+										{iconsList.map((item) => (
+											item.type =='sensor'? (
+												<option value={item.icon} color={"var(--color-primer)"}>
+													{item.name}
+												</option>
+											) : null
 										))}
 									</Select>
 									<Flex m={"15px"}>
@@ -282,7 +297,7 @@ const Monitoring_Edit = () => {
 										color={"var(--color-primer)"}
 										maxWidth={"100%"}
 										marginTop={"0 auto"}
-										type="text"
+										type="hidden"
 										name="color"
 										value={values.color}
 										onChange={handleChange}
@@ -290,9 +305,11 @@ const Monitoring_Edit = () => {
 										variant="outline">
 										<option value="">Pilih Warna</option>
 										{iconsList.map((item) => (
-											<option value={item.color} color={"var(--color-primer)"}>
-												{item.nama}
-											</option>
+											item.type =='sensor' && item.icon == icon_selected? (
+												<option value={item.color} color={"var(--color-primer)"} selected>
+													{item.name}
+												</option>
+											) : null
 										))}
 									</Select>
 									<Flex m={"15px"}>
@@ -399,7 +416,7 @@ const Monitoring_Edit = () => {
 										{errors.id_category_sensor}
 									</FormErrorMessage>
 								</FormControl>
-								<Link>
+								<Link  to={"/unit/monitoring"}>
 									<Button
 										marginTop={"44px"}
 										width="100%"
