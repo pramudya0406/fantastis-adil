@@ -23,7 +23,6 @@ import { brokerSensor } from "../..//Utility/api_link";
 import Loading from "../../component/loading/loading";
 import { useNavigate } from "react-router-dom";
 import { buildStyles } from 'react-circular-progressbar';
-import hexRgb from 'hex-rgb';
 import moment from 'moment/moment';
 import './value_sensor.css';
 
@@ -44,11 +43,9 @@ const ValueSensor = (props) => {
   
   const [onRefresh,setOnRefresh] = useState(true)
   const [firstCheck,setFirstCheck] = useState(true)
-  const warna = hexRgb(color)
-  delete warna.alpha
 
   const getValueRefreshFirst = async () => {
-    setTimeout(() => {
+     setTimeout(() => {
       axios.get(`${brokerSensor}${idSensor}`)
       .then(response => { 
         setValueSensor(response.data.data[0].value)
@@ -59,7 +56,7 @@ const ValueSensor = (props) => {
     , 1000)
   }
   const getValueRefreshSecond = async () => {
-    setTimeout(() => {
+     setTimeout(() => {
       axios.get(`${brokerSensor}${idSensor}`)
       .then(response => { 
         setValueSensor(response.data.data[0].value)
@@ -68,7 +65,6 @@ const ValueSensor = (props) => {
     }
     , 1000)
   }
-  const needDominantBaselineFix = true;
   
   const onRefreshUpdate = () => {
     if(onRefresh == false){
