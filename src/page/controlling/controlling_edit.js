@@ -17,9 +17,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { useDispatch } from "react-redux";
 import { routePageName } from "../../redux/action";
-import iconsList from "../../Utility/icon_list_aktuator";
 import { TabTitle } from "../../Utility/utility";
-import { updateActuatorDetail } from "../../Utility/api_link";
+import { updateActuatorDetail, icons } from "../../Utility/api_link";
 import axios from "axios";
 
 const Controlling_Edit = () => {
@@ -27,6 +26,7 @@ const Controlling_Edit = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const data = location.state?.data;
+	console.log(data);
 	const header = localStorage.getItem("token");
 	const [iconSelected, setIconSelected] = useState("");
 
@@ -67,6 +67,19 @@ const Controlling_Edit = () => {
 			});
 	};
 
+	const [iconsList, setIconsList] = useState(null);
+	const getIcon = async () => {
+		axios
+			.get(icons)
+			.then((response) => {
+				console.log("isi response", response);
+				setIconsList(response.data.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
 	let dataSend = {
 		name: "",
 		icon: "",
@@ -86,7 +99,10 @@ const Controlling_Edit = () => {
 		}
 	};
 
+	console.log("hallo", iconsList);
+
 	useEffect(() => {
+		getIcon();
 		return () => {
 			dispatch(routePageName("Controlling"));
 		};
@@ -94,7 +110,7 @@ const Controlling_Edit = () => {
 
 	return (
 		<>
-			{isloading ? (
+			{iconsList == null || isloading ? (
 				<Loading />
 			) : (
 				<Flex w="100%" flexDir={"column"}>
@@ -179,11 +195,13 @@ const Controlling_Edit = () => {
 										name="icon"
 										id="icon">
 										<option value="">Pilih Ikon</option>
-										{iconsList.map((item, key) => (
-											<option value={item.icon} color={"var(--color-primer)"}>
-												{item.nama}
-											</option>
-										))}
+										{iconsList.map((item) =>
+											item.type == "actuator" ? (
+												<option value={item.icon} color={"var(--color-primer)"}>
+													{item.name}
+												</option>
+											) : null
+										)}
 									</Select>
 									<Flex m={"15px"}>
 										{iconSelected == "" ? (
@@ -209,18 +227,23 @@ const Controlling_Edit = () => {
 										onBlur={handleBlur}
 										variant="outline">
 										<option value="">Pilih Warna</option>
-										{iconsList.map((item) => (
-											<option value={item.color} color={"var(--color-primer)"}>
-												{item.nama}
-											</option>
-										))}
+										{iconsList.map((item) =>
+											item.type == "actuator" && item.icon == iconSelected ? (
+												<option
+													value={item.color}
+													color={"var(--color-primer)"}
+													selected>
+													{item.name}
+												</option>
+											) : null
+										)}
 									</Select>
 									<Flex m={"15px"}>
 										<Circle bg={values.color} size="30px" />
 									</Flex>
 									<FormErrorMessage>{errors.color}</FormErrorMessage>
 								</FormControl>
-								<Link>
+								<Link to={"/unit/controlling"}>
 									<Button
 										marginTop={"44px"}
 										width="100%"
