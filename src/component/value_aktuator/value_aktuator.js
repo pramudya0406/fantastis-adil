@@ -9,8 +9,7 @@ import {
 import axios from 'axios';
 import useSound from 'use-sound';
 import clickSound from '../../assets/switch.mp3';
-import Status from '../../Utility/status_aktuator';
-import { postLogAktuator } from "../..//Utility/api_link";
+import { postLogAktuator,Status } from "../..//Utility/api_link";
 import Loading from "../../component/loading/loading";
 import { useNavigate } from "react-router-dom";
 import { Switch } from '@chakra-ui/react'
@@ -30,6 +29,7 @@ const ValueAktuator = (props) => {
     playbackRate,
     interrupt: true,
   });
+  const [isOn, setIsOn] = useState(false);
   const convertValue = () => {
     if (life_cycle == 1){
       return true
@@ -38,6 +38,18 @@ const ValueAktuator = (props) => {
       return false
     }
   }
+  const onlineStatus = () => {
+    axios.get(`${Status}${idApi}`, {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    })
+    .then(response => {
+      setIsOn(response.data.data[0].status)
+    })
+  }
+
+  
   const [status,setStatus] = useState(convertValue);
   const toogleSwitch = () => {
     if(status == true){
@@ -68,33 +80,27 @@ const ValueAktuator = (props) => {
     useEffect(() => {
       return () => {
         setIsLoading(true)
+        onlineStatus()
       };
     },[idApi,status]);
   return (
   <>
   { status == null && isLoading ? <Loading/> :(
   <><Flex justify={'center'} mt='30px' mb={'30px'}>
-          <Image className='Image' w={'180px'} h={'auto'} src={status == 0 ? '/Off.png' : '/On.png'} alt="image" boxSize="100px" />
+          <Image className='Image' w={'180px'} h={'auto'} src={isOn == 'offline' ? '/Off.png' : '/On.png'} alt="image" boxSize="100px" />
         </Flex><Flex flexDir={'row'}>
-            {Status.map((item, index) => {
-              return (
-                item.id === status ? (
-                  <Flex flexDir={'row'} key={`${index}`}>
-                    <Flex>
-                      <Text fontSize={`var(--header-5)`}>
-                        Status :
-                      </Text>
-                    </Flex>
-                    <Flex>
-                      <Text fontSize={`var(--header-5)`} color={item.id == true ? 'var(--color-secondary-variant)' : 'var(--color-error)'}>
-                        {item.name}
-                      </Text>
-                    </Flex>
-                  </Flex>
-                ) : <></>
-              );
-            }
-            )}
+             <Flex flexDir={'row'} >
+             <Flex>
+               <Text fontSize={`var(--header-5)`}>
+                 Status :
+               </Text>
+             </Flex>
+             <Flex>
+               <Text fontSize={`var(--header-5)`} color={ isOn == 'online' ? 'var(--color-secondary-variant)' : 'var(--color-error)'}>
+                 {isOn}
+               </Text>
+             </Flex>
+           </Flex>       
           </Flex><FormControl mt={'10px'} alignContent={'center'} justify={'center'} columns={{ base: 2, lg: 4 }}>
             <Stack align='center' onClick={play} className='touchable'>
               {
@@ -102,12 +108,12 @@ const ValueAktuator = (props) => {
                 <Switch colorScheme="green" size="lg"  onChange={()=>{
                   setIsLoading(true)
                   toogleSwitch()
-                } } value={status} isChecked={status}  
-                />:<Switch size="lg" onChange={()=>{
+                } } value={status} isChecked={isOn == 'online' ? true : false} isDisabled={isOn == 'offline' ? true  : false} />
+                :<Switch size="lg" onChange={()=>{
                   setIsLoading(true)
                   toogleSwitch()
                 }
-                } value={status}  isInvalid={status} isChecked={status} />
+                } value={status} isChecked={status} />
               }
             </Stack>
           </FormControl></>

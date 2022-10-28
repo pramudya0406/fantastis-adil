@@ -230,7 +230,7 @@ useEffect(() => {
 																	onClick={() => {
 																		onClose();
 																	}}
-																	variant="ghost">
+																	>
 																	Batal
 																</Button>
 															</ModalFooter>

@@ -18,7 +18,6 @@ import {
   CircularProgressLabel
 } from "@chakra-ui/react";
 import axios from 'axios';
-import Status from '../../Utility/status';
 import { brokerSensor } from "../..//Utility/api_link";
 import Loading from "../../component/loading/loading";
 import { useNavigate } from "react-router-dom";
@@ -37,7 +36,7 @@ const ValueSensor = (props) => {
   const [valueSensor,setValueSensor] = useState(0)
   const [time,setTime] = useState('')
   const [category,setCategory] = useState('')
-  const [status, setStatus] = useState(1)
+  const [status, setStatus] = useState('')
 
   console.log( kategori)
   
@@ -49,6 +48,7 @@ const ValueSensor = (props) => {
       axios.get(`${brokerSensor}${idSensor}`)
       .then(response => { 
         setValueSensor(response.data.data[0].value)
+        setStatus(response.data.data[0].status)
         setTime(response.data.data[0].createdAt)
         setOnRefresh(true)
       })
@@ -60,6 +60,7 @@ const ValueSensor = (props) => {
       axios.get(`${brokerSensor}${idSensor}`)
       .then(response => { 
         setValueSensor(response.data.data[0].value)
+        setStatus(response.data.data[0].status)
         setOnRefresh(false)
       })
     }
@@ -78,6 +79,7 @@ const ValueSensor = (props) => {
     axios.get(`${brokerSensor}${idSensor}`)
     .then(response => { 
       setValueSensor(response.data.data[0].value)
+      setStatus(response.data.data[0].status)
       })
     }
     
@@ -97,10 +99,20 @@ const ValueSensor = (props) => {
   <Flex alignContent={'center'} justify={'center'} flexDir={'column'} alignItems={'center'} >
     {
       kategori == 'Persen' ? 
-      <Flex justify={'center'} alignItems={'center'} textAlign='center' mb={'5px'} mt={'10px'} style={{ width: "100px" }}>
-        <CircularProgress value={valueSensor} color={valueSensor > max || valueSensor < min ? 'var(--color-error)' : `${color}`} size='70px'>
-          <CircularProgressLabel>{valueSensor}%</CircularProgressLabel>
-        </CircularProgress>
+      <Flex flexDir={'column'} justify={'center'} alignItems={'center'} textAlign='center' mb={'5px'} mt={'10px'} style={{ width: "100px" }}>
+        <Flex>
+          <CircularProgress value={valueSensor} color={valueSensor > max || valueSensor < min ? 'var(--color-error)' : `${color}`} size='70px'>
+            <CircularProgressLabel>{valueSensor}%</CircularProgressLabel>
+          </CircularProgress>
+        </Flex>
+        <Flex width={'130px'}  mt={'10px'} flexDir={'row'} justifyContent={"center"} alignItems={"center"} >
+            <Text width={'100%'} fontSize={'12px'} fontWeight={'bold'} color={'var(--color-primer)'}>Status :</Text>
+            {
+              status == null && status == undefined ?
+              (<Text width={'100%'} fontSize={'12px'} fontWeight={'bold'} color={'var(--color-primer)'}>Offline</Text>):
+              (<Text width={'100%'} ml={'-20px'} fontSize={'12px'} fontWeight={'bold'} color={status == 'offline' || status == null  ? 'var(--color-error)' : `var(--color-secondary-variant)`}>{status}</Text>)
+            }
+          </Flex>
       </Flex>:
         null
       }
@@ -110,7 +122,15 @@ const ValueSensor = (props) => {
           {
             <><Text fontSize={'20px'} color={valueSensor > max || valueSensor < min ? 'var(--color-error)' : `${color}`}>{valueSensor}°</Text><Text fontSize={'20px'} color={valueSensor > max || valueSensor < min ? 'var(--color-error)' : `${color}`}>{satuan}</Text></>
           }
-          </Flex>:
+          <Flex width={'130px'}  mt={'10px'} flexDir={'row'} justifyContent={"center"} alignItems={"center"} >
+            <Text width={'100%'} fontSize={'12px'} fontWeight={'bold'} color={'var(--color-primer)'}>Status :</Text>
+            {
+              status == null && status == undefined ?
+              (<Text width={'100%'} fontSize={'12px'} fontWeight={'bold'} color={'var(--color-error)'}>Offline</Text>):
+              (<Text width={'100%'} ml={'-20px'} fontSize={'12px'} fontWeight={'bold'} color={status == 'offline' || status == null  ? 'var(--color-error)' : `var(--color-secondary-variant)`}>{status}</Text>)
+            }
+          </Flex>
+        </Flex>:
            
          null
       }
@@ -122,30 +142,16 @@ const ValueSensor = (props) => {
               valueSensor > max || valueSensor < min ? 'var(--color-error)' :  `${color}`
             }>{valueSensor}</Text><Text fontSize={'20px'} color={valueSensor > max || valueSensor < min ? 'var(--color-error)' :  `${color}`}>{satuan}</Text></>
           }
+          <Flex width={'130px'}  mt={'10px'} flexDir={'row'} justifyContent={"center"} alignItems={"center"} >
+            <Text width={'100%'} fontSize={'12px'} fontWeight={'bold'} color={'var(--color-primer)'}>Status :</Text>
+            {
+              status == null && status == undefined ?
+              (<Text width={'100%'} fontSize={'12px'} fontWeight={'bold'} color={'var(--color-error)'}>Offline</Text>):
+              (<Text width={'100%'} ml={'-20px'} fontSize={'12px'} fontWeight={'bold'} color={status == 'offline' || status == null  ? 'var(--color-error)' : `var(--color-secondary-variant)`}>{status}</Text>)
+            }
+          </Flex>
         </Flex>
         : null
-      }
-      {
-        Status.map((item,index)=>{
-          return (
-            item.id == status ? (
-              <Flex flexDir={'row'}>
-                <Flex>
-                  <Text fontSize={`var(--header-5)`}>
-                      Status :
-                  </Text>
-                </Flex>
-                <Flex>
-                  <Text fontSize={`var(--header-5)`} color={ item.id == 1 ? 'var(--color-secondary-variant)':'var(--color-error)'}>
-                      {item.name}
-                  </Text>
-                </Flex>
-              </Flex>
-            ):<></>
-
-          )
-        }
-        )
       }
     {
           <Flex flexDir={'row'} justifyContent={'space-between'}>

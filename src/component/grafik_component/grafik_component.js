@@ -19,7 +19,6 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import GrafikVlue from './grafik_value';
-const { faker } = require('@faker-js/faker');
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -53,11 +52,13 @@ const GrafikComponent= (props) => {
   useEffect(() => {
     getGrafik()
   }, [id,value]);
-    return <GrafikValue className='grafik' data={{
-      value: value,
-      label: dataSensor.map((item) => item.label),
-      data: dataSensor.map((item) => item.data),
-    }
-    } />;
+    return (
+        <GrafikValue className='grafik' data={{
+          value: value,
+          label: dataSensor.map((item) => item.label),
+          data:dataSensor.map((item) => item.data),
+        }
+        } />
+    )
 }
 export default GrafikComponent
