@@ -110,7 +110,7 @@ const ValueSensor = (props) => {
             {
               status == null && status == undefined ?
               (<Text width={'100%'} fontSize={'12px'} fontWeight={'bold'} color={'var(--color-primer)'}>Offline</Text>):
-              (<Text width={'100%'} ml={'-20px'} fontSize={'12px'} fontWeight={'bold'} color={status == 'offline' || status == null  ? 'var(--color-error)' : `var(--color-secondary-variant)`}>{status}</Text>)
+              (<Text width={'100%'} ml={'-20px'} fontSize={'12px'} fontWeight={'bold'} color={status == 'offline' || status == null  ? 'var(--color-error)' : `var(--color-secondary-variant)`}>{status == 'offline' || status == null ? 'Offline' : 'Online'}</Text>)
             }
           </Flex>
       </Flex>:
@@ -127,7 +127,7 @@ const ValueSensor = (props) => {
             {
               status == null && status == undefined ?
               (<Text width={'100%'} fontSize={'12px'} fontWeight={'bold'} color={'var(--color-error)'}>Offline</Text>):
-              (<Text width={'100%'} ml={'-20px'} fontSize={'12px'} fontWeight={'bold'} color={status == 'offline' || status == null  ? 'var(--color-error)' : `var(--color-secondary-variant)`}>{status}</Text>)
+              (<Text width={'100%'} ml={'-20px'} fontSize={'12px'} fontWeight={'bold'} color={status == 'offline' || status == null  ? 'var(--color-error)' : `var(--color-secondary-variant)`}>{status == 'offline' || status == null ? 'Offline' : 'Online'}</Text>)
             }
           </Flex>
         </Flex>:
@@ -147,7 +147,7 @@ const ValueSensor = (props) => {
             {
               status == null && status == undefined ?
               (<Text width={'100%'} fontSize={'12px'} fontWeight={'bold'} color={'var(--color-error)'}>Offline</Text>):
-              (<Text width={'100%'} ml={'-20px'} fontSize={'12px'} fontWeight={'bold'} color={status == 'offline' || status == null  ? 'var(--color-error)' : `var(--color-secondary-variant)`}>{status}</Text>)
+              (<Text width={'100%'} ml={'-20px'} fontSize={'12px'} fontWeight={'bold'} color={status == 'offline' || status == null  ? 'var(--color-error)' : `var(--color-secondary-variant)`}>{status == 'offline' || status == null ? 'Offline' : 'Online'}</Text>)
             }
           </Flex>
         </Flex>
