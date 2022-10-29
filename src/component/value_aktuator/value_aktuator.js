@@ -87,7 +87,7 @@ const ValueAktuator = (props) => {
   <>
   { status == null && isLoading ? <Loading/> :(
   <><Flex justify={'center'} mt='30px' mb={'30px'}>
-          <Image className='Image' w={'180px'} h={'auto'} src={isOn == 'offline' ? '/Off.png' : '/On.png'} alt="image" boxSize="100px" />
+          <Image className='Image' w={'180px'} h={'auto'} src={isOn == 'offline' || isOn == undefined ? '/Off.png' : '/On.png'} alt="image" boxSize="100px" />
         </Flex><Flex flexDir={'row'}>
              <Flex flexDir={'row'} >
              <Flex>
@@ -97,7 +97,7 @@ const ValueAktuator = (props) => {
              </Flex>
              <Flex>
                <Text fontSize={`var(--header-5)`} color={ isOn == 'online' ? 'var(--color-secondary-variant)' : 'var(--color-error)'}>
-                 {isOn}
+                 {isOn == 'offline' || isOn == undefined ? 'Offline' : 'Online'}
                </Text>
              </Flex>
            </Flex>       
