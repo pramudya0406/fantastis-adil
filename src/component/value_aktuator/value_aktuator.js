@@ -29,7 +29,7 @@ const ValueAktuator = (props) => {
     playbackRate,
     interrupt: true,
   });
-  const [isOn, setIsOn] = useState(false);
+  const [isOn, setIsOn] = useState('offline');
   const convertValue = () => {
     if (life_cycle == 1){
       return true
@@ -45,7 +45,12 @@ const ValueAktuator = (props) => {
       }
     })
     .then(response => {
-      setIsOn(response.data.data[0].status)
+      if(response.data.data.length > 0 ){
+        setIsOn(response.data.data[0].status)
+      }
+      if(response.data.data.length == 0){
+        setIsOn('offline')
+      }
     })
   }
 
@@ -87,7 +92,7 @@ const ValueAktuator = (props) => {
   <>
   { status == null && isLoading ? <Loading/> :(
   <><Flex justify={'center'} mt='30px' mb={'30px'}>
-          <Image className='Image' w={'180px'} h={'auto'} src={isOn == 'offline' || isOn == undefined ? '/Off.png' : '/On.png'} alt="image" boxSize="100px" />
+          <Image className='Image' w={'180px'} h={'auto'} src={status == 0 ? '/Off.png' : '/On.png'} alt="image" boxSize="100px" />
         </Flex><Flex flexDir={'row'}>
              <Flex flexDir={'row'} >
              <Flex>
@@ -97,7 +102,7 @@ const ValueAktuator = (props) => {
              </Flex>
              <Flex>
                <Text fontSize={`var(--header-5)`} color={ isOn == 'online' ? 'var(--color-secondary-variant)' : 'var(--color-error)'}>
-                 {isOn == 'offline' || isOn == undefined ? 'Offline' : 'Online'}
+                 {isOn == 'offline' || isOn == undefined || isOn == ''? 'Offline' : 'Online'}
                </Text>
              </Flex>
            </Flex>       
@@ -108,12 +113,8 @@ const ValueAktuator = (props) => {
                 <Switch colorScheme="green" size="lg"  onChange={()=>{
                   setIsLoading(true)
                   toogleSwitch()
-                } } value={status} isChecked={isOn == 'online' ? true : false} isDisabled={isOn == 'offline' ? true  : false} />
-                :<Switch size="lg" onChange={()=>{
-                  setIsLoading(true)
-                  toogleSwitch()
-                }
-                } value={status} isChecked={status} />
+                } } value={status} isChecked={status==1} isDisabled={isOn == 'offline' || isOn == undefined || isOn == '' ? true : false} />
+                :null
               }
             </Stack>
           </FormControl></>
