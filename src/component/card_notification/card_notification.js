@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import {
 	Flex,
 	Image,
-	Box,
-	Center,
 	Text,
 	Icon,
 	CloseButton,
@@ -45,7 +43,6 @@ const CardNotification = (props) => {
 
 	const eleminateZ = (date) => {
 		let result = date.replace("T", " ").replace("Z", " +0700");
-		// console.log(result);
 		return result;
 	};
 

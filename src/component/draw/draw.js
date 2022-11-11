@@ -20,7 +20,6 @@ const Draw = (props) => {
 	const navSize = "large";
 
 	const { routeName } = useSelector((state) => state.userReducer);
-	console.log(routeName);
 
 	const dispatch = useDispatch();
 

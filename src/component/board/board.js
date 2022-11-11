@@ -10,18 +10,9 @@ import {
 } from '@chakra-ui/react'
 import SideNav from '../sidenav/sidenav'
 import Header from '../header/header'
-import { Route, Routes, Outlet } from 'react-router-dom'
-import Dashboard from '../../page/dashboard/dashboard'
-import { useSelector, useDispatch } from 'react-redux';
-import Controlling from '../../page/controlling/controlling'
-import GreenHouse from '../../page/greenhouse/greenhouse'
-import Monitoring from '../../page/monitoring/monitoring'
-import Notification from '../../page/notification/notification'
-import GreenhouseAdd from '../../page/greenhouse/greenhouse_add'
-import GreenhouseEdit from '../../page/greenhouse/greenhouse_edit'
-import Monitoring_Add from '../../page/monitoring/monitoring_add'
-import Controlling_Add from '../../page/controlling/controlling_add'
-import grafik from '../../page/grafik/grafik'
+import { Outlet } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+
 
 const Board = () => {
     const { routeName } = useSelector(

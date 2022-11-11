@@ -1,24 +1,5 @@
-import { Flex,Text } from '@chakra-ui/layout'
-import React,{useState,useEffect} from 'react'
-import { getGrafikSensor } from '../../Utility/api_link';
-import axios from 'axios';
-import Loading from '../../component/loading/loading';
-import { useNavigate } from 'react-router';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Filler,
-  Legend,
-} from 'chart.js';
+import React,{useEffect} from 'react'
 import { Line } from 'react-chartjs-2';
-import GrafikVlue from './grafik_value';
-import { $CombinedState } from 'redux';
-const { faker } = require('@faker-js/faker');
 const GrafikValue =(props) => {
   const value = props.data.value
   const label2 = props.data.label

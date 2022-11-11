@@ -69,8 +69,6 @@ const TableControlling = (props) => {
 			.then((response) => {
 				setDataTable(response.data.data);
 				setTotalPage(response.data.totalPage);
-				console.log("halloooooo...");
-				console.log(response.data);
 				setIsLoading(false);
 			})
 			.catch((error) => {

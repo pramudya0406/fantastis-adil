@@ -1,21 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./monitoring.css";
 import {
-	Table,
-	Thead,
-	Tbody,
 	Text,
 	Button,
 	Select,
-	Tr,
-	Image,
-	Th,
-	Td,
-	Box,
-	TableContainer,
 	Flex,
 } from "@chakra-ui/react";
-import { Link, useLinkClickHandler } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";

@@ -1,25 +1,13 @@
 import React,{useState,useEffect} from 'react';
 import {
-	Table,
-	Thead,
-	Tbody,
 	Text,
-	Button,
-	Select,
-	Tr,
 	Image,
-	Th,
-	Td,
-	Box,
-	TableContainer,
 	Flex,
   Wrap,
   WrapItem,
   Center,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom"
 import axios from 'axios';
-import { Switch } from '@chakra-ui/react'
 import { paginationAktuator } from "../..//Utility/api_link";
 import Loading from "../../component/loading/loading";
 import { useNavigate } from "react-router-dom";
@@ -29,10 +17,8 @@ import ValueAktuator from '../value_aktuator/value_aktuator';
 
 const CardAktuator = (props) => {
     const idApi = props.data.id
-    const [id,setId] = useState('')
     const navigate = useNavigate();
     const [dataTable, setDataTable] = useState([])
-    const [name,setName] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const getPagination = async () => {
       setIsLoading(true)

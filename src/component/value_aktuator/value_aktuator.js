@@ -13,18 +13,13 @@ import { postLogAktuator,Status } from "../..//Utility/api_link";
 import Loading from "../../component/loading/loading";
 import { useNavigate } from "react-router-dom";
 import { Switch } from '@chakra-ui/react'
-import { Formik,Form, replace } from 'formik';
 import './value_aktuator.css';
 
 const ValueAktuator = (props) => {
   const idApi = props.data.id
   const life_cycle = props.data.life_cycle
-  const [id,setId] = useState('')
-  const navigate = useNavigate();
-  const [dataTable, setDataTable] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [playbackRate, setPlaybackRate] = useState(0.75);
-  const [isEnable, setIsEnable] = useState('')
   const [play] = useSound(clickSound, {
     playbackRate,
     interrupt: true,

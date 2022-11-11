@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { Box, Flex, Button, Image, Text, Input } from "@chakra-ui/react"
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { Formik, Form } from 'formik'
 import { FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/form-control"
 import * as yup from "yup"
 import { useNavigate } from "react-router-dom";
@@ -27,7 +27,6 @@ const Login = () => {
     })
       .then((response) => {
         if (response.data == '' || response.data == ' ') {
-          console.log(response)
           alert('Login gagal')
         }
         else {
@@ -66,7 +65,6 @@ const Login = () => {
             initialValues={{ email: '', password: '' }}
             validationSchema={schema}
             onSubmit={(values, actions) => {
-              console.log(JSON.stringify(values, null, 2))
               actions.resetForm()
             }}
           >

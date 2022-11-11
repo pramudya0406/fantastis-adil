@@ -34,7 +34,6 @@ const SideNav = () => {
 				flexDir="column"
 				justifyContent="space-between">
 				<Flex
-					// p="5%"
 					flexDir="column"
 					w="100%"
 					as="nav"

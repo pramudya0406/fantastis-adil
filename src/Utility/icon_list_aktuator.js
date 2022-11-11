@@ -9,9 +9,5 @@ let iconsList = [
         icon: 'https://res.cloudinary.com/diyu8lkwy/image/upload/v1664327875/itera%20herro%20icon/material-symbols_mode-fan_vb9uv6.png',
         color: '#57A519'
     },
-    // {
-    //     icon: 'https://res.cloudinary.com/diyu8lkwy/image/upload/v1663229869/itera%20herro%20icon/pngkey_5_v6jzws.png',
-    //     color: '#A6CE39'
-    // },
 ]
 export default iconsList;

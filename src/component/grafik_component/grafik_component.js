@@ -1,9 +1,7 @@
-import { Flex,Text } from '@chakra-ui/layout'
 import React,{useState,useEffect} from 'react'
 import { getGrafikSensor } from '../../Utility/api_link';
 import axios from 'axios';
 import GrafikValue from './grafik_value';
-import Loading from '../../component/loading/loading';
 import './grafik_component';
 import { useNavigate } from 'react-router';
 import {
@@ -17,8 +15,6 @@ import {
   Filler,
   Legend,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import GrafikVlue from './grafik_value';
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -31,11 +27,9 @@ ChartJS.register(
 );
 
 const GrafikComponent= (props) => {
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false)
   const id = props.data.id
   const value = props.data.value
-  console.log(value)
   const [dataSensor,setDataSensor] = useState([])
   const getGrafik = async () => {
     const header = localStorage.getItem('token')
@@ -46,7 +40,6 @@ const GrafikComponent= (props) => {
     })
     .then(response => {
       setDataSensor(response.data.data)
-      console.log(response.data.data)
     })
   }
   useEffect(() => {

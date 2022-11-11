@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Text, Button, Select, Flex, Form } from "@chakra-ui/react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Text,Flex } from "@chakra-ui/react";
+import { Link, useNavigate } from "react-router-dom";
 import { TabTitle } from "../../Utility/utility";
 import { useDispatch } from "react-redux";
 import { routePageName } from "../../redux/action";
-import axios from "axios";
-import Loading from "../../component/loading/loading";
 import TableNotification from "../../component/table/notification_table";
 
 const MoreNotification = () => {

@@ -31,9 +31,7 @@ export const getNotificationByUserId =
 	"https://iterahero.herokuapp.com/api/v1/notification?by_user_id=1";
 export const brokerSensor = 'https://iterahero.herokuapp.com/api/v1/sensor_broker?id_sensor='
 export const idSensor =  'https://iterahero.herokuapp.com/api/v1/sensor/'
-// ini local host
-// export const getNotificationByUserId =
-// 	"http://localhost:3001/api/v1/notification?by_user_id=1";
+
 export const getGrafikSensor = 'https://iterahero.herokuapp.com/api/v1/grafik/'
 export const deleteNotification =
 	"https://iterahero.herokuapp.com/api/v1/notification/";
@@ -41,8 +39,7 @@ export const deleteNotification =
 export const updateActuatorDetail =
 	"https://iterahero.herokuapp.com/api/v1/actuator/";
 
-// // ini local
-// export const updateActuatorDetail = "http://localhost:3001/api/v1/actuator/";
+
 
 export const updateSensorDetail =
 	"https://iterahero.herokuapp.com/api/v1/sensor/";
@@ -51,6 +48,4 @@ export const getLogAktuator = "https://iterahero.herokuapp.com/api/v1/actuator-l
 export const postLogAktuator = 'https://iterahero.herokuapp.com/api/v1/actuator-log'
 export const icons = 'https://iterahero.herokuapp.com/api/v1/icon'
 export const Status = 'https://iterahero.herokuapp.com/api/v1/actuator-broker?id_actuator='
-// // ini local
-// export const updateSensorDetail = "http://localhost:3001/api/v1/sensor/";
-// kalo 
+

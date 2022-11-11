@@ -1,4 +1,3 @@
-import React, { useState, } from 'react'
 import {
     Flex,
     Text,
@@ -7,7 +6,7 @@ import {
 } from '@chakra-ui/react'
 import { IoExitOutline } from 'react-icons/io5'
 import { AiOutlineMenu } from 'react-icons/ai'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Draw from '../draw/draw';
 import { Link } from 'react-router-dom';
 
@@ -17,7 +16,6 @@ const Header = () => {
     const { routeName } = useSelector(
         state => state.userReducer,
     );
-    console.log(routeName)
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 

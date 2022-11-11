@@ -3,11 +3,8 @@ import {
 	Flex,
 	Text,
 	Icon,
-	Link,
 	Menu,
 	MenuButton,
-	MenuList,
-	Center,
 } from "@chakra-ui/react";
 import "../sidenav/navigation.css";
 
@@ -25,7 +22,6 @@ export default function NavItem({ icon, title, description, active, navSize }) {
 					backgroundColor={active && "#FFFF"}
 					p={3}
 					borderLeftRadius={25}
-                    // borderRightRadius={-25}
 					_hover={{ textDecor: "#FFFF", backgroundColor: "#FBFBFB" }}
 					w={navSize == "large" && "100%"}
 					alignContent={"center"}

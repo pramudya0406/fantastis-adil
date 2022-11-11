@@ -9,7 +9,6 @@ import {
 	Tbody,
 	Button,
 	Tr,
-	Image,
 	Th,
 	Td,
 	Box,
@@ -25,7 +24,7 @@ import {
 	Flex,
 } from "@chakra-ui/react";
 import { RiDeleteBinFill, RiPencilFill } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Loading from "../../component/loading/loading";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
@@ -35,7 +34,6 @@ import moment from "moment";
 const TableNotification = () => {
 	const eleminateZ = (date) => {
 		let result = date.replace("T", " ").replace("Z", " +0700");
-		// console.log(result);
 		return result;
 	};
 
