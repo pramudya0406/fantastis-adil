@@ -49,17 +49,17 @@ const Login = () => {
   }, [])
 
 
-  TabTitle("Login - ITERA Hero")
+  TabTitle("Login - FANTASTIS ADIL")
   return (
 
     <Flex backgroundColor={"var(--color-on-primary)"} width='100%' height="100vh" alignItems='center' justifyContent='center'>
-      <Flex flexDir={'column'} backgroundColor={"var(--color-on-primary)"} width='100%' height="100%" alignItems='center' justifyContent='center' display={{ base: 'none', md: 'none', lg: 'flex' }}>
-        <Image position={'Relative'} width={'80%'} maxWidth={'400px'} src="https://res.cloudinary.com/diyu8lkwy/image/upload/v1664911531/itera%20herro%20icon/Frame_245_3_nvtrkl.png" />
-        <Text p={3} fontWeight={'semibold'} fontFamily={'var(--font-family-secondary)'} fontSize={'var(--header-3)'} color={'{var(--color-primer)}'} >Kerjasama ITERA dan PT. Kharisma Agri Inovasi</Text>
+      <Flex flexDir={'column'} backgroundColor={"#607286"} width='100%' height="100%" alignItems='center' justifyContent='center' display={{ base: 'none', md: 'none', lg: 'flex' }}>
+        <Image position={'Relative'} width={'80%'} maxWidth={'400px'} src="/logofa.png" />
+        <Text p={3} fontWeight={'semibold'} fontFamily={'var(--font-family-secondary)'} fontSize={'var(--header-3)'} color={'#fff'} >Smart Fertilization Tanaman Melon Greenhouse ITERA Berbasis IoT dan Machine Learning</Text>
       </Flex>
-      <Flex backgroundColor={{ lg: "var(--color-primer)" }} width='100%' height="100%" alignItems={{ lg: 'center' }} justifyContent='center'>
-        <Box max-width='649px' borderRadius={'20px'} display="flex" gap="40px" flexDirection={"column"} size={'md'} width={{ base: '100%', md: '80%' }} padding="90px 50px 90px 50px" backgroundColor={"var(--color-on-primary)"} justifyContent={{ lg: 'center' }} textAlign='center' alignItems='center'>
-          <Image sizes="md" display={{ base: 'flex', lg: 'none' }} position={'Relative'} width={'80%'} maxWidth={'200px'} src="https://res.cloudinary.com/diyu8lkwy/image/upload/v1664911531/itera%20herro%20icon/Frame_245_3_nvtrkl.png" />
+      <Flex backgroundColor={{ lg: "#46525F" }} width='100%' height="100%" alignItems={{ lg: 'center' }} justifyContent='center'>
+        <Box max-width='649px' borderRadius={'20px'} display="flex" gap="40px" flexDirection={"column"} size={'md'} width={{ base: '100%', md: '80%' }} padding="90px 50px 90px 50px" backgroundColor={"#607286"} justifyContent={{ lg: 'center' }} textAlign='center' alignItems='center'>
+          <Image sizes="md" display={{ base: 'flex', lg: 'none' }} position={'Relative'} width={'80%'} maxWidth={'200px'} src="/logofa.png" />
           <Text size='md' fontWeight='bold' fontFamily='var(--font-family-secondary)' fontSize='var(--header-2)' color='var(--color-primer)' >Masuk</Text>
           <Formik
             initialValues={{ email: '', password: '' }}
@@ -82,6 +82,7 @@ const Login = () => {
                     Email
                   </FormLabel>
                   <Input
+                    backgroundColor={'#fff'}
                     size={'md'}
                     marginTop={'0 auto'}
                     type="text"
@@ -104,6 +105,7 @@ const Login = () => {
                     size={'md'}
                     margin={'0 auto'}
                     variant='outline'
+                    backgroundColor={'#fff'}
                     type="password"
                     name="password"
                     onChange={handleChange}

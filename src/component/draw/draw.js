@@ -37,7 +37,7 @@ const Draw = (props) => {
 						position={"Relative"}
 						width={"80%"}
 						maxWidth={"200px"}
-						src="https://res.cloudinary.com/diyu8lkwy/image/upload/v1663418492/itera%20herro%20icon/Frame_3_2_3_1_hfojfh.png"
+						src="/logofa.png"
 					/>
 				</DrawerHeader>
 				<DrawerBody>
@@ -51,18 +51,6 @@ const Draw = (props) => {
 							icon={FiHome}
 							title="Dashboard"
 							active={routeName === "Dashboard"}
-						/>
-					</Link>
-					<Link
-						to={"/unit/greenhouse"}
-						onClick={() => {
-							patchRoute("Greenhouse");
-						}}>
-						<NavItem
-							navSize={navSize}
-							icon={GiGreenhouse}
-							title="Greenhouse"
-							active={routeName === "Greenhouse"}
 						/>
 					</Link>
 					<Link

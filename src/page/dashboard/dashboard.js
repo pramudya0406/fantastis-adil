@@ -16,10 +16,10 @@ import dashboardMenu from "../../Utility/dashboard_menu";
 import CardSensor from "../../component/card_sensor/card_sensor";
 import CardAktuator from "../../component/card_aktuator/card_aktuator";
 const Dashboard = () => {
-	TabTitle("Dashboard - ITERA Hero")
+	TabTitle("Dashboard - FANTASTIS ADIL")
 	const dispatch = useDispatch();
 	const navigate = useNavigate()
-	const [data, setData] = useState('');
+	const [data, setData] = useState('36');
 
 	const [dataApi, setDataApi] = useState(null)
 	const [selected, setSelected] = useState(1)
@@ -60,37 +60,26 @@ const Dashboard = () => {
 			dispatch(routePageName("Dashboard"));
 		};
 	}, []);
+	
+
 
 	return (
 		<>
 			{dataApi == null || dataGreenhouse == null ? <Loading />
 				: <Flex w="100%"  flexDir={"column"} >
-					<Flex w="100%"  flexDir={"row"} alignContent={"center"} justifyContent={"center"} alignItems={"center"}>
-					<Image
-						  width={"20%"}
-							height={"auto"}
-							src="https://res.cloudinary.com/diyu8lkwy/image/upload/v1663542541/itera%20herro%20icon/Frame_181_fmtxbh.png"
-						/>
-						</Flex>
 					<Flex  justify="center" mt={'-30px'}>
 						<Wrap  spacing="50px" justify="center">
+							
 							<CardDashboard
 								data={{
-									value: dataApi.greenhouse,
-									icon: GiGreenhouse,
-									name: "Jumlah GreenHouse",
-								}}
-							/>
-							<CardDashboard
-								data={{
-									value: dataApi.sensor,
+									value: 5,
 									icon: MdMonitor,
 									name: "Jumlah Sensor",
 								}}
 							/>
 							<CardDashboard
 								data={{
-									value: dataApi.actuator,
+									value: 5,
 									icon: AiOutlineControl,
 									name: "Jumlah Actuator",
 								}}
@@ -143,26 +132,19 @@ const Dashboard = () => {
 											setFieldValue('id', e.target.value);
 											setData(e.target.value)
 										}}
-										size="xs"
-										borderRadius={"10"}
-										name="greenhouse"
 										value={values.id}
 										placeholder="Pilih Greenhouse"
+										color={"var(--color-border)"}
 										width={"100%"}
-										bg={"white"}
-										_active={{ bg: "white" }}
-										borderColor={"var(--color-border)"}
-										fontSize={"var(--header-5)"}
-										fontWeight={"normal"}
-										color={"var(--color-primer)"}
-										_hover={{ borderColor: "var(--color-border)" }}
-										_focusWithin={{ borderColor: "var(--color-border)" }}>
+										height={'auto'}
+										borderRadius={'16px'}
+										border={'1px solid var(--color-border)'}>
 										{dataGreenhouse.map((item, index) => {
 											return (
 												<option
 													color={"var(--color-border)"}
 													key={index}
-													value={item.id}>
+													value={item.id = 36}>
 													{item.name}
 												</option>
 											);

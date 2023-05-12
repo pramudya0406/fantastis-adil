@@ -22,7 +22,7 @@ const SideNav = () => {
 	return (
 		<>
 			<Flex
-				backgroundColor={"#09322D"}
+				backgroundColor={"#607286"}
 				display={{
 					base: "none",
 					lg: "flex",
@@ -40,7 +40,7 @@ const SideNav = () => {
 					className="navbar">
 					<Box paddingRight="5%">
 						<Center>
-							<Image src="https://res.cloudinary.com/diyu8lkwy/image/upload/v1663396824/itera%20herro%20icon/Frame_9_1_sznmbk.png" />
+							<Image src="/logofa.png" />
 						</Center>
 					</Box>
 
@@ -54,18 +54,6 @@ const SideNav = () => {
 							icon={FiHome}
 							title="Dashboard"
 							active={routeName === "Dashboard"}
-						/>
-					</Link>
-					<Link
-						to={"/unit/greenhouse"}
-						onClick={() => {
-							patchRoute("Greenhouse");
-						}}>
-						<NavItem
-							navSize={navSize}
-							icon={GiGreenhouse}
-							title="Greenhouse"
-							active={routeName === "Greenhouse"}
 						/>
 					</Link>
 					<Link

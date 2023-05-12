@@ -15,7 +15,7 @@ const Controlling = () => {
 	TabTitle("Controlling - ITERA Hero");
 	const navigate = useNavigate();
 	const [dataApi, setDataApi] = useState(null);
-	const [data, setData] = useState("");
+	const [data, setData] = useState("36");
 	const header = localStorage.getItem("token");
 
 	const getApiGreenhouse = async () => {
@@ -78,26 +78,19 @@ const Controlling = () => {
 											alignContent={"center"}
 											alignItems={"center"}
 											justify={"space-between"}>
-											<Flex width={"100%"}>
+											<Flex height={'auto'} width={"100%"}>
 												<Select
 													onChange={(e) => {
 														setFieldValue("id", e.target.value);
 														setData(e.target.value);
 													}}
-													size="xs"
-													borderRadius={"10"}
-													name="greenhouse"
 													value={values.id}
 													placeholder="Pilih Greenhouse"
+													color={"var(--color-border)"}
 													width={"100%"}
-													bg={"white"}
-													_active={{ bg: "white" }}
-													borderColor={"var(--color-border)"}
-													fontSize={"var(--header-5)"}
-													fontWeight={"normal"}
-													color={"var(--color-primer)"}
-													_hover={{ borderColor: "var(--color-border)" }}
-													_focusWithin={{ borderColor: "var(--color-border)" }}>
+													height={'auto'}
+													borderRadius={'16px'}
+													border={'1px solid var(--color-border)'}>
 													{dataApi.map((item, index) => {
 														return (
 															<option

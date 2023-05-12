@@ -135,10 +135,11 @@ const TableControlling = (props) => {
 									<Th textAlign={"center"}>Aksi</Th>
 								</Tr>
 							</Thead>
-							<Tbody>
-								{dataTable.map((item, index) => {
-									return (
-										<Tr key={index}>
+							{dataTable.map((item, index) => {
+								return(
+									<Tbody>
+										{item.id === 1 ? 
+											<Tr key={index}>
 											<Td textAlign={"center"} color={"var(--color-primer)"}>
 												{index + 1}
 											</Td>
@@ -220,10 +221,436 @@ const TableControlling = (props) => {
 												</Flex>
 											</Td>
 										</Tr>
-									);
-								})}
-								;
-							</Tbody>
+										:<></>
+										}
+										{item.id === 2 ? 
+											<Tr key={index}>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{index + 1}
+											</Td>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{item.name}
+											</Td>
+											<Td
+												display={"flex"}
+												justifyContent="center"
+												alignItems={"center"}>
+												<Image height={"30px"} src={item.icon} alt="icon" />
+											</Td>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{item.status_lifecycle}
+											</Td>
+											<Td
+												display={"flex"}
+												justifyContent="center"
+												alignItems={"center"}>
+												<Box
+													width={"20px"}
+													borderRadius={"100px"}
+													height={"20px"}
+													background={item.color}></Box>
+											</Td>
+											<Td textAlign={"center"}>
+												<Flex justifyContent={"space-evenly"}>
+													<Link
+														to={{
+															pathname: "/unit/controlling/edit/" + item.id,
+														}}
+														state={{
+															data: item,
+														}}>
+														<Button
+															bg={"var(--color-on-primary)"}
+															color={"var(--color-info)"}>
+															<RiPencilFill />
+														</Button>
+													</Link>
+													<Button
+														onClick={() => {
+															setId(item.id);
+															setName(item.name);
+															onOpen();
+														}}
+														bg={"var(--color-on-primary)"}
+														color={"var(--color-error)"}>
+														<RiDeleteBinFill />
+													</Button>
+													<Modal isOpen={isOpen} onClose={onClose}>
+														<ModalOverlay />
+														<ModalContent>
+															<ModalHeader>Peringatan !</ModalHeader>
+															<ModalCloseButton />
+															<ModalBody>
+																Apakah anda yakin ingin menghapus {name} ini?
+															</ModalBody>
+															<ModalFooter>
+																<Button
+																	colorScheme="blue"
+																	onClick={(e) => {
+																		deleteItem(e, id);
+																		onClose();
+																	}}
+																	mr={3}>
+																	Hapus
+																</Button>
+																<Button
+																	onClick={() => {
+																		onClose();
+																	}}
+																	variant="ghost">
+																	Batal
+																</Button>
+															</ModalFooter>
+														</ModalContent>
+													</Modal>
+												</Flex>
+											</Td>
+										</Tr>
+										:<></>
+										}
+										{item.id === 3 ? 
+											<Tr key={index}>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{index + 1}
+											</Td>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{item.name}
+											</Td>
+											<Td
+												display={"flex"}
+												justifyContent="center"
+												alignItems={"center"}>
+												<Image height={"30px"} src={item.icon} alt="icon" />
+											</Td>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{item.status_lifecycle}
+											</Td>
+											<Td
+												display={"flex"}
+												justifyContent="center"
+												alignItems={"center"}>
+												<Box
+													width={"20px"}
+													borderRadius={"100px"}
+													height={"20px"}
+													background={item.color}></Box>
+											</Td>
+											<Td textAlign={"center"}>
+												<Flex justifyContent={"space-evenly"}>
+													<Link
+														to={{
+															pathname: "/unit/controlling/edit/" + item.id,
+														}}
+														state={{
+															data: item,
+														}}>
+														<Button
+															bg={"var(--color-on-primary)"}
+															color={"var(--color-info)"}>
+															<RiPencilFill />
+														</Button>
+													</Link>
+													<Button
+														onClick={() => {
+															setId(item.id);
+															setName(item.name);
+															onOpen();
+														}}
+														bg={"var(--color-on-primary)"}
+														color={"var(--color-error)"}>
+														<RiDeleteBinFill />
+													</Button>
+													<Modal isOpen={isOpen} onClose={onClose}>
+														<ModalOverlay />
+														<ModalContent>
+															<ModalHeader>Peringatan !</ModalHeader>
+															<ModalCloseButton />
+															<ModalBody>
+																Apakah anda yakin ingin menghapus {name} ini?
+															</ModalBody>
+															<ModalFooter>
+																<Button
+																	colorScheme="blue"
+																	onClick={(e) => {
+																		deleteItem(e, id);
+																		onClose();
+																	}}
+																	mr={3}>
+																	Hapus
+																</Button>
+																<Button
+																	onClick={() => {
+																		onClose();
+																	}}
+																	variant="ghost">
+																	Batal
+																</Button>
+															</ModalFooter>
+														</ModalContent>
+													</Modal>
+												</Flex>
+											</Td>
+										</Tr>
+										:<></>
+										}
+										{item.id === 4 ? 
+											<Tr key={index}>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{index + 1}
+											</Td>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{item.name}
+											</Td>
+											<Td
+												display={"flex"}
+												justifyContent="center"
+												alignItems={"center"}>
+												<Image height={"30px"} src={item.icon} alt="icon" />
+											</Td>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{item.status_lifecycle}
+											</Td>
+											<Td
+												display={"flex"}
+												justifyContent="center"
+												alignItems={"center"}>
+												<Box
+													width={"20px"}
+													borderRadius={"100px"}
+													height={"20px"}
+													background={item.color}></Box>
+											</Td>
+											<Td textAlign={"center"}>
+												<Flex justifyContent={"space-evenly"}>
+													<Link
+														to={{
+															pathname: "/unit/controlling/edit/" + item.id,
+														}}
+														state={{
+															data: item,
+														}}>
+														<Button
+															bg={"var(--color-on-primary)"}
+															color={"var(--color-info)"}>
+															<RiPencilFill />
+														</Button>
+													</Link>
+													<Button
+														onClick={() => {
+															setId(item.id);
+															setName(item.name);
+															onOpen();
+														}}
+														bg={"var(--color-on-primary)"}
+														color={"var(--color-error)"}>
+														<RiDeleteBinFill />
+													</Button>
+													<Modal isOpen={isOpen} onClose={onClose}>
+														<ModalOverlay />
+														<ModalContent>
+															<ModalHeader>Peringatan !</ModalHeader>
+															<ModalCloseButton />
+															<ModalBody>
+																Apakah anda yakin ingin menghapus {name} ini?
+															</ModalBody>
+															<ModalFooter>
+																<Button
+																	colorScheme="blue"
+																	onClick={(e) => {
+																		deleteItem(e, id);
+																		onClose();
+																	}}
+																	mr={3}>
+																	Hapus
+																</Button>
+																<Button
+																	onClick={() => {
+																		onClose();
+																	}}
+																	variant="ghost">
+																	Batal
+																</Button>
+															</ModalFooter>
+														</ModalContent>
+													</Modal>
+												</Flex>
+											</Td>
+										</Tr>
+										:<></>
+										}
+										{item.id === 5 ? 
+											<Tr key={index}>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{index + 1}
+											</Td>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{item.name}
+											</Td>
+											<Td
+												display={"flex"}
+												justifyContent="center"
+												alignItems={"center"}>
+												<Image height={"30px"} src={item.icon} alt="icon" />
+											</Td>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{item.status_lifecycle}
+											</Td>
+											<Td
+												display={"flex"}
+												justifyContent="center"
+												alignItems={"center"}>
+												<Box
+													width={"20px"}
+													borderRadius={"100px"}
+													height={"20px"}
+													background={item.color}></Box>
+											</Td>
+											<Td textAlign={"center"}>
+												<Flex justifyContent={"space-evenly"}>
+													<Link
+														to={{
+															pathname: "/unit/controlling/edit/" + item.id,
+														}}
+														state={{
+															data: item,
+														}}>
+														<Button
+															bg={"var(--color-on-primary)"}
+															color={"var(--color-info)"}>
+															<RiPencilFill />
+														</Button>
+													</Link>
+													<Button
+														onClick={() => {
+															setId(item.id);
+															setName(item.name);
+															onOpen();
+														}}
+														bg={"var(--color-on-primary)"}
+														color={"var(--color-error)"}>
+														<RiDeleteBinFill />
+													</Button>
+													<Modal isOpen={isOpen} onClose={onClose}>
+														<ModalOverlay />
+														<ModalContent>
+															<ModalHeader>Peringatan !</ModalHeader>
+															<ModalCloseButton />
+															<ModalBody>
+																Apakah anda yakin ingin menghapus {name} ini?
+															</ModalBody>
+															<ModalFooter>
+																<Button
+																	colorScheme="blue"
+																	onClick={(e) => {
+																		deleteItem(e, id);
+																		onClose();
+																	}}
+																	mr={3}>
+																	Hapus
+																</Button>
+																<Button
+																	onClick={() => {
+																		onClose();
+																	}}
+																	variant="ghost">
+																	Batal
+																</Button>
+															</ModalFooter>
+														</ModalContent>
+													</Modal>
+												</Flex>
+											</Td>
+										</Tr>
+										:<></>
+										}
+										{item.id === 9 ? 
+											<Tr key={index}>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{index + 1}
+											</Td>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{item.name}
+											</Td>
+											<Td
+												display={"flex"}
+												justifyContent="center"
+												alignItems={"center"}>
+												<Image height={"30px"} src={item.icon} alt="icon" />
+											</Td>
+											<Td textAlign={"center"} color={"var(--color-primer)"}>
+												{item.status_lifecycle}
+											</Td>
+											<Td
+												display={"flex"}
+												justifyContent="center"
+												alignItems={"center"}>
+												<Box
+													width={"20px"}
+													borderRadius={"100px"}
+													height={"20px"}
+													background={item.color}></Box>
+											</Td>
+											<Td textAlign={"center"}>
+												<Flex justifyContent={"space-evenly"}>
+													<Link
+														to={{
+															pathname: "/unit/controlling/edit/" + item.id,
+														}}
+														state={{
+															data: item,
+														}}>
+														<Button
+															bg={"var(--color-on-primary)"}
+															color={"var(--color-info)"}>
+															<RiPencilFill />
+														</Button>
+													</Link>
+													<Button
+														onClick={() => {
+															setId(item.id);
+															setName(item.name);
+															onOpen();
+														}}
+														bg={"var(--color-on-primary)"}
+														color={"var(--color-error)"}>
+														<RiDeleteBinFill />
+													</Button>
+													<Modal isOpen={isOpen} onClose={onClose}>
+														<ModalOverlay />
+														<ModalContent>
+															<ModalHeader>Peringatan !</ModalHeader>
+															<ModalCloseButton />
+															<ModalBody>
+																Apakah anda yakin ingin menghapus {name} ini?
+															</ModalBody>
+															<ModalFooter>
+																<Button
+																	colorScheme="blue"
+																	onClick={(e) => {
+																		deleteItem(e, id);
+																		onClose();
+																	}}
+																	mr={3}>
+																	Hapus
+																</Button>
+																<Button
+																	onClick={() => {
+																		onClose();
+																	}}
+																	variant="ghost">
+																	Batal
+																</Button>
+															</ModalFooter>
+														</ModalContent>
+													</Modal>
+												</Flex>
+											</Td>
+										</Tr>
+										:<></>
+										}
+									</Tbody>
+								);
+							})};
 						</Table>
 					</TableContainer>
 					{dataTable.length > 0 ? (
